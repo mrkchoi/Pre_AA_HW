@@ -1,3 +1,5 @@
+require "byebug"
+
 # Exercise 1 - Stack
 # Let's write a Stack class. To do this, use the following framework:
 
@@ -98,4 +100,74 @@ end
 # Our Map class should have the following instance methods: set(key, value), get(key), delete(key), show. Note that the set method can be used to either create a new key-value pair or update the value for a pre-existing key. It's up to you to check whether a key currently exists!
 
 # As always, test your code thoroughly to make sure all properties of maps are enforced.
+
+
+
+
+
+
+class Map
+  def initialize
+    @map = [] # => [[1,2],[4,6],[3,8],[0,6]
+  end
+
+  def set(k, v)
+    new_key = true
+    @map.each_with_index do |pair|
+      if k == pair[0]
+        pair[1] = v
+        new_key = false
+      end
+    end
+
+    @map << [k,v] if new_key
+  end
+
+  def get(k)
+    @map.each do |pair|
+      return pair[1] if k == pair[0]
+    end
+    nil
+  end
+
+  def delete(k)
+    matching_idx = nil
+    @map.each_with_index {|pair, i| matching_idx = i if k == pair[0]}
+    return nil if matching_idx == nil
+    @map.delete_at(matching_idx)
+  end
+
+  def show
+    @map
+  end
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
