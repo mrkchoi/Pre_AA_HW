@@ -20,7 +20,7 @@ class PolyTreeNode
   end
 
   def parent=(node)
-    @parent.children.reject! {|child| child == self} if @parent
+    @parent.children.reject! {|child| child == self} if !@parent.nil?
     @parent = node
     node.children << self if !@parent.nil?
   end
@@ -59,24 +59,4 @@ class PolyTreeNode
     end
     nil
   end
-
-  def trace_path_back
-    path_to_start = [self.value]
-    current_node = self
-
-    while current_node.parent
-      current_node = current_node.parent
-      path_to_start << current_node.value
-    end
-
-    path_to_start.reverse
-  end
-
-
-  protected
-
-  def _children
-    @children
-  end
-
 end

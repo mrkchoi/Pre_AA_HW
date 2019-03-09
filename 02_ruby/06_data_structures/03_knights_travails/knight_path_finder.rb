@@ -3,66 +3,74 @@ require 'byebug'
 require_relative './poly_node_tree.rb'
 
 class KnightPathFinder
-  ################################
-  # CLASS METHODS
-  ################################
-  def self.valid_moves(pos) # => [0,0]
-    valid_moves = []
-    x, y = pos
+  MOVE_DELTAS = [
+    [-1, -2],
+    [-1, 2],
+    [1, -2],
+    [1, 2],
+    [-2, -1],
+    [-2, 1],
+    [2, -1],
+    [2, 1]
+  ]
 
-    ((x - 2)..(x + 2)).each do |new_x|
-      if x - new_x == 2
-        valid_moves << [new_x, y - 1]
-        valid_moves << [new_x, y + 1]
-      elsif x - new_x == 1
-        valid_moves << [new_x, y + 2]
-        valid_moves << [new_x, y - 2]
-      elsif new_x - x == 1
-        valid_moves << [new_x, y + 2]
-        valid_moves << [new_x, y - 2]
-      elsif new_x - x == 2
-        valid_moves << [new_x, y - 1]
-        valid_moves << [new_x, y + 1]
-      end
-    end
-
-    valid_moves.reject! do |move|
-      x, y = move
-      x < 0 || x > 7 || y < 0 || y > 7
-    end
-    valid_moves
+  def self.valid_moves(pos)
+    makes_position(pos).select { |pos| on_board?(pos) }
   end
 
-  ################################
-  # INITIALIZE
-  ################################  
-  def initialize(starting_pos)
-    @starting_pos = starting_pos
-    @root_node = PolyTreeNode.new(@starting_pos)
-    @considered_positions = [@starting_pos]
-    # self.build_move_tree
-  end
-
-  ################################
-  # INSTANCE METHODS
-  ################################
-  def build_move_tree
+  def initialize(start)
+    @start = start
+    @visited_positions = [start]
+    @move_tree = build_move_tree(start)
   end
 
   def new_move_positions(pos)
-    unfiltered_moves = KnightPathFinder.valid_moves(pos)
-
-    unfiltered_moves.each {|move| @considered_positions << move unless @considered_positions.include?(move)}
-    
-    @considered_positions
+    possible_moves = (KnightPathFinder.valid_moves(pos) - @visited_positions)
+    @visited_positions += possible_moves
+    possible_moves
   end
 
+  def build_move_tree(start)
+    root_node = PolyTreeNode.new(start)
+    queue = [root_node]
 
+    until queue.empty?
+      current_node = queue.shift
+      position = current_node.value
+      children = []
+      new_move_positions(position).each do |child|
+        child_node = PolyTreeNode.new(child)
+        children << child_node
+        current_node.add_child(child_node)
+      end
 
-  
+      queue += children
+    end
+
+    root_node
+  end
+
+  def find_path(end_pos)
+    pos_node = @move_tree.bfs(end_pos)
+    pos_node.trace_path_back
+  end
+
+  private
+
+  def self.makes_position(pos)
+    row, col = pos
+
+    MOVE_DELTAS.map do |x, y|
+      [row + x, col + y]
+    end
+  end
+
+  def self.on_board?(pos)
+    pos.all? { |el| el.between?(0,7) }
+  end
+
 end
 
-# k = KnightPathFinder.new([2,2])
 k = KnightPathFinder.new([0,0])
 
-p k.new_move_positions([0,0])
+p k.find_path([6,2])
