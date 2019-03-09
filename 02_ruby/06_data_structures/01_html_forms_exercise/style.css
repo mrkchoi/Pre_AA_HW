@@ -1,0 +1,16 @@
+
+
+/* Header */
+
+.header__main {
+  display: flex;
+  flex-direction: column;
+}
+
+.header__logo-img {
+  max-width: 4rem;
+}
+
+.main_content {
+  display: flex;
+}
