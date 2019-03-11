@@ -2,6 +2,7 @@ require 'byebug'
 require_relative './piece.rb'
 
 class Board
+  attr_accessor :rows
   def initialize
     @rows = Array.new(8) {Array.new(8)}
     fill_board
