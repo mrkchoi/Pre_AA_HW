@@ -1,5 +1,5 @@
 require 'byebug'
-require_relative './piece.rb'
+require_relative './pieces.rb'
 
 class Board
   attr_accessor :rows
@@ -11,12 +11,45 @@ class Board
   def fill_board
     @rows.each_with_index do |row, row_i|
       row.each_with_index do |col, col_i|
-        if row_i >= 0 && row_i <= 1 || row_i >= 6 && row_i <= 7
-          @rows[row_i][col_i] = Piece.new
+        if row_i >= 2 && row_i <= 5
+          @rows[row_i][col_i] = NullPiece.new(self, :empty, [row_i, col_i])
         end
       end
     end
+    fill_back_row_pieces
+    fill_pawn_rows
     # p @rows
+  end
+
+  def fill_back_row_pieces
+    debugger
+    filled_row = []
+    back_pieces = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
+
+    @rows.each_with_index do |row, row_i|
+      row.each_with_index do |col, col_i|
+        if row_i == 0
+          piece_name = back_pieces[col_i]
+          @rows[row_i][col_i] = piece_name.new(self, :black, [row_i, col_i])
+        elsif row_i == 7    
+          piece_name = back_pieces[col_i]
+          @rows[row_i][col_i] = piece_name.new(self, :white, [row_i, col_i])
+        end
+      end
+    end
+
+  end
+
+  def fill_pawn_rows
+    @rows.each_with_index do |row, row_i|
+      row.each_with_index do |col, col_i|
+        if row_i == 1
+          @rows[row_i][col_i] = Pawn.new(self, :black, [row_i, col_i])
+        elsif row_i == 6  
+          @rows[row_i][col_i] = Pawn.new(self, :white, [row_i, col_i])
+        end
+      end
+    end
   end
 
   # TEMPORARY BOARD RENDER
@@ -46,7 +79,7 @@ class Board
 
 end
 
-# b = Board.new
-# b.render_board
-# b.move_piece([0,0],[1,2])
+b = Board.new
+b.fill_board
+b.render_board
 
