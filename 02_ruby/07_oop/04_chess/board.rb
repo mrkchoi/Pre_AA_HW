@@ -45,7 +45,7 @@ class Board
 
 end
 
-b = Board.new
-b.render_board
-b.move_piece([0,0],[1,2])
+# b = Board.new
+# b.render_board
+# b.move_piece([0,0],[1,2])
 
