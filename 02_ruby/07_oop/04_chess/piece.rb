@@ -1,4 +1,7 @@
 class Piece
+  attr_reader :board, :color
+  attr_accessor :pos
+
   def initialize(board, color, pos)
     @board = board
     @color = color
@@ -6,24 +9,16 @@ class Piece
   end
 
   def to_s
-  end
-
-  def empty?
+    symbol
   end
 
   def valid_moves
+    moves.select do |pos|
+      @board.on_board?(pos) && (@board.rows[pos[0]][pos[1]] || @board.rows[pos[0]][pos[1]].color != color)
+    end
   end
 
-  def pos=(val)
-  end
-  
-  def symbol
-  end
-
-  def move_into_check?(end_pos)
-  end
-
-  def inspect
-    self.to_s.inspect
-  end
+  # def inspect
+  #   {'pos' => @pos}
+  # end
 end

@@ -1,11 +1,16 @@
+require 'singleton'
 require_relative '../piece.rb'
 
 class NullPiece < Piece
-  def initialize(board, color, pos)
-    super(board, color, pos)
+  attr_reader :symbol, :color
+  include Singleton 
+
+  def initialize
+    @symbol = "   "
+    @color = :none
   end
 
   def to_s
-    return '0'
+    "   "
   end
 end

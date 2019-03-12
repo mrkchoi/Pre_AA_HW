@@ -5,10 +5,19 @@ class Queen < Piece
   include Slidable
 
   def initialize(board, color, pos)
-    super(color, board, pos)
+    super(board, color, pos)
+  end
+
+  def move_dir
+    # debugger
+    linear + diagonal
   end
 
   def to_s
-    return 'Q'
+    if @color == :black
+      " #{"\u265B".encode('utf-8')} "
+    else
+      " #{"\u2655".encode('utf-8')} "
+    end
   end
 end

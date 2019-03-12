@@ -8,7 +8,15 @@ class Bishop < Piece
     super(board, color, pos)
   end
 
+  def move_dir
+    diagonal
+  end
+
   def to_s
-    return 'B'
+    if @color == :black
+      " #{"\u265D".encode('utf-8')} "
+    else
+      " #{"\u2657".encode('utf-8')} "
+    end
   end
 end
