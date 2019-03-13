@@ -17,8 +17,4 @@ class Piece
       @board.on_board?(pos) && (@board.rows[pos[0]][pos[1]] || @board.rows[pos[0]][pos[1]].color != color)
     end
   end
-
-  # def inspect
-  #   {'pos' => @pos}
-  # end
 end

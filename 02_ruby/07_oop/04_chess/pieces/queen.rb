@@ -9,7 +9,6 @@ class Queen < Piece
   end
 
   def move_dir
-    # debugger
     linear + diagonal
   end
 

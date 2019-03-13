@@ -13,15 +13,13 @@ module Slidable
 
   def moves
     possible_moves = []
-    # debugger
-    move_dir.each do |x, y| # => bishop = diagonal
+    move_dir.each do |x, y|
       possible_moves.concat(generate_moves(x, y))
     end
     possible_moves
   end
 
   def generate_moves(dx, dy)
-    # debugger
     cur_x, cur_y = pos
     possible_moves = []
 
@@ -39,7 +37,6 @@ module Slidable
       break if @board.rows[cur_x][cur_y].color == opposite_color
     end
 
-    # p possible_moves
     possible_moves
   end
 end

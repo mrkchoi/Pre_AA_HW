@@ -51,30 +51,26 @@ class Board
     end
   end
 
-  # # TEMPORARY BOARD RENDER
-  # def render_board
-  #   @rows.each do |row|
-  #     print "#{row}\n"
-  #   end
-  # end
-
-  # move_piece([0,0], [2,2])
   def move_piece(start_pos, end_pos)
     x_start, y_start = start_pos
     x_end, y_end = end_pos
 
     # Possible argument errors
     if @rows[start_pos[0]][start_pos[1]] == NullPiece
-      raise ArgumentError.new "No piece at starting coordinates!" 
-      return nil
+      puts "No piece at starting coordinates!" 
+      sleep(1)
+      return false
     elsif !@rows[start_pos[0]][start_pos[1]].moves.include?(end_pos)
-      raise ArgumentError.new "Cannot move piece to ending coordinates" 
-      # @cursor.get_input
-      return nil
+      puts "Cannot move piece to ending coordinates!" 
+      sleep(1)
+      return false
+    else
+      @rows[x_end][y_end], @rows[x_start][y_start] = @rows[x_start][y_start], NullPiece.instance
+      @rows[x_end][y_end].pos = end_pos
+      return true
     end
 
-    @rows[x_end][y_end], @rows[x_start][y_start] = @rows[x_start][y_start], NullPiece.instance
-    @rows[x_end][y_end].pos = end_pos
+    
   end
 
   def on_board?(pos)
@@ -91,16 +87,13 @@ class Board
     @rows[row][col]
   end
 
-  def checkmate?(color) # => :black
-    # debugger
+  def checkmate?(color)
     king_pos = pos_of_king(color)
-    # p king_pos
-    return true if king_pos.nil? # && in_check?(color)
+
+    return true if king_pos.nil?
+
     king_piece = @rows[king_pos[0]][king_pos[1]]
     all_king_moves = king_piece.valid_moves
-    
-    
-
     all_possible_opponent_moves = []
 
     opposing_color = nil
@@ -118,12 +111,7 @@ class Board
 
     filtered_opponent_moves = filter_all_possible_moves(all_possible_opponent_moves, opposing_color)
 
-
-
-    all_king_moves.all? do |king_move|
-      opponent_can_reach_king?(filtered_opponent_moves, king_move)
-    end
-
+    all_king_moves.all? {|king_move| opponent_can_reach_king?(filtered_opponent_moves, king_move)}
   end
 
   def in_check?(color)
@@ -144,16 +132,13 @@ class Board
 
     filtered_opponent_moves = filter_all_possible_moves(all_possible_moves, opposing_color)
     king_position = pos_of_king(color)
-
     opponent_reaches_king = opponent_can_reach_king?(filtered_opponent_moves, king_position)
 
     opponent_can_reach_king?(filtered_opponent_moves, king_position)
   end
 
   def opponent_can_reach_king?(filtered_opponent_moves, king_position)
-    filtered_opponent_moves.any? do |move|
-      move == king_position
-    end
+    filtered_opponent_moves.any? {|move| move == king_position}
   end
 
   def filter_all_possible_moves(moves, opposing_color)
@@ -182,9 +167,3 @@ class Board
 
 
 end
-
-# b = Board.new
-# b.fill_board
-# # b.render_board
-# b.pos_of_king(:black)
-

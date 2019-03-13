@@ -30,11 +30,9 @@ class Pawn < Piece
     elsif @color == :black && @pos[0] == 1
       current_valid_moves += VALID_DIFF_LINEAR_BLACK
     elsif @color == :black && @pos[1] > 0 && @pos[1] < 7 && @board.rows[start_x + 1][start_y - 1].color == :white && @board.rows[start_x + 1][start_y + 1].color == :white
-      # debugger
       current_valid_moves += [VALID_DIFF_LINEAR_BLACK[0]]
       current_valid_moves += VALID_DIFF_DIAG_BLACK
     elsif @color == :black && @pos[1] > 0 && @board.rows[start_x + 1][start_y - 1].color == :white
-      # debugger
       current_valid_moves += [VALID_DIFF_LINEAR_BLACK[0]]
       current_valid_moves += [VALID_DIFF_DIAG_BLACK[0]]
     elsif @color == :black && @pos[1] < 7 && @board.rows[start_x + 1][start_y + 1].color == :white
@@ -68,9 +66,8 @@ class Pawn < Piece
     elsif @color == :white
       current_valid_moves += [VALID_DIFF_LINEAR_WHITE[0]]
     end
-    # debugger
+
     generate_moves(current_valid_moves)
-    # p generate_moves(current_valid_moves)
   end
 
   def generate_moves(valid_moves) [[1, 0], [2, 0]]

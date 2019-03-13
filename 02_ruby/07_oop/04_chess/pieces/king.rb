@@ -13,7 +13,6 @@ class King < Piece
     DELTA
   end
 
-
   def to_s
     if @color == :black
       " #{"\u265A".encode('utf-8')} "

@@ -11,13 +11,15 @@ class Display
     @cursor = Cursor.new([0,0], board)
   end
 
-  def render(name)
-    # debugger
-    
+  def render(current_player)
     system('clear')
-    print "#{name}'s Turn.\nNavigate using WASD or arrow keys\n"
+    print "\n#{current_player.name}'s Turn.\n\n"
     build_display_grid.each do |row|
       puts row.join('')
+    end
+    print "\n(Navigate using WASD or arrow keys)\n"
+    if @board.in_check?(current_player.color)
+      print "\n#{current_player.name} is in check!\n"
     end
   end
 
@@ -54,9 +56,3 @@ class Display
     end
   end
 end
-
-# d = Display.new(Board.new)
-# d.render
-# # d.board.in_check?(:black)
-# p d.board.checkmate?(:black)
-# d.test_cursor

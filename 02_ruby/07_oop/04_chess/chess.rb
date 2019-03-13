@@ -15,21 +15,10 @@ class Chess
 
   def play
     until @board.checkmate?(:black) || @board.checkmate?(:white)
-      # print "#{@current_player.name}'s turn!'"
-      # render board
-      @display.render(@current_player.name)
-      # debugger
-      # read cursor input for current player
-      # until @display.cursor.successful_play
-        # debugger
-        @display.cursor.get_input(@current_player.color)
-      # end
-      
-      # if move is check, warn current player and let them go again
-      # otherwise, if move is valid, make move & switch players
-      if @display.cursor.successful_play 
-        switch_player
-      end
+      @display.render(@current_player)
+      @display.cursor.get_input(@current_player.color)
+
+      switch_player if @display.cursor.successful_play
     end
 
     if @board.checkmate?(:black)
@@ -41,16 +30,7 @@ class Chess
 
   def switch_player
     @current_player == @player1 ? @current_player = @player2 : @current_player = @player1
-    # debugger
   end
-
-  def win?
-    
-  end
-
-
-
-
 end
 
 

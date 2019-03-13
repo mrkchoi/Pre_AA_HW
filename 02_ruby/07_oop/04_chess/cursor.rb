@@ -45,9 +45,7 @@ class Cursor
 
   def get_input(color)
     @successful_play = false
-    # print "Getting input..."
     key = KEYMAP[read_char]
-    # print "#{key}"
     handle_key(key, color)
   end
 
@@ -86,12 +84,8 @@ class Cursor
   def handle_key(key, color)
     case key
     when :return, :space
-      # if @selected_positions.empty?
-      #   get_input
-      # else
-        toggle_selected
-        select_positions_for_move(@cursor_pos, color)
-      # end
+      toggle_selected
+      select_positions_for_move(@cursor_pos, color)
     when :left, :right, :up, :down
       diff = MOVES[key]
       update_pos(diff)
@@ -103,25 +97,25 @@ class Cursor
   end
 
   def select_positions_for_move(pos, color)
-    # debugger
     if @board[pos].is_a?(NullPiece) && @selected_positions.empty?
-      # || @board.rows[pos[0]][pos[1]].color != color
-      #@selected_positions = []
-      #@selected = false
+      get_input(color)
+    elsif @selected_positions.count == 0 && @board[pos].color != color
       get_input(color)
     elsif @selected_positions.count == 0
       @selected_positions << pos
     elsif @selected_positions.count == 1
       @selected_positions << pos
-      # print "#{@selected_positions}"
       if @board.rows[@selected_positions[1][0]][@selected_positions[1][1]].color == color
         @selected_positions = []
         get_input(color)
         return nil
       else
-        @board.move_piece(@selected_positions[0], @selected_positions[1])
+        successful_move = @board.move_piece(@selected_positions[0], @selected_positions[1])
+        if successful_move
+          @successful_play = true
+        end
         @selected_positions = []
-        @successful_play = true
+        
       end
     end
   end
@@ -141,6 +135,3 @@ class Cursor
     end
   end
 end
-
-# c = Cursor.new([0,0], Board.new)
-# c.get_input

@@ -16,13 +16,9 @@ class Rook < Piece
 
   def to_s
     if @color == :black
-      # debugger
       " #{"\u265C".encode('utf-8')} "
     else
       " #{"\u2656".encode('utf-8')} "
     end
   end
 end
-
-# r = Rook.new(Board.new, :black, [5,0])
-# p r.moves
