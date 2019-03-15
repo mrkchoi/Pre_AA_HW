@@ -1,6 +1,6 @@
 
 require_relative './towers.rb'
-require 'byebug'
+# require 'byebug'
 
 class Game
   attr_reader :towers, :num_towers
@@ -8,6 +8,7 @@ class Game
   def initialize
     @towers = nil
     @num_towers = nil
+    @move_count = 0
   end
 
   def play
@@ -18,7 +19,7 @@ class Game
       make_move    
     end
 
-    print "Congrats! You win!\n"
+    print "\nCongrats! You win!\n"
   end
 
   def create_towers
@@ -35,13 +36,20 @@ class Game
   end
 
   def make_move
+    print "Move count: #{@move_count}"
     print "\nMake a move (e.g. 12):\n> "
+    # debugger
     player_move = gets.chomp.chars.map {|el| el.to_i - 1}
     from_pos, to_pos = player_move
 
-    make_move if !from_pos.between?(0, 2) || !to_pos.between?(0, 2)
+    make_move if from_pos.nil? || to_pos.nil? ||  !from_pos.between?(0, 2) || !to_pos.between?(0, 2)
 
-    @towers.valid_move?(player_move) ? @towers.make_move(player_move) : print "Invalid move! Try again.\n\n"
+    if @towers.valid_move?(player_move) 
+      @move_count += 1
+      @towers.make_move(player_move)
+    else
+      print "Invalid move! Try again.\n\n"
+    end
   end
 
   def win?

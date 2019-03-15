@@ -17,23 +17,28 @@ class Towers
   end
 
   def render_towers
+    system('clear')
+    print "\n"
     @towers.each_with_index do |tower, i|
       print "Tower #{i + 1}: #{tower.tower}\n"
     end
+    print "\n"
   end
 
   def valid_move?(move)
-    start_tower = (move[0])
-    end_tower = (move[1])
+    start_tower = move[0]
+    end_tower = move[1]
 
-    start_value = @towers[start_tower].peek
-    end_value = @towers[end_tower].peek
+    return false if start_tower.nil? || end_tower.nil?
 
-    if start_value.nil? 
+    start_value = @towers[start_tower]
+    end_value = @towers[end_tower]
+
+    if start_value.peek.nil?
       return false
-    elsif end_value.nil?
+    elsif end_value.peek.nil?
       return true
-    elsif start_value > end_value
+    elsif start_value.peek > end_value.peek
       return false
     else
       return true
