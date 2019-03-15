@@ -46,10 +46,4 @@ describe Game do
       expect(Game.new(player3, player4).win_game?).to eq false
     end
   end
-
-  describe '#pay_round_winner' do
-    it 'adds the current game pot to the winning player'
-
-    it 'resets the pot to zero'
-  end
 end
