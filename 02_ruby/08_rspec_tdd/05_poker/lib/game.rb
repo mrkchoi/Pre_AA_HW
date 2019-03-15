@@ -25,10 +25,11 @@ class Game
 
     until win_game?
       play_round
+      collect_player_cards
     end
 
     winner = winning_player
-    print "Congrats #{winner.name}, you win!"
+    print "\n\nCongrats #{winner.name}, you win!\n\n"
   end
 
   def play_round
@@ -48,6 +49,7 @@ class Game
     end
     
     discard_round
+    render_hands
 
     # bet round 2
     betting_round_all
@@ -60,13 +62,11 @@ class Game
       return
     end
 
-    if showdown?
       calculate_best_hand
       pay_round_winner
 
       reset_players
       reset_call_and_raise_amounts
-    end
   end
 
   def switch_player
@@ -103,8 +103,6 @@ class Game
   # DEAL / RENDER
   ##########################################
   def deal_cards
-    print "\nDealing cards...\n\n"
-    # sleep(1)
     all_players_dealt_five_cards = @game_players.all? {|player| player.hand.cards.count == 5}
 
     until all_players_dealt_five_cards
@@ -138,12 +136,28 @@ class Game
     print "Current pot: $#{@pot}\n"
   end
 
+  def collect_player_cards
+    @game_players.each {|player| player.hand.reset}
+  end
 
   ##########################################
   # DISCARD ROUND
   ##########################################
   def discard_round
+    @game_players.each do |player|
+      print "\n#{player.name}, discard any cards? (y/n)\n> "
+      discard_prompt = gets.chomp.capitalize
+      if discard_prompt == 'Y'
+        ask_for_discard_cards(player)
+      end
+    end
+    deal_cards
+  end
 
+  def ask_for_discard_cards(player)
+    print "Which cards?\n> "
+    discard_cards = gets.chomp.chars.map(&:to_i)
+    player.discard(discard_cards)
   end
 
 
@@ -164,9 +178,9 @@ class Game
   
   def betting_round(player)
       if player.position == 1
-        print "\n\n#{player.name}: bet or fold..\n\n"
+        print "\n\n#{player.name}: bet or fold..\n> "
       else
-        print "\n\n#{player.name}: call, raise, or fold..\n\n"
+        print "\n\n#{player.name}: call, raise, or fold..\n> "
       end
 
       player_move = gets.chomp.capitalize
@@ -178,7 +192,7 @@ class Game
         @bet_to_call = player_bet
         render_current_pot
       elsif player_move == 'Call'
-        print "\n\n#{player.name} calls $#{@bet_to_call}\n\n"
+        print "#{player.name} calls $#{@bet_to_call}\n\n"
         @pot += player.call(@bet_to_call).to_i
         render_current_pot
       elsif player_move == 'Raise'
@@ -202,7 +216,7 @@ class Game
   end
 
   def raise_round(player)
-    print "\n\n#{player.name}, call raise of #{@raise_amount}? (y/n)\n\n"
+    print "\n\n#{player.name}, call raise of #{@raise_amount}? (y/n)\n> "
 
     raise_decision = gets.chomp.capitalize
     if raise_decision == 'Y'
@@ -228,20 +242,21 @@ class Game
     @game_players.one? {|player| player.active}
   end
 
-
   ##########################################
   # PAYOUT
   ##########################################
   def pay_round_winner
     round_winner = @game_players.select(&:active).first
-    # debugger
     round_winner.pay_player(@pot)
     @pot = 0
 
-    print "\n\n#{round_winner.name} wins the pot!\nNew player total is #{round_winner.pot}\n\n"
+    print "\n\n#{round_winner.name} wins the pot!\nNew player total is $#{round_winner.pot}\n\n"
+    sleep(1)
   end
 
 end
 
-g = Game.new(Player.new('Player1', 1), Player.new('Player2', 2))
-g.play
+if __FILE__ == $PROGRAM_NAME
+  g = Game.new(Player.new('Player1', 1), Player.new('Player2', 2))
+  g.play
+end

@@ -13,6 +13,10 @@ class Hand
     @cards << new_card
   end
 
+  def reset
+    @cards = []
+  end
+
   def remove_card_from_hand(card_index)
     @cards.delete_at(card_index)
   end
