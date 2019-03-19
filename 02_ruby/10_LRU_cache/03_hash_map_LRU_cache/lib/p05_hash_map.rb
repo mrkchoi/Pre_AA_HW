@@ -63,13 +63,11 @@ class HashMap
   def resize!
     new_store = Array.new(num_buckets * 2) {LinkedList.new}
 
-    if @count == num_buckets
       @store.each do |linked_list|  
         linked_list.each do |el|
           new_store[el.key.hash % (num_buckets * 2)].append(el.key, el.val)
         end
       end
-    end
     @store = new_store
   end
 
