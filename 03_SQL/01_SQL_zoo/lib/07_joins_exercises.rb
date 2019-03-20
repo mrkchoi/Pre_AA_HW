@@ -220,7 +220,5 @@ def colleagues_of_garfunkel
           name = 'Art Garfunkel'
       ) AND
       name != 'Art Garfunkel'
-
-    
   SQL
 end
