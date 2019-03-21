@@ -18,12 +18,13 @@ CREATE TABLE questions (
   id INTEGER PRIMARY KEY,
   title TEXT NOT NULL,
   body TEXT,
-  associated_author INTEGER,
+  associated_author_id INTEGER,
   
-  FOREIGN KEY (associated_author) REFERENCES users(id)
+  FOREIGN KEY (associated_author_id) REFERENCES users(id)
 );
 
 CREATE TABLE question_follows (
+  id INTEGER PRIMARY KEY,
   user_id INTEGER,
   question_id INTEGER
 );
@@ -58,7 +59,7 @@ VALUES
   ('Brian', 'Ortega');
 
 INSERT INTO
-  questions (title, body, associated_author)
+  questions (title, body, associated_author_id)
 VALUES
   ('What is the admissions process like?', 'I was wondering what the admissions process will be like. I am interested in applying as soon as possible.', (SELECT id FROM users WHERE fname = 'Kenny' AND lname = 'Choi')),
   ('Where are you located?', 'I am located in a city outside of the bootcamp location (in SF). Do you recommend relocating for the duration of the bootcamp?', (SELECT id FROM users WHERE fname = 'Will' AND lname = 'Smith')),
@@ -77,7 +78,8 @@ INSERT INTO
 VALUES
   ((SELECT id FROM users WHERE fname = 'Kenny' AND lname = 'Choi'), (SELECT id FROM questions WHERE title LIKE '%located%'), 'I''ve decide to relocate in order to minimize commute times.', null),
   ((SELECT id FROM users WHERE fname = 'Will' AND lname = 'Smith'), (SELECT id FROM questions WHERE title LIKE '%job%'), 'Absolutely. I''ve been working as a software engineering since graduating from App Academy in 2016.', null),
-  ((SELECT id FROM users WHERE fname = 'Brian' AND lname = 'Ortega'), (SELECT id FROM questions WHERE title LIKE '%admissions%'), 'It''s not the easiest process in the world, but if you really buckle down and study your ruby fundamentals, you should have a decent chance of acceptance. Good luck!', null);
+  ((SELECT id FROM users WHERE fname = 'Brian' AND lname = 'Ortega'), (SELECT id FROM questions WHERE title LIKE '%admissions%'), 'It''s not the easiest process in the world, but if you really buckle down and study your ruby fundamentals, you should have a decent chance of acceptance. Good luck!', null),
+  ((SELECT id FROM users WHERE fname = 'Kenny' AND lname = 'Choi'), (SELECT id FROM questions WHERE title LIKE '%admissions%'), 'I agree with Brian. I would go through all of the prepwork, and do as many problems on sites like codewars (Up to roughly 6 kyu), Leetcode, Hackerrank, etc.', 1);
 
 INSERT INTO
   question_likes (user_id, question_id)
