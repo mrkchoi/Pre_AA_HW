@@ -71,6 +71,11 @@ class User
     raise "#{self} not in database" unless @id
     Reply.find_by_user_id(@id)
   end
+
+  def followed_questions
+    raise "#{self} not in database" unless @id
+    QuestionFollow.followed_questions_for_user_id(@id)
+  end
 end
 
 ########################################
@@ -130,6 +135,11 @@ class Question
     raise "#{self} not in database" unless @id
     Reply.find_by_question_id(@id)
   end
+
+  def followers
+    raise "#{self} not in database" unless @id
+    QuestionFollow.followers_for_question_id(@id)
+  end
 end
 
 ########################################
@@ -159,6 +169,33 @@ class QuestionFollow
     SQL
 
     data.map {|data| QuestionFollow.new(data)}
+  end
+
+  def self.followers_for_question_id(question_id)
+    data = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+      SELECT
+        *
+      FROM
+        users
+      JOIN
+        questions ON questions.associated_author_id = users.id
+      WHERE
+        questions.id = ?
+    SQL
+    data.map {|datum| User.new(datum)}
+  end
+
+  def self.followed_questions_for_user_id(user_id)
+    data = QuestionsDatabase.instance.execute(<<-SQL, user_id)
+      SELECT
+        *
+      FROM
+        questions
+      JOIN
+        users ON users.id = questions.associated_author_id
+      WHERE
+        questions.associated_author_id = ?
+    SQL
   end
 
   def initialize(options)
