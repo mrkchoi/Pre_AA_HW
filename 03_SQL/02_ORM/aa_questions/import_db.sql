@@ -63,7 +63,8 @@ INSERT INTO
 VALUES
   ('What is the admissions process like?', 'I was wondering what the admissions process will be like. I am interested in applying as soon as possible.', (SELECT id FROM users WHERE fname = 'Kenny' AND lname = 'Choi')),
   ('Where are you located?', 'I am located in a city outside of the bootcamp location (in SF). Do you recommend relocating for the duration of the bootcamp?', (SELECT id FROM users WHERE fname = 'Will' AND lname = 'Smith')),
-  ('What kind of job can I expect to get after completing the bootcamp?', 'I have been working as a front end developer for the past two years and want to take my career to the next level. Will the bootcamp prepare me for taking on more complex software engineering positions?', (SELECT id FROM users WHERE fname = 'Brian' AND lname = 'Ortega'));
+  ('What kind of job can I expect to get after completing the bootcamp?', 'I have been working as a front end developer for the past two years and want to take my career to the next level. Will the bootcamp prepare me for taking on more complex software engineering positions?', (SELECT id FROM users WHERE fname = 'Brian' AND lname = 'Ortega')),
+  ('Have any of you found success after the bootcamp?', 'I''m looking for anecdotes from people who have attended previous cohorts. What was the job search like, and how long did it take before you were employed? Thanks in advanced.' , (SELECT id FROM users WHERE fname = 'Brian' AND lname = 'Ortega'));
 
 INSERT INTO
   question_follows (user_id, question_id)
