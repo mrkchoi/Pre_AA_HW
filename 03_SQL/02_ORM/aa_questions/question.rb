@@ -75,13 +75,13 @@ class Question < ModelBase
     QuestionLike.num_likes_for_question_id(@id)
   end
 
-  def save
-    QuestionsDatabase.instance.execute(<<-SQL, self.title, self.body, self.associated_author_id)
-      INSERT INTO
-        questions (title, body, associated_author_id)
-      VALUES
-        (?, ?, ?)
-    SQL
-    self.id = QuestionsDatabase.instance.last_insert_row_id
-  end
+  # def save
+  #   QuestionsDatabase.instance.execute(<<-SQL, self.title, self.body, self.associated_author_id)
+  #     INSERT INTO
+  #       questions (title, body, associated_author_id)
+  #     VALUES
+  #       (?, ?, ?)
+  #   SQL
+  #   self.id = QuestionsDatabase.instance.last_insert_row_id
+  # end
 end

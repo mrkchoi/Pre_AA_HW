@@ -68,13 +68,13 @@ class Reply < ModelBase
     children.map {|data| Reply.new(data)}
   end
 
-  def save
-    QuestionsDatabase.instance.execute(<<-SQL, self.body, self.question_id, self.parent_reply_id, self.user_id)
-      INSERT INTO
-        replies (body, question_id, parent_reply_id, user_id)
-      VALUES
-        (?, ?, ?, ?)
-    SQL
-    self.id = QuestionsDatabase.instance.last_insert_row_id
-  end
+  # def save
+  #   QuestionsDatabase.instance.execute(<<-SQL, self.body, self.question_id, self.parent_reply_id, self.user_id)
+  #     INSERT INTO
+  #       replies (body, question_id, parent_reply_id, user_id)
+  #     VALUES
+  #       (?, ?, ?, ?)
+  #   SQL
+  #   self.id = QuestionsDatabase.instance.last_insert_row_id
+  # end
 end

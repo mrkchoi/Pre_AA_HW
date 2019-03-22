@@ -68,14 +68,14 @@ class User < ModelBase
     avg_karma.first.values[0]
   end
 
-  def save
-    QuestionsDatabase.instance.execute(<<-SQL, self.fname, self.lname)
-      INSERT INTO
-        users (fname, lname)
-      VALUES
-        (?, ?)
-    SQL
-    self.id = QuestionsDatabase.instance.last_insert_row_id
-  end
+  # def save
+  #   QuestionsDatabase.instance.execute(<<-SQL, self.fname, self.lname)
+  #     INSERT INTO
+  #       users (fname, lname)
+  #     VALUES
+  #       (?, ?)
+  #   SQL
+  #   self.id = QuestionsDatabase.instance.last_insert_row_id
+  # end
 
 end
