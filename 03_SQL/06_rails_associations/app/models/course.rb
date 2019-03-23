@@ -23,4 +23,19 @@ class Course < ApplicationRecord
       through: :enrollments,
       source: :user
   )
+
+  # self/reflexive association
+  has_many(
+    :prerequisites,
+      class_name: 'Course',
+      foreign_key: :id,
+      primary_key: :prereq_id
+  )
+
+  belongs_to(
+    :postrequisite,
+      class_name: 'Course',
+      foreign_key: :id,
+      primary_key: :prereq_id
+  )
 end
