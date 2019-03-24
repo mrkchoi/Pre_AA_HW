@@ -15,6 +15,7 @@ require 'securerandom'
 class ShortenedURL < ApplicationRecord
   validates :submitted_by_user_id, presence: true
   validates :short_url, uniqueness: true
+  validate :no_spamming, :nonpremium_max
 
   belongs_to(
     :submitter,
@@ -37,6 +38,19 @@ class ShortenedURL < ApplicationRecord
       source: :user
   )
 
+  has_many(
+    :taggings,
+      class_name: 'Tagging',
+      foreign_key: :url_id,
+      primary_key: :id
+  )
+
+  has_many(
+    :tag_topics,
+      through: :taggings,
+      source: :topics
+  )
+
   def self.random_code
     unique_url = SecureRandom.urlsafe_base64(16)
 
@@ -48,11 +62,16 @@ class ShortenedURL < ApplicationRecord
   end
 
   def self.create_shortened_url_from_user_and_long_url(user, url_long)
-    ShortenedURL.create!({
-      long_url: url_long,
-      short_url: self.random_code,
-      submitted_by_user_id: user.id
-    })
+      ShortenedURL.create!({
+        long_url: url_long,
+        short_url: self.random_code,
+        submitted_by_user_id: user.id
+      })
+  end
+
+  def self.prune(mins)
+    urls_within_timeframe = ShortenedURL.where('created_at > ?', mins.minutes.ago).destroy_all
+    # urls_within_timeframe.joins(:visits).where('visits.count(visited_url_id) = 0' )
   end
 
   def num_clicks
@@ -66,4 +85,24 @@ class ShortenedURL < ApplicationRecord
   def num_recent_uniques
     visits.select(:user_id).distinct.where('created_at > ?', 10.minutes.ago).count
   end  
+
+  def no_spamming
+    # Filter rows by user_id, check if count > 5 && diff between first & last is less than 1 minute, then return false
+
+    url_count = ShortenedURL.all.where(submitted_by_user_id: self.submitted_by_user_id).count
+    latest_url = 
+    ShortenedURL.select(:created_at).where(submitted_by_user_id: self.submitted_by_user_id).limit(5).first
+    fifth_latest_url = 
+    ShortenedURL.select(:created_at).where(submitted_by_user_id: self.submitted_by_user_id).limit(5).last
+
+    if url_count >= 5 && (fifth_latest_url.created_at - latest_url.created_at) < 1
+      errors[:base] << "can't submit more than 5 URLS per minute."
+    end
+  end
+
+  def nonpremium_max
+    if ShortenedURL.all.where(submitted_by_user_id: self.submitted_by_user_id).count >= 5
+      errors[:base] << 'non-premium members are limited to 5 urls!'
+    end
+  end
 end

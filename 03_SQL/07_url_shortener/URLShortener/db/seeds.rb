@@ -11,21 +11,60 @@
 
 
 
-user1 = User.new(email: 'kennethichoi@gmail.com')
-user2 = User.new(email: 'testy123@yahoo.com')
-user3 = User.new(email: 'deborah_q@hotmail.com')
+user1 = User.create!(email: 'kennethichoi@gmail.com')
+user2 = User.create!(email: 'testy123@yahoo.com')
+user3 = User.create!(email: 'deborah_q@hotmail.com')
 
-user1.save!
-user2.save!
-user3.save!
+url1 = ShortenedURL.create_shortened_url_from_user_and_long_url(User.find(1), "https://www.youtube.com")
+url2 = ShortenedURL.create_shortened_url_from_user_and_long_url(User.find(2), "https://www.techcrunch.com")
+url3 = ShortenedURL.create_shortened_url_from_user_and_long_url(User.find(3), "https://www.medium.com")
+url4 = ShortenedURL.create_shortened_url_from_user_and_long_url(User.find(1), "https://www.vimeo.com")
+url5 = ShortenedURL.create_shortened_url_from_user_and_long_url(User.find(2), "https://www.flipboard.com")
+url6 = ShortenedURL.create_shortened_url_from_user_and_long_url(User.find(3), "https://open.appacademy.io")
 
 
-url1 = ShortenedURL.new(short_url: 'bit.ly/9123a87', submitted_by_user_id: 2)
-url2 = ShortenedURL.new(short_url: 'bit.ly/83323a87', submitted_by_user_id: 2)
-url3 = ShortenedURL.new(short_url: 'bit.ly/aaaa23a87', submitted_by_user_id: 3)
-url4 = ShortenedURL.new(short_url: 'bit.ly/bbbca87', submitted_by_user_id: 4)
+topic1 = TagTopic.create!(name: 'Videos')
+topic2 = TagTopic.create!(name: 'News')
+topic3 = TagTopic.create!(name: 'Education')
 
-url1.save!
-url2.save!
-url3.save!
-url4.save!
+
+tagging1 = Tagging.create!(url_id: 1, topic_id: 1)
+tagging2 = Tagging.create!(url_id: 2, topic_id: 2)
+tagging3 = Tagging.create!(url_id: 3, topic_id: 3)
+tagging4 = Tagging.create!(url_id: 4, topic_id: 1)
+tagging5 = Tagging.create!(url_id: 5, topic_id: 2)
+tagging6 = Tagging.create!(url_id: 6, topic_id: 3)
+
+tagging1 = Tagging.create!(url_id: 2, topic_id: 3)
+tagging2 = Tagging.create!(url_id: 3, topic_id: 2)
+tagging3 = Tagging.create!(url_id: 4, topic_id: 1)
+tagging4 = Tagging.create!(url_id: 5, topic_id: 3)
+tagging5 = Tagging.create!(url_id: 6, topic_id: 2)
+tagging6 = Tagging.create!(url_id: 1, topic_id: 1)
+
+
+visit1 = Visit.record_visit!(User.find(1), ShortenedURL.find(1))
+visit2 = Visit.record_visit!(User.find(2), ShortenedURL.find(2))
+visit3 = Visit.record_visit!(User.find(3), ShortenedURL.find(3))
+visit4 = Visit.record_visit!(User.find(1), ShortenedURL.find(4))
+visit5 = Visit.record_visit!(User.find(2), ShortenedURL.find(5))
+visit6 = Visit.record_visit!(User.find(3), ShortenedURL.find(6))
+visit7 = Visit.record_visit!(User.find(3), ShortenedURL.find(1))
+visit8 = Visit.record_visit!(User.find(2), ShortenedURL.find(1))
+visit9 = Visit.record_visit!(User.find(1), ShortenedURL.find(2))
+visit10 = Visit.record_visit!(User.find(3), ShortenedURL.find(2))
+visit11 = Visit.record_visit!(User.find(2), ShortenedURL.find(2))
+visit12 = Visit.record_visit!(User.find(1), ShortenedURL.find(3))
+
+
+
+
+# 
+
+
+ShortenedURL.create_shortened_url_from_user_and_long_url(User.find(1), "https://www.amazon.com")
+ShortenedURL.create_shortened_url_from_user_and_long_url(User.find(1), "https://www.cnet.com")
+ShortenedURL.create_shortened_url_from_user_and_long_url(User.find(1), "https://www.bhphotovideo.com")
+ShortenedURL.create_shortened_url_from_user_and_long_url(User.find(1), "https://www.huffpost.com")
+ShortenedURL.create_shortened_url_from_user_and_long_url(User.find(1), "https://www.reddit.com")
+ShortenedURL.create_shortened_url_from_user_and_long_url(User.find(2), "https://www.leetcode.com")
