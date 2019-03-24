@@ -1,0 +1,78 @@
+#!/usr/bin/env ruby
+require 'byebug'
+
+# GET EMAIL
+def get_email
+  print "\nInput your email\n> "
+  user_email = gets.chomp
+end
+
+# GET USER BY EMAIL
+def get_user_by_email(email)
+  User.find_by(:email => email)
+end
+
+def prompt_user_for_action
+  print "\nWhat do you want to do?\n"
+  print "0. Create shortened URL\n"
+  print "1. Visit shortened URL\n> "
+
+  gets.chomp.to_i
+end
+
+def take_action(action, user)
+  # debugger
+  if action == 0
+    long_url = get_long_url
+    generate_short_url(user, long_url)
+  elsif action == 1
+    short_url = get_short_url
+    launch_long_url(short_url)
+  end
+end
+
+##############################
+# USER SCENARIO 0
+##############################
+def get_long_url
+  print "\nType in your long URL\n> "
+  gets.chomp
+end
+
+def generate_short_url(user, long_url)
+  short_url = ShortenedURL.create_shortened_url_from_user_and_long_url(user, long_url)
+  print "\nShort URL is: #{short_url.short_url}\n"
+end
+
+##############################
+# USER SCENARIO 1
+##############################
+def get_short_url
+  print "\nWhere do you want to go?\n> "
+  gets.chomp
+end
+
+def launch_long_url(short_url)
+  # debugger
+  long_url = ShortenedURL.select(:long_url).where('short_url': short_url).pluck.first[1]
+  print "\n\nLaunching #{long_url} ...\n"
+  # LAUNCH URL VIA LAUNCHY
+  Launchy.open("#{long_url}")
+end
+
+
+def say_goodbye
+  print "\n\nGoodbye!\n"
+end
+
+def main
+  email = get_email
+  user = get_user_by_email(email)
+
+  user_action = prompt_user_for_action
+  take_action(user_action, user)
+
+  say_goodbye
+end
+
+main
