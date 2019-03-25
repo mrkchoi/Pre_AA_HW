@@ -23,4 +23,8 @@ class User < ApplicationRecord
       primary_key: :id,
   )
 
+  def completed_polls
+    User.joins(responses: {question: :poll}).select('polls.*').where('responses.user_id = ?', self.id).having('COUNT(polls.title) = ?', 2).group('polls.id')
+  end
+
 end

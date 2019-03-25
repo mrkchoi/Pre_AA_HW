@@ -11,6 +11,7 @@ class Response < ApplicationRecord
   validates :user_id, presence: true
   validates :answer_choice_id, presence: true
   validate :not_duplicate_response
+  validate :not_answering_own_poll
 
   belongs_to(
     :answer_choice,
@@ -45,4 +46,19 @@ class Response < ApplicationRecord
       errors[:user_id] << 'cannot answer the same question more than once!'
     end
   end
+
+  # AUTHOR CANNOT RESPOND TO OWN POLL
+
+  def author_answering_own_poll?
+    question.poll.author_id == self.user_id
+
+    # poll_author_id = Poll.joins(questions: {answer_choices: :responses}).select('polls.author_id').distinct.where(self.answer_choice_id: poll: {question: :answer_choices}).pluck(:author_id)
+  end
+
+  def not_answering_own_poll
+    if author_answering_own_poll?
+      errors[:user_id] << 'cannot answer question from poll they created!'
+    end
+  end
+
 end
