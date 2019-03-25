@@ -2,6 +2,9 @@ def what_was_that_one_with(those_actors)
   # Find the movies starring all `those_actors` (an array of actor names).
   # Show each movie's title and id.
 
+  # RESUME
+  Movie.joins(:actors).select(:id, :title)
+
 end
 
 def golden_age
@@ -14,11 +17,50 @@ def costars(name)
   # appeared with.
   # Hint: use a subquery
 
+  actors = Actor.find_by_sql(<<-SQL)
+    SELECT
+      actors.name
+    FROM
+      actors
+    JOIN
+      castings ON castings.actor_id = actors.id
+    WHERE
+      castings.movie_id IN (
+        SELECT
+          castings.movie_id
+        FROM
+          castings
+        JOIN
+          actors ON actors.id = castings.actor_id
+        WHERE
+          actors.name = "Humphrey Bogart"
+      )
+  SQL
+
+  actors.pluck(:name)
+
 end
 
 def actor_out_of_work
   # Find the number of actors in the database who have not appeared in a movie
 
+  actors =  Actor.find_by_sql(<<-SQL)
+    SELECT
+      COUNT(*)
+    FROM
+      actors
+    WHERE
+      actors.id NOT IN (
+        SELECT
+          castings.actor_id
+        FROM
+          castings
+      )
+    GROUP BY
+        actors.id
+  SQL
+
+  actors.count
 end
 
 def starring(whazzername)
@@ -38,3 +80,67 @@ def longest_career
   # their career.
 
 end
+
+
+#  Actor.find_by_sql(<<-SQL)
+#     SELECT
+#       COUNT(*)
+#     FROM
+#       actors
+#     WHERE
+#       actors.id NOT IN (
+#         SELECT
+#           castings.actor_id
+#         FROM
+#           castings
+#       )
+#   SQL
+
+
+
+
+
+#   Actor.find_by_sql(<<-SQL)
+#     SELECT
+#       actors.name
+#     FROM
+#       actors
+#     JOIN
+#       castings ON castings.actor_id = actors.id
+#     WHERE
+#       castings.movie_id IN (
+#         SELECT
+#           castings.movie_id
+#         FROM
+#           castings
+#         JOIN
+#           actors ON actors.id = castings.actor_id
+#         WHERE
+#           actors.name = 'Dave Chapelle'
+#       )
+#   SQL
+
+
+
+
+  # actors = Actor.find_by_sql(<<-SQL)
+  #   SELECT
+  #     actors.name
+  #   FROM
+  #     actors
+  #   JOIN
+  #     castings ON castings.actor_id = actors.id
+  #   WHERE
+  #     castings.movie_id IN (
+  #       SELECT
+  #         castings.movie_id
+  #       FROM
+  #         castings
+  #       JOIN
+  #         actors ON actors.id = castings.actor_id
+  #       WHERE
+  #         actors.name = 'Julie Andrews'
+  #     )
+  # SQL
+
+  # actors.pluck(:name)
