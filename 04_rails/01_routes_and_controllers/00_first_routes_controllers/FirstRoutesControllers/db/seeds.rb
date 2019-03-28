@@ -50,3 +50,30 @@ as17 = ArtworkShare.create!(artwork_id: 9, viewer_id: 1)
 as18 = ArtworkShare.create!(artwork_id: 9, viewer_id: 2)
 as19 = ArtworkShare.create!(artwork_id: 10, viewer_id: 3)
 as20 = ArtworkShare.create!(artwork_id: 10, viewer_id: 4)
+
+
+# COMMENTS
+
+c1 = Comment.create!(user_id: 1, artwork_id: 3, body: 'Amazing!')
+c2 = Comment.create!(user_id: 2, artwork_id: 5, body: 'Beautiful use of color.')
+c3 = Comment.create!(user_id: 3, artwork_id: 7, body: 'Unique perspective')
+c4 = Comment.create!(user_id: 4, artwork_id: 9, body: 'Speaks volumes')
+c5 = Comment.create!(user_id: 5, artwork_id: 1, body: 'Emotionally stirring')
+
+c6 = Comment.create!(user_id: 1, artwork_id: 6, body: 'Blown away by the attention to detail')
+c7 = Comment.create!(user_id: 2, artwork_id: 8, body: 'Absolute mastery')
+c8 = Comment.create!(user_id: 3, artwork_id: 10, body: 'Craftsmanship is unparalleled')
+c9 = Comment.create!(user_id: 4, artwork_id: 2, body: 'Mid-century bliss')
+c10 = Comment.create!(user_id: 5, artwork_id: 4, body: 'Intricacies of design')
+
+c11 = Comment.create!(user_id: 1, artwork_id: 5, body: 'Stunning!')
+c12 = Comment.create!(user_id: 2, artwork_id: 7, body: 'Visual candy')
+c13 = Comment.create!(user_id: 3, artwork_id: 9, body: 'Ordered simplicity')
+c14 = Comment.create!(user_id: 4, artwork_id: 1, body: 'Deadass')
+c15 = Comment.create!(user_id: 5, artwork_id: 3, body: 'Algorithmic')
+
+c16 = Comment.create!(user_id: 1, artwork_id: 8, body: 'Contagious feeling')
+c17 = Comment.create!(user_id: 2, artwork_id: 10, body: 'Wow. Just wow.')
+c18 = Comment.create!(user_id: 3, artwork_id: 2, body: 'Do you do custom orders?')
+c19 = Comment.create!(user_id: 4, artwork_id: 4, body: 'Like coffee in the morning')
+c20 = Comment.create!(user_id: 5, artwork_id: 6, body: 'Reverberating my soul')
