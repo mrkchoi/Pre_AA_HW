@@ -1,9 +1,17 @@
 class BooksController < ApplicationController
   def index
-    render json: Book.all
+    @books = Book.all
+
+    render :index 
   end
 
   def show
-    render json: Book.find(params[:id])
+    @book = Book.find_by(id: params[:id])
+
+    if @book
+      render :show
+    else
+      redirect_to :books
+    end
   end
 end

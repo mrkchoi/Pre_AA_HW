@@ -1,0 +1,16 @@
+<h1>Greatest Books List</h1>
+
+<ul>
+  <% @books.each do |book| %>
+    <li>
+      <strong><%= book.title %></strong>
+      <ol>
+        <li><%= book.author %></li>
+        <li><%= book.year %></li>
+        <li><%= book.category %></li>
+        <li><%= book.description %></li>
+      </ol>
+    </li>
+    <br/>
+  <% end %>
+</ul>
