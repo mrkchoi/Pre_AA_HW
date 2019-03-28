@@ -22,7 +22,12 @@ class UsersController < ApplicationController
   def update
     users = User.all
     user = users.update(params[:id], user_params)
-    render json: user
+    if user
+      render json: user
+    else
+      render json: user.errors.full_messages, status: :unprocessable_entity
+    end
+    
   end
 
   def destroy
