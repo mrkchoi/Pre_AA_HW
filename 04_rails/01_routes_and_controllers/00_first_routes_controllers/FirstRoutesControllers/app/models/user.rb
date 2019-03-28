@@ -39,4 +39,18 @@ class User < ApplicationRecord
     dependent: :destroy
   )
 
+  def liked_comments
+    likes = []
+    comments.each do |comment|
+      comment.likes
+    end
+  end
+
+  def liked_artworks
+    likes = []
+    artworks.each do |artwork|
+      artwork.likes
+    end
+  end
+
 end

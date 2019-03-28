@@ -27,5 +27,9 @@ class Comment < ApplicationRecord
     primary_key: :id
   )
 
+  has_many(
+    :likes,
+    as: :likeable
+  )
   
 end

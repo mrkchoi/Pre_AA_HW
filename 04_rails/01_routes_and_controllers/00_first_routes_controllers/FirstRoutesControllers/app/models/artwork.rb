@@ -43,4 +43,9 @@ class Artwork < ApplicationRecord
     primary_key: :id,
     dependent: :destroy
   )
+
+  has_many(
+    :likes,
+    as: :likeable
+  )
 end
