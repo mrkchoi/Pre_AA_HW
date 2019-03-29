@@ -26,7 +26,7 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
 
     if @book.save
-      # shoqw user the book show page
+      # show user the book show page
       redirect_to book_url(@book)
     else
       # show user the new book form
