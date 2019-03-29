@@ -1,0 +1,53 @@
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 40rem;
+  }
+
+  input, div, select, textarea {
+    margin-bottom: .4rem;
+  }
+</style>
+
+<h1>Update a cat:</h1>
+
+<form action="<%= cat_url(@cat) %>" method="post">
+  <%# HIDDEN PATCH EMULATOR %>
+  <input type="hidden" name="_method" value="PATCH">
+
+  <%# NAME %>
+  <label for="name">Name</label>
+  <input type="text" id="name" name="cat[name]" value="<%= @cat.name %>">
+
+  <%# SEX %>
+  <div>
+    <label for="sex">Sex</label>
+    <label for="male">M</label>
+    <input type="radio" id="male" name="cat[sex]" value="M" <%= @cat.sex == 'M' ? 'CHECKED' : '' %>>
+    <label for="female">F</label>
+    <input type="radio" id="female" name="cat[sex]" value="F"  <%= @cat.sex == 'F' ? 'CHECKED' : '' %>>
+  </div>
+
+  <%# COLOR %>
+  <label for="color">Color</label>
+  <select name="cat[color]" id="color">
+    <option disabled>--choose a color--</option>
+    <% Cat::COLORS.each do |color| %>
+      <option value="<%= color %>" <%= @cat.color == color ? 'SELECTED' : "" %> ><%= color %></option>
+    <% end %>
+  </select>
+
+  <%# BIRTH DATE %>
+  <label for="birth-date">Birthday</label>
+  <input type="date" id="birth-date" name="cat[birth_date]" value="<%= @cat.birth_date %>">
+
+  <%# DESCRIPTION %>
+  <label for="description">Description</label>
+  <textarea name="cat[description]" id="description" cols="30" rows="10">
+    <%= @cat.description %>
+  </textarea>
+
+  <input type="submit" value="Update cat!">
+
+</form>
