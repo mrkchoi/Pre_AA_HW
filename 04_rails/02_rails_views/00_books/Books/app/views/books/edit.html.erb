@@ -1,0 +1,41 @@
+<%# <style>
+  input, select, textarea {
+    margin-bottom: 1rem;
+  }
+</style> %>
+
+<h1>Edit book from library!</h1>
+
+<%= render 'form', book: @book, action: :edit  %>
+
+<!--
+<form action="<%= book_url(@book) %>" method="post" style="display: flex; flex-direction: column; max-width: 40rem;">
+  <input type="hidden" name="_method" value="PATCH">
+
+  <label for="title">Title</label>
+  <input type="text" name="book[title]" placeholder="Enter book name" value="<%= @book.title %>" id="title">
+
+  <label for="author">Author</label>
+  <input type="text" name="book[author]" placeholder="Enter author" id="author" value="<%= @book.author %>" >
+
+  <label for="year">Year</label>
+  <input type="text" name="book[year]" placeholder="Enter year" id="year" value="<%= @book.year %>" >
+
+
+  <label for="category">Category</label>
+  <select name="book[category]" id="category">
+    <option disabled>--Please Select--</option>
+    <option value="Fiction" <%= @book.category == 'Fiction' ? 'selected' : "" %>>Fiction</option>
+    <option value="Non-Fiction" <%= @book.category == 'Non-Fiction' ? 'selected' : "" %>>Non-Fiction</option>
+    <option value="Memoir" <%= @book.category == 'Memoir' ? 'selected' : "" %>>Memoir</option>
+  </select>
+
+  <label for="description">Description</label>
+  <textarea name="book[description]" id="description" rows=10>
+    <%= @book.description %>
+  </textarea>
+
+  <input type="submit" value="Update book in library">
+</form>
+
+-->

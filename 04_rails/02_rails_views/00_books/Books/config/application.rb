@@ -9,6 +9,7 @@ Bundler.require(*Rails.groups)
 module Books
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    config.action_controller.default_protect_from_forgery = false
     config.load_defaults 5.2
 
     # Settings in config/environments/* take precedence over those specified here.
