@@ -14,6 +14,7 @@ class CatRentalRequest < ApplicationRecord
   validates :status, inclusion: { in: %w(PENDING APPROVED DENIED),
     message: 'status must be either PENDING, APPROVED or DENIED'
   }
+  validate :does_not_overlap_approved_requests
 
   belongs_to(
     :cat,
@@ -33,6 +34,8 @@ class CatRentalRequest < ApplicationRecord
   end
 
   def does_not_overlap_approved_requests
-    !overlapping_approved_requests.exists?
+    if overlapping_approved_requests.exists?
+      errors.add(:request, 'cannot overlap previously approved request!')
+    end
   end
 end
