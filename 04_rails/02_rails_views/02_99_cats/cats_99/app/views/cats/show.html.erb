@@ -14,10 +14,9 @@
   }
 </style>
 
+<%# CAT PROFILE %>
 <h1><%= @cat.name %></h1>
-
 <br>
-
 <table>
   <th>Name</th>
   <th>Birth Date</th>
@@ -32,4 +31,22 @@
     <td><%= @cat.sex %></td>
     <td><%= @cat.description %></td>
   </tr>
+</table>
+<br><br>
+
+<%# RENTAL REQUESTS %>
+<h3>Rental requests:</h3>
+
+<table>
+  <th>Start date</th>
+  <th>End date</th>
+  <th>Status</th>
+
+  <% @cat.catrentalrequests.each do |request| %>
+    <tr>
+      <td><%= request.start_date %></td>
+      <td><%= request.end_date %></td>
+      <td><%= request.status %></td>
+    </tr>
+  <% end%>
 </table>

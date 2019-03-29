@@ -10,6 +10,8 @@
 #
 
 class CatRentalRequest < ApplicationRecord
+  default_scope { order(start_date: :asc)}
+
   validates :cat_id, :start_date, :end_date, :status, presence: true
   validates :status, inclusion: { in: %w(PENDING APPROVED DENIED),
     message: 'status must be either PENDING, APPROVED or DENIED'

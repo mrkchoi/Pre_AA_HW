@@ -20,7 +20,7 @@ c10 = Cat.create!(birth_date: '1990/08/05', color: 'grey', name: '90''s cat', se
 # REQUESTS FOR CAT ID 1
 r1 = CatRentalRequest.create!(cat_id: 1, start_date: '2019/03/12', end_date: '2019/03/17')
 r2 = CatRentalRequest.create!(cat_id: 1, start_date: '2019/03/15', end_date: '2019/03/19')
-r3 = CatRentalRequest.create!(cat_id: 1, start_date: '2019/03/16', end_date: '2019/03/21',status: 'APPROVED')
+r3 = CatRentalRequest.create!(cat_id: 1, start_date: '2019/03/16', end_date: '2019/03/21')
 r4 = CatRentalRequest.create!(cat_id: 1, start_date: '2019/03/25', end_date: '2019/03/27')
 
 # REQUESTS FOR CAT ID 2
