@@ -1,13 +1,28 @@
-<h1>Update a cat:</h1>
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 40rem;
+  }
 
-<%= render 'form', cat: @cat, action: :edit %>
+  input, div, select, textarea {
+    margin-bottom: .4rem;
+  }
+</style>
 
+<%# <h1>Update a cat:</h1> %>
 
+<% if action == :edit  %>
+  <% action_url = cat_url(cat) %>
+<% elsif action == :new  %>
+  <% action_url = cats_url %>
+<% end %>
 
-<!--
-<%# <form action="<%= cat_url(@cat) %>" method="post">
+<form action="<%= action_url %>" method="post">
   <%# HIDDEN PATCH EMULATOR %>
-  <input type="hidden" name="_method" value="PATCH">
+  <% if action == :edit %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
 
   <%# NAME %>
   <label for="name">Name</label>
@@ -25,7 +40,7 @@
   <%# COLOR %>
   <label for="color">Color</label>
   <select name="cat[color]" id="color">
-    <option disabled>--choose a color--</option>
+    <option disabled <%= cat.color ? '' : 'SELECTED' %> >--choose a color--</option>
     <% Cat::COLORS.each do |color| %>
       <option value="<%= color %>" <%= @cat.color == color ? 'SELECTED' : "" %> ><%= color %></option>
     <% end %>
@@ -43,5 +58,4 @@
 
   <input type="submit" value="Update cat!">
 
-</form> %>
--->
+</form>

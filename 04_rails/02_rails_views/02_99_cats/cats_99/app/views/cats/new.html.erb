@@ -1,4 +1,4 @@
-<style>
+<%# <style>
   form {
     display: flex;
     flex-direction: column;
@@ -8,11 +8,14 @@
   input, div, select, textarea {
     margin-bottom: .4rem;
   }
-</style>
+</style> %>
 
 <h1>Add a new cat:</h1>
 
-<form action="/cats" method="post">
+<%= render 'form', cat: @cat, action: :new %>
+
+<!--
+<%# <form action="/cats" method="post">
   <%# NAME %>
   <label for="name">Name</label>
   <input type="text" id="name" name="cat[name]">
@@ -45,4 +48,5 @@
 
   <input type="submit" value="Add a new cat!">
 
-</form>
+</form> %>
+-->
