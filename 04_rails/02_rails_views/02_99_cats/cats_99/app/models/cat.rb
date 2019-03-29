@@ -24,6 +24,14 @@ class Cat < ApplicationRecord
   validates :sex, inclusion: {in: SEXES, message: "sex must be M or F only"}
   validates :birth_date, :name, :sex, :description, presence: true
 
+  has_many(
+    :catrentalrequests,
+    class_name: 'CatRentalRequest',
+    foreign_key: :cat_id,
+    primary_key: :id,
+    dependent: :destroy
+  )
+
   def age
     birth_date = self.birth_date
     date_now = Time.now

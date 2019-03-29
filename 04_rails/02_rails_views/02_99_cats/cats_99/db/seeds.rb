@@ -16,3 +16,14 @@ c7 = Cat.create!(birth_date: '2003/02/28', color: 'orange', name: 'Chester', sex
 c8 = Cat.create!(birth_date: '2017/11/28', color: 'black', name: 'Turk', sex: 'M', description: 'Catsgiving')
 c9 = Cat.create!(birth_date: '2015/12/25', color: 'brown', name: 'SantaCat', sex: 'F', description: 'Ho ho ho!')
 c10 = Cat.create!(birth_date: '1990/08/05', color: 'grey', name: '90''s cat', sex: 'M', description: 'Just made it in!')
+
+# REQUESTS FOR CAT ID 1
+r1 = CatRentalRequest.create!(cat_id: 1, start_date: '2019/03/12', end_date: '2019/03/17')
+r2 = CatRentalRequest.create!(cat_id: 1, start_date: '2019/03/15', end_date: '2019/03/19')
+r3 = CatRentalRequest.create!(cat_id: 1, start_date: '2019/03/16', end_date: '2019/03/21',status: 'APPROVED')
+r4 = CatRentalRequest.create!(cat_id: 1, start_date: '2019/03/25', end_date: '2019/03/27')
+
+# REQUESTS FOR CAT ID 2
+r1 = CatRentalRequest.create!(cat_id: 2, start_date: '2019/03/12', end_date: '2019/03/17')
+r2 = CatRentalRequest.create!(cat_id: 2, start_date: '2019/03/15', end_date: '2019/03/19')
+r3 = CatRentalRequest.create!(cat_id: 2, start_date: '2019/03/16', end_date: '2019/03/21')
