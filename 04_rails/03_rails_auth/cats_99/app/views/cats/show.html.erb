@@ -1,0 +1,56 @@
+<style>
+  table {
+    
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  table, th, td {
+    border: 1px solid black;
+  }
+
+  th, td {
+    padding: .4rem;
+  }
+</style>
+
+<%# CAT PROFILE %>
+<h1><%= @cat.name %></h1>
+<br>
+<table>
+  <th>Name</th>
+  <th>Birth Date</th>
+  <th>Age</th>
+  <th>Sex</th>
+  <th>Description</th>
+
+  <tr>
+    <td><%= @cat.name %></td>
+    <td><%= @cat.birth_date %></td>
+    <td><%= @cat.age %></td>
+    <td><%= @cat.sex %></td>
+    <td><%= @cat.description %></td>
+  </tr>
+</table>
+<br><br>
+
+<%# RENTAL REQUESTS %>
+<h3>Rental requests:</h3>
+
+<table>
+  <th>Start date</th>
+  <th>End date</th>
+  <th>Status</th>
+
+  <% @cat.catrentalrequests.each do |request| %>
+    <tr>
+      <td><%= request.start_date %></td>
+      <td><%= request.end_date %></td>
+      <td><%= request.status %></td>
+      <% if request.status == 'PENDING' %>
+        <td><%= button_to 'Approve', approve_cat_rental_request_url(request.id), action: :approve %></td>
+        <td><%= button_to 'Deny', deny_cat_rental_request_url(request.id), action: :deny %></td>
+      <% end %>
+    </tr>
+  <% end%>
+</table>

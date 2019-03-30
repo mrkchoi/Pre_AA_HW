@@ -1,0 +1,37 @@
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 40rem;
+  }
+
+  input, div, select, textarea {
+    margin-bottom: .4rem;
+  }
+</style>
+
+<h1>New cat rental request form:</h1>
+
+<form action="/cat_rental_requests" method="post">
+
+  <%# CAT %>
+  <label for="cat_rental_request--name">Choose a cat:</label>
+  <select name="cat_rental_request[cat_id]" id="cat_rental_request--name">
+  <option disabled selected>--choose a cat--</option>
+    <% @cats.each do |cat| %>
+      <option value="<%= cat.id %>"><%= cat.name %></option> 
+    <% end %>
+  </select>
+
+  <%# START DATE %>
+  <label for="cat_rental_request--start_date">Rental start date:</label>
+  <input type="date" id="cat_rental_request--start_date" name="cat_rental_request[start_date]">
+
+  <%# END DATE %>
+  <label for="cat_rental_request--end_date">Rental end date:</label>
+  <input type="date" id="cat_rental_request--end_date" name="cat_rental_request[end_date]">
+
+  <%# SUBMIT %>
+  <input type="submit" value="Submit rental request">
+
+</form>
