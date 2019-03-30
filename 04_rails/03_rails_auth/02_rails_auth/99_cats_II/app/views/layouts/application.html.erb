@@ -9,6 +9,19 @@
   </head>
 
   <body>
+    <% if !current_user.nil? %>
+      <div>
+        <p>Currently logged in as: <strong><%= current_user.user_name %></strong></p>
+        <form action="/session" method="post">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          
+          <input type="submit" value="Log out">
+        </form>
+      </div>
+    <% else %>
+      <%= button_to 'Login', new_session_url, method: :get %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
