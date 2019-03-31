@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :redirect_already_signed_in_user!, except: [:destroy]
+
   def new
     @user = User.new
     render :new
