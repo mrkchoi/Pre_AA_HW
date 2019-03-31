@@ -20,10 +20,12 @@ class Cat < ApplicationRecord
 
   # .freeze renders a constant immutable.
   CAT_COLORS = %w(black white orange brown).freeze
+  COAT_COLORS = %w(black calico tabby)
 
   validates :color, inclusion: CAT_COLORS
   validates :sex, inclusion: %w(M F)
-  validates :birth_date, :color, :name, :sex, presence: true
+  validates :birth_date, :color, :name, :sex, :coat_color, presence: true
+  validates :coat_color, inclusion: COAT_COLORS
   validate :owner
 
   # Remember, has_many is just a method where the first argument is
