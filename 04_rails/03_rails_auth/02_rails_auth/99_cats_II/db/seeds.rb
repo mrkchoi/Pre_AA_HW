@@ -11,3 +11,7 @@ u1 = User.new(user_name: 'mrkchoi')
 u1.password = 'backtrail'
 
 u1.save!
+
+c1 = Cat.create!(birth_date: '2018/12/23', color: 'brown', name: 'TABBIE', sex: 'F', description: 'Amazing cat!', user_id: 1)
+
+r1 = CatRentalRequest.create!(cat_id: 1, start_date: '2019/02/01', end_date: '2019/02/02', user_id: 1)

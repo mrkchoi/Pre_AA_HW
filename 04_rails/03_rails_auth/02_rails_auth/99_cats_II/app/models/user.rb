@@ -21,6 +21,13 @@ class User < ApplicationRecord
     primary_key: :id
   )
 
+  has_many(
+    :cat_rental_requests,
+    class_name: 'CatRentalRequest',
+    foreign_key: :user_id,
+    primary_key: :id
+  )
+
   def self.generate_session_token
     SecureRandom::urlsafe_base64(16)
   end

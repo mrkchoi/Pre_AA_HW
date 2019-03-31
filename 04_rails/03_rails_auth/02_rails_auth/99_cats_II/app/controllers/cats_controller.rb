@@ -44,7 +44,7 @@ class CatsController < ApplicationController
   end
 
   def require_matching_login_to_edit
-    matching_cat = current_user.cats.find_by(id: params[:id])
+    matching_cat = current_user && current_user.cats.find_by(id: params[:id])
 
     redirect_to cats_url if matching_cat.nil?
   end
