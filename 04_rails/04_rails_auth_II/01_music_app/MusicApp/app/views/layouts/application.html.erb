@@ -5,11 +5,30 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+
+    <%= stylesheet_link_tag    'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css', media: 'all' %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
 
+
   <body>
+  <main class="main_container">
+    <header class="header_container">
+
+      <h1>Music App</h1>
+      <div>
+        <% if logged_in? %>
+          <%= button_to 'Log out', session_url, method: :delete %>
+        <% else %>
+          <%= link_to 'Sign in', new_session_url %>
+          <%= link_to 'Sign up', new_user_url %>
+        <% end %>
+      </div>
+    </header>
+
+
     <%= yield %>
+    </main>
   </body>
 </html>
