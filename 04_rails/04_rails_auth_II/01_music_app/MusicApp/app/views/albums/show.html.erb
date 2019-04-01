@@ -2,7 +2,7 @@
 <div class="ui divider"></div>
 
 <div class="ui list">
-  <h3 class="ui header">Album details:</h3>
+  <h3 class="ui header">Album details</h3>
   <div class="item">
     <strong>Title:</strong> <%= @album.title %>
   </div>
@@ -10,7 +10,7 @@
     <strong>Year:</strong> <%= @album.year %>
   </div>
   <div class="item">
-    <strong>Recording Type:</strong> <%= @album.studio_album ? 'Studio' : 'Live' %>
+    <strong>Recording Type:</strong> <%= @album.album_type == 'Studio' ? 'Studio' : 'Live' %>
   </div>
   <div class="item">
     <strong>Artist:</strong> <%= Band.find_by(id: @album.band_id).name %>
@@ -19,8 +19,47 @@
 
 <div class="ui divider"></div>
 
+<h3>Tracks</h3>
+<table class="ui celled table">
+  <thead>
+    <tr>
+      <th>Track no</th>
+      <th>Title</th>
+      <th>Album</th>
+      <th>Track Type</th>
+      <th>Lyrics</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @album.tracks.order('tracks.ord').each do |track| %>
+      <tr>
+        <td data-label="Track no">
+          <%= track.ord %>
+        </td>
+        <td data-label="Title">
+          <%= link_to track.title, track_url(track.id)  %>
+        </td>
+        <td data-label="Album">
+          <%= track.album.title %>
+        </td>
+        <td data-label="Track Type">
+          <%= track.track_type == 'Regular' ? 'Regular': 'Bonus' %>
+        </td>
+        <td data-label="Lyrics">
+          <%= track.lyrics %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<div class="ui divider"></div>
 
 <div >
+  <div class="ui button">
+    <%= link_to 'Add Track', new_album_track_url(params[:id]), method: :get %> 
+  </div>
   <div class="ui button">
     <%= link_to 'Edit Album', edit_album_url(@album), method: :get %> 
   </div>
@@ -31,3 +70,4 @@
     <%= link_to 'Back to Band Albums', band_url(@album.band_id), method: :get %> 
   </div>
 </div>
+

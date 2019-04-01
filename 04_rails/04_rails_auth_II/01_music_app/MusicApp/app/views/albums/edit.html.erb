@@ -17,14 +17,14 @@
   </select>
   <br>
 
-    <label for="album[studio_album]">Album type: &nbsp;&nbsp;</label>
+    <label for="album[album_type]">Album type: &nbsp;&nbsp;</label>
         <label for="album_type--studio">
-          <input type="radio" name="album[studio_album]" value="true" <%= @album.studio_album ? 'checked' : '' %>>
+          <input type="radio" name="album[album_type]" value="Studio" <%= @album.album_type == 'Studio' ? 'checked' : '' %>>
           Studio
         </label>
 
         <label for="album_type--studio">
-          <input type="radio" name="album[studio_album]" value="false" <%= @album.studio_album ? '' : 'checked' %>>
+          <input type="radio" name="album[album_type]" value="Live" <%= @album.album_type == 'Studio' ? '' : 'checked' %>>
           Live
         </label>
 

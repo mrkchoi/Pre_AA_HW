@@ -1,0 +1,52 @@
+<h1>Edit track</h1>
+
+<div class="ui divider"></div>
+
+
+<form action="<%= track_url(params[:id]) %>" method="post" class="ui form">
+  <%= auth_token %>
+  <%= patch_input %>
+  <label for="track_title">Track title</label>
+  <input type="text" id="track_title" name="track[title]" value="<%= @track.title %>">
+  
+  <br>
+
+  <label for="track_album">Album</label>
+  <select name="track[album_id]" id="track_album">
+    <% Album.all.each do |album| %>
+      <option value="<%= album.id %>" <%= @track.album_id == album.id ? 'SELECTED' : ''  %>><%= album.title %></option>
+    <% end %>
+  </select>
+
+  <br>
+  <div>
+  <label for="track_number">Track number</label>
+    <input type="number" id="track_number" name="track[ord]" value="<%= @track.ord %>">
+  </div>
+  
+  <br>
+  <label for="track[track_type]">Track type: &nbsp;&nbsp;</label>
+    <label for="track_regular_track--true">
+      <input type="radio" name="track[track_type]" value="Regular" <%= @track.track_type == 'Regular' ? 'CHECKED' : '' %>>
+      Regular
+    </label>
+
+    <label for="track_regular_track--false">
+      <input type="radio" name="track[track_type]" value="Bonus"  <%= @track.track_type == 'Bonus' ? 'CHECKED' : '' %>>
+      Bonus
+    </label>
+  <br>
+  <br>
+
+  <div>
+    <label for="track_lyrics">Lyrics (Optional)</label>
+    <textarea name="track[lyrics]" id="track_lyrics" cols="30" rows="10"><%= @track.lyrics %></textarea>
+  </div>
+<br>
+<br>
+  <input type="submit" class="ui button" value="Edit Track">
+
+</form>
+
+<div class="ui divider"></div>
+

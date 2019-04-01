@@ -1,0 +1,43 @@
+<h1><%= Track.find_by(id: params[:id]).title %></h1>
+
+<div class="ui divider"></div>
+
+<div class="ui list">
+  <h3 class="ui header">Track details</h3>
+  <div class="item">
+    <strong>Track no:</strong> <%= @track.ord %>
+  </div>
+  <div class="item">
+    <strong>Title:</strong> <%= @track.title %>
+  </div>
+  <div class="item">
+    <strong>Album:</strong> <%= @track.album.title %>
+  </div>
+  <div class="item">
+    <strong>Artist:</strong> <%= @track.album.band.name %>
+  </div>
+  <div class="item">
+    <strong>Track Type:</strong> <%= @track.track_type %>
+  </div>
+  <div class="item">
+    <strong>Lyrics:</strong> <%= @track.lyrics %>
+  </div>
+</div>
+
+<div class="ui divider"></div>
+
+<div >
+  <div class="ui button">
+    <%= link_to 'Edit Track', edit_track_url(params[:id]), method: :get %> 
+  </div>
+  <div class="ui button">
+    <%= link_to 'Destroy Track', track_url(params[:id]), method: :delete %> 
+  </div>
+  <div class="ui button">
+    <%= link_to 'Back to Album', album_url(@track.album.id), method: :get %> 
+  </div>
+  <div class="ui button">
+    <%= link_to 'Back to Artist', band_url(@track.album.band.id), method: :get %> 
+  </div>
+</div>
+

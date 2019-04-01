@@ -19,7 +19,7 @@
       <h1><%= link_to 'Music App', bands_url, class: 'header_title' %></h1>
       
       <div class="header_auth">
-        <% if logged_in? %>
+        <% if current_user && logged_in? %>
           <p>Logged in as: <%= current_user.email %></p>
           <%= button_to 'Log out', session_url, method: :delete %>
           
