@@ -10,6 +10,9 @@ class TracksController < ApplicationController
 
   def create
     track = Track.new(track_params)
+    if track_params[:track][:lyrics]
+      lyrics = ugly_lyrics(track_params[:track][:lyrics])
+    end
 
     if track.save
       redirect_to album_url(params[:track][:album_id])
