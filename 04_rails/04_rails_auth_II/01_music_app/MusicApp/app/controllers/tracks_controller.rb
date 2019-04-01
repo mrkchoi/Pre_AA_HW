@@ -10,14 +10,15 @@ class TracksController < ApplicationController
 
   def create
     track = Track.new(track_params)
-    if track_params[:track][:lyrics]
+    if track.valid?
       lyrics = ugly_lyrics(track_params[:track][:lyrics])
     end
 
     if track.save
       redirect_to album_url(params[:track][:album_id])
     else
-      render json: 'Track info invalid!'
+      flash.now[:errors] = ["Invalid track details"]
+      render :new
     end
   end
 
@@ -27,9 +28,13 @@ class TracksController < ApplicationController
   end
 
   def update
+    @track = Track.find_by(id: params[:id])
     track = Track.find_by(id: params[:id])
-    track.update_attributes(track_params)
-    redirect_to album_url(params[:track][:album_id])
+    if !track.update_attributes(track_params)
+      flash[:edit_errors] = ["Invalid track details"] 
+    end
+
+    redirect_to track_url(params[:id])
   end
 
   def show

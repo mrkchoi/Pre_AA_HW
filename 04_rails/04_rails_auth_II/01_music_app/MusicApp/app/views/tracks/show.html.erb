@@ -2,6 +2,14 @@
 
 <div class="ui divider"></div>
 
+<% if flash[:edit_errors]%>
+  <% flash[:edit_errors].each do |error| %>
+    <div class="ui warning message">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
+
 <div class="ui list">
   <h3 class="ui header">Track details</h3>
   <div class="item">

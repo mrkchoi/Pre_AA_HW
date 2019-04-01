@@ -8,10 +8,10 @@ class SessionsController < ApplicationController
 
     if @user
       log_in_user!(@user)
-      flash[:alert] = 'Successfully logged in!'
       redirect_to bands_url
     else
-      redirect_to new_session_url
+      flash.now[:errors] = ["Wrong username and/or password"]
+      render :new
     end
   end
 

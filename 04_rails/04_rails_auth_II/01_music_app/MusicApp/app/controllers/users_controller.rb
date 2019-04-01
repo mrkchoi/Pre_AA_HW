@@ -12,8 +12,8 @@ class UsersController < ApplicationController
     if @user.save
       log_in_user!(@user)
       redirect_to bands_url
-    else
-      render json: @user.errors.full_messages
+    elsif @user.errors
+      render :new
     end
   end
 

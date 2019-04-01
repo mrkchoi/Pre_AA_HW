@@ -1,6 +1,14 @@
 <h1><%= @album.title %></h1>
 <div class="ui divider"></div>
 
+<% if flash[:album_edit_errors]%>
+  <% flash[:album_edit_errors].each do |error| %>
+    <div class="ui warning message">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
+
 <div class="ui list">
   <h3 class="ui header">Album details</h3>
   <div class="item">

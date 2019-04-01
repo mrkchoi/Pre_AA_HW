@@ -17,7 +17,8 @@ class BandsController < ApplicationController
     if band.save
       redirect_to bands_url
     else
-      render json: 'Band name invalid!'
+      flash.now[:errors] = ['Invalid band name']
+      render :new
     end
 
   end
@@ -29,7 +30,10 @@ class BandsController < ApplicationController
 
   def update
     band = Band.find_by(id: params[:band][:id])
-    band.update_attributes(band_params)
+    if !band.update_attributes(band_params)
+      flash[:band_edit_error] = ["Invalid band name. Edit not saved."]
+    end
+    
     redirect_to bands_url
   end
 

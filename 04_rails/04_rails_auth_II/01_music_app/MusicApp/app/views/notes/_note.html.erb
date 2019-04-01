@@ -1,6 +1,14 @@
 
 <h3>Add a note:</h3>
 
+<% if flash[:errors]%>
+  <% flash[:errors].each do |error| %>
+    <div class="ui warning message">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
+
 <form action="<%= notes_url %>" method="post" class="ui form">
   <%= auth_token %>
 

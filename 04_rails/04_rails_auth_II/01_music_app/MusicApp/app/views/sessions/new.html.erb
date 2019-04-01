@@ -1,6 +1,14 @@
 <h1>Log in</h1>
 <div class="ui divider"></div>
 
+<% if flash.now[:errors]%>
+  <% flash.now[:errors].each do |error| %>
+    <div class="ui warning message">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
+
 <form action="<%= session_url %>" method="post" class="ui form">
   <!-- FORM AUTHENTICITY TOKEN --> 
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">

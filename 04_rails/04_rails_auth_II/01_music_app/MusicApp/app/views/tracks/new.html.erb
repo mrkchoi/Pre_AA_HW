@@ -1,7 +1,15 @@
 <h1>Add Track</h1>
-<h3>Album: <%= Album.find_by(id: params[:album_id]).title %></h3>
+<h3>Album: <%= Album.find_by(id: params[:album_id] || params[:track][:album_id]).title %></h3>
 
 <div class="ui divider"></div>
+
+<% if flash.now[:errors]%>
+  <% flash.now[:errors].each do |error| %>
+    <div class="ui warning message">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
 
 <form action="<%= tracks_url %>" method="post" class="ui form">
   <%= auth_token %>

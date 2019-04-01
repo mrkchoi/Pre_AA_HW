@@ -12,6 +12,8 @@ class NotesController < ApplicationController
     if note.save
       redirect_to track_url(params[:note][:track_id])
     else
+      flash[:errors] = ["Invalid note"]
+      # render 'tracks'
       redirect_to track_url(params[:note][:track_id])
     end
   end

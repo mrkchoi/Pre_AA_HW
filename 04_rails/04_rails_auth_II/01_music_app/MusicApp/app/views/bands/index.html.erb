@@ -1,6 +1,13 @@
 <h1>All bands</h1>
 <div class="ui divider"></div>
 
+<% if flash[:band_edit_error]%>
+  <% flash[:band_edit_error].each do |error| %>
+    <div class="ui warning message">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
 
   <div>
     <% @bands.each do |band| %>

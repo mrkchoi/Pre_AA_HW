@@ -1,5 +1,13 @@
 <h1>Add a new band</h1>
 
+<% if flash.now[:errors]%>
+  <% flash.now[:errors].each do |error| %>
+    <div class="ui warning message">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
+
 <form action="<%= bands_url %>" method="post" class="ui form">
   <%= auth_token %>
 

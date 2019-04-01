@@ -9,10 +9,13 @@ class AlbumsController < ApplicationController
   def create
     album = Album.new(album_params)
 
+    # fail
     if album.save
       redirect_to band_url(params[:album][:band_id])
-    else
-      render json: album.errors.full_messages
+    elsif album.errors.full_messages
+      flash.now[:errors] = ["Invalid album details"]
+      @params = params[:album][:band_id]
+      render :new
     end
   end
 
@@ -29,7 +32,9 @@ class AlbumsController < ApplicationController
 
   def update
     album = Album.find_by(id: params[:id])
-    album.update_attributes(album_params)
+    if !album.update_attributes(album_params)
+      flash[:album_edit_errors] = ["Invalid album details. Edit not saved."]
+    end
 
     redirect_to album_url(album)
   end
