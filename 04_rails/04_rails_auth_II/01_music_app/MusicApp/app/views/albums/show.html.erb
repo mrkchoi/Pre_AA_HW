@@ -1,0 +1,33 @@
+<h1><%= @album.title %></h1>
+<div class="ui divider"></div>
+
+<div class="ui list">
+  <h3 class="ui header">Album details:</h3>
+  <div class="item">
+    <strong>Title:</strong> <%= @album.title %>
+  </div>
+  <div class="item">
+    <strong>Year:</strong> <%= @album.year %>
+  </div>
+  <div class="item">
+    <strong>Recording Type:</strong> <%= @album.studio_album ? 'Studio' : 'Live' %>
+  </div>
+  <div class="item">
+    <strong>Artist:</strong> <%= Band.find_by(id: @album.band_id).name %>
+  </div>
+</div>
+
+<div class="ui divider"></div>
+
+
+<div >
+  <div class="ui button">
+    <%= link_to 'Edit Album', edit_album_url(@album), method: :get %> 
+  </div>
+  <div class="ui button">
+    <%= link_to 'Destroy Album', album_url, method: :delete %> 
+  </div>
+  <div class="ui button">
+    <%= link_to 'Back to Band Albums', band_url(@album.band_id), method: :get %> 
+  </div>
+</div>

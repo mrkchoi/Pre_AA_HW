@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if @user
       log_in_user!(@user)
       flash[:alert] = 'Successfully logged in!'
-      redirect_to user_url(@user)
+      redirect_to bands_url
     else
       redirect_to new_session_url
     end

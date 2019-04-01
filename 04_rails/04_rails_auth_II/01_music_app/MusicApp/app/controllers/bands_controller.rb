@@ -22,22 +22,24 @@ class BandsController < ApplicationController
 
   def edit
     @band = Band.find_by(id: params[:id])
-
     render :edit
   end
 
   def update
-    band = Band.find_by(id: params[:id])
+    band = Band.find_by(id: params[:band][:id])
     band.update_attributes(band_params)
     redirect_to bands_url
   end
 
   def show
+    @band = Band.find_by(id: params[:id])
+    render :show
   end
 
-
-
   def destroy
+    @band = Band.find_by(id: params[:id])
+    @band.destroy
+    redirect_to bands_url
   end
 
   private

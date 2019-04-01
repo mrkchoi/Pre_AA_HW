@@ -20,12 +20,15 @@
       
       <div class="header_auth">
         <% if logged_in? %>
+          <p>Logged in as: <%= current_user.email %></p>
           <%= button_to 'Log out', session_url, method: :delete %>
+          
         <% else %>
           <%= link_to 'Sign in', new_session_url %>
           <%= link_to 'Sign up', new_user_url %>
         <% end %>
       </div>
+
     </header>
 
 

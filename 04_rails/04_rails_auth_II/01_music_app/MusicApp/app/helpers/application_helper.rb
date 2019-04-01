@@ -6,4 +6,8 @@ module ApplicationHelper
   def patch_input
     "<input type=\"hidden\" name=\"_method\" value=\"PATCH\">".html_safe
   end
+
+  def band_buttons
+    
+  end
 end

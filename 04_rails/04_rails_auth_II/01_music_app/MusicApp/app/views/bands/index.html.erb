@@ -1,8 +1,13 @@
 <h1>All bands</h1>
+<div class="ui divider"></div>
 
-<ul>
-  <% @bands.each do |band| %>
-    <li><%= band.name %></li>
-  <% end %>
-</ul>
+
+  <div>
+    <% @bands.each do |band| %>
+    <div class="ui button"> 
+      <%= link_to band.name, band_url(band) %>
+    </div>
+    <% end %>
+  </div>
+
 
