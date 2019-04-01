@@ -16,8 +16,9 @@
   <main class="main_container">
     <header class="header_container">
 
-      <h1>Music App</h1>
-      <div>
+      <h1><%= link_to 'Music App', bands_url, class: 'header_title' %></h1>
+      
+      <div class="header_auth">
         <% if logged_in? %>
           <%= button_to 'Log out', session_url, method: :delete %>
         <% else %>
