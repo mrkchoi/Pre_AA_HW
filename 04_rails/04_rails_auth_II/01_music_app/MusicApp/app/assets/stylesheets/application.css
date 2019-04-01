@@ -58,3 +58,8 @@
   font-weight: 500 !important;
   font-size: 1em !important;
 }
+
+.comment_wrapper {
+  display: flex;
+  justify-content: space-between;
+}

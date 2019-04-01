@@ -1,6 +1,7 @@
 <h1><%= link_to @band.name, band_url(params[:id]) %></h1>
 <div class="ui divider"></div>
 
+<h3>Albums</h3>
 <div class="ui items">
   <% @band.albums.each do |album| %>
     <div class="item">
@@ -27,3 +28,4 @@
   
   
 </div>
+

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  # before_action :authenticate_user
 
   def new
     @user = User.new
@@ -10,7 +11,7 @@ class UsersController < ApplicationController
 
     if @user.save
       log_in_user!(@user)
-      redirect_to user_url(@user)
+      redirect_to bands_url
     else
       render json: @user.errors.full_messages
     end

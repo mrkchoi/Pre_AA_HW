@@ -13,6 +13,14 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   after_initialize :ensure_session_token
 
+  has_many(
+    :notes,
+    class_name: 'Note',
+    foreign_key: :user_id,
+    primary_key: :id,
+    dependent: :destroy
+  )
+
   def self.generate_session_token
     SecureRandom::urlsafe_base64(16)
   end

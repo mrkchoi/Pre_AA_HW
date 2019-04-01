@@ -1,0 +1,26 @@
+<div class="ui comments">
+  <% @track.notes.each do |note|%>
+    <div class="comment_wrapper">
+      <div class="comment">
+        <div class="content">
+          <p class="author">
+            <%= User.find_by(id: note.user_id).email %>
+          </p>
+          
+          <div class="text">
+            <%= note.note_text %>
+          </div>
+        </div>
+
+      </div>
+      <div class="comment_action">
+        <% if User.find_by(id: note.user_id) == current_user %>
+          <%= button_to 'Destroy Note', note_url(note.id), method: :delete, class: 'mini ui button right floated'%>
+        <% end %>
+      </div>
+    </div>
+    <div class="ui divider"></div>
+  <% end %>
+
+</div>
+

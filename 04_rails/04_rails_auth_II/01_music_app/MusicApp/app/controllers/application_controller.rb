@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :authenticate_user
 
   def log_in_user!(user)
     @current_user = user
@@ -18,6 +18,12 @@ class ApplicationController < ActionController::Base
   def log_out_user!
     current_user.try(:reset_session_token!)
     session[:session_token] = nil
+  end
+
+  def authenticate_user
+    if !current_user || !logged_in?
+      redirect_to new_session_url
+    end
   end
 
 end

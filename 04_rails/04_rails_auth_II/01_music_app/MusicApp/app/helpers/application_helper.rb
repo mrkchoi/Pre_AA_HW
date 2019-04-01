@@ -7,7 +7,11 @@ module ApplicationHelper
     "<input type=\"hidden\" name=\"_method\" value=\"PATCH\">".html_safe
   end
 
-  def band_buttons
+  # def logged_in?
+  #   current_user && logged_in?
+  # end
+
+  # def authenticate_user
     
-  end
+  # end
 end
