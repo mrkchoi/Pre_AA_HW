@@ -1,0 +1,22 @@
+
+<h3>Add a note:</h3>
+
+<% if flash[:errors]%>
+  <% flash[:errors].each do |error| %>
+    <div class="ui warning message">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
+
+<form action="<%= notes_url %>" method="post" class="ui form">
+  <%= auth_token %>
+
+  <input type="hidden" name="note[track_id]" value="<%= @track.id %>">
+  <label for="note_note_text">Note</label>
+  <textarea name="note[note_text]" id="note_note_text" cols="30" rows="10"></textarea>
+  <br>
+  <br>
+
+  <input type="submit" value="Submit Note" class="ui button">
+</form>

@@ -1,0 +1,26 @@
+<h1>All bands</h1>
+<div class="ui divider"></div>
+
+<% if flash[:band_edit_error]%>
+  <% flash[:band_edit_error].each do |error| %>
+    <div class="ui warning message">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
+
+  <div>
+    <% @bands.each do |band| %>
+    <div class="ui button"> 
+      <%= link_to band.name, band_url(band) %>
+    </div>
+    <% end %>
+  </div>
+
+<div class="ui divider"></div>
+
+<div >
+  <div class="ui button">
+    <%= link_to 'Add Band', new_band_url, method: :get %> 
+  </div>
+</div>

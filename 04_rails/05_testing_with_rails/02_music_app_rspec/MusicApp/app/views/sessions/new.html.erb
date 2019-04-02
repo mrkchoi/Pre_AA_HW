@@ -1,0 +1,27 @@
+<h1>Log in</h1>
+<div class="ui divider"></div>
+
+<% if flash.now[:errors]%>
+  <% flash.now[:errors].each do |error| %>
+    <div class="ui warning message">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
+
+<form action="<%= session_url %>" method="post" class="ui form">
+  <!-- FORM AUTHENTICITY TOKEN --> 
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  
+  <!-- USER INPUT --> 
+  <label for="user_email">Email</label>
+  <input type="email" id="user_email" name="user[email]">
+  <br>
+
+  <label for="user_password">Password</label>
+  <input type="password" id="user_password" name="user[password]">
+  <br>
+  <br>
+
+  <input type="submit" value="Sign in now!" class="ui button">
+</form>
