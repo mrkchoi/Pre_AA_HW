@@ -13,3 +13,30 @@
  *= require_tree .
  *= require_self
  */
+
+
+.header_main {
+  padding-top: 2rem;
+}
+
+.ui.form,
+.ui.warning {
+  max-width: 30rem;
+}
+
+.header_main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.header_auth {  
+  display: flex; 
+  align-items: center;
+}
+
+.header_auth p {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  margin-right: 1rem;
+}
