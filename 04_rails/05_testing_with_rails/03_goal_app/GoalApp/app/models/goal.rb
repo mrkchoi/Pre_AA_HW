@@ -23,8 +23,6 @@ class Goal < ApplicationRecord
 
   has_many(
     :comments,
-    class_name: 'GoalComment',
-    foreign_key: :goal_id,
-    primary_key: :id
+    as: :commentable
   )
 end
