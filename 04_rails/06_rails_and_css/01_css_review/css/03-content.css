@@ -1,0 +1,33 @@
+/* PHASE 3: Content */
+
+.content {
+  max-width: 900px;
+  background-color: #fff;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.content-sidebar {
+  box-sizing: border-box;
+  max-width: 240px;
+  float: left;
+  padding: 20px;
+  
+}
+
+.content-main {
+  box-sizing: border-box;
+  max-width: 660px;
+  padding: 20px;
+  float: left;
+}
+
+.content h1 {
+  font-size: 24px;
+  margin-bottom: 1rem;
+}
+
+.content p {
+  font-weight: 400;
+}
