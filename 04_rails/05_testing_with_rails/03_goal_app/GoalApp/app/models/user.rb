@@ -24,26 +24,16 @@ class User < ApplicationRecord
   )
 
   has_many(
-    :incoming_user_comments,
-    class_name: 'UserComment',
-    foreign_key: :user_id,
-    primary_key: :id
+    :comments,
+    as: :commentable
   )
 
   has_many(
-    :outgoing_user_comments,
-    class_name: 'UserComment',
+    :authored_comments,
+    class_name: 'Comment',
     foreign_key: :author_id,
     primary_key: :id
   )
-
-  has_many(
-    :outgoing_goal_comments,
-    class_name: 'GoalComment',
-    foreign_key: :author_id,
-    primary_key: :id
-  )
-  
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)

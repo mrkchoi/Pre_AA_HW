@@ -11,45 +11,6 @@
 
 </div>
 
-
-<%# Comments for goal %>
-<br>
-<h2>Comments</h2>
-<div class="ui comments small">
-  <% @goal.comments.order('goal_comments.created_at ASC').each do |comment| %>
-    <div class="comment">
-      <div class="content">
-        <p class="author">>> <%= comment.author.username %></p>
-        <div class="text">
-          <%= comment.content %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
-
-<%# GOAL COMMENT FORM %>
-<h3>Add comment</h3>
-
-<% if flash[:errors] %>
-  <div class="ui message warning">
-    <% flash[:errors].each do |error| %>
-      <%= error %>
-    <% end %>
-  </div>
-<% end %>
-
-<form action="<%= goal_comments_url %>" method="post" class="ui form">
-  <%= auth_token %>
-  <input type="hidden" name="goal_comment[goal_id]" value="<%= params[:id] %>">
-  <label for="goal_comment-comment">Comment</label>
-  <br>
-  <textarea name="goal_comment[content]" id="goal_comment-comment" cols="60" rows="2"></textarea>
-  <br>
-  <br>
-  <input type="submit" value="Submit" class="ui button">
-</form>
-
 <div class="ui divider"></div>
 
 <div>
