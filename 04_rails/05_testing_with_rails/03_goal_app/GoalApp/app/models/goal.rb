@@ -7,6 +7,8 @@
 #  goal_content :text             not null
 #  goal_type    :string           default("public"), not null
 #  completed    :string           default("false"), not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 
 class Goal < ApplicationRecord
@@ -16,6 +18,13 @@ class Goal < ApplicationRecord
     :user,
     class_name: 'User',
     foreign_key: :user_id,
+    primary_key: :id
+  )
+
+  has_many(
+    :comments,
+    class_name: 'GoalComment',
+    foreign_key: :goal_id,
     primary_key: :id
   )
 end
