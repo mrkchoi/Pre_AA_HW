@@ -26,7 +26,11 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user
+    if !current_user || !logged_in?
+      redirect_to new_session_url
+    end
   end
+
 end
 
 

@@ -16,6 +16,13 @@ class User < ApplicationRecord
   validates :username, uniqueness: true
   after_initialize :ensure_session_token
 
+  has_many(
+    :goals,
+    class_name: 'Goal',
+    foreign_key: :user_id,
+    primary_key: :id
+  )
+
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return nil if user.nil?

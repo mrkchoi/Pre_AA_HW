@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user, except: [:new, :create]
+  before_action :authenticate_current_user, only: [:show]
+  
   def index
     @users = User.all
     render :index
@@ -30,5 +33,8 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :password)
+  end
+
+  def authenticate_current_user
   end
 end

@@ -1,0 +1,53 @@
+<h2>New goal</h2>
+
+<%# DISPLAY ERRORS IF NECESSARY %>
+<% if flash.now[:errors] %>
+  <% flash.now[:errors].each do |error| %>
+    <div class="ui message warning">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
+
+<%# MAIN SIGN UP FORM %>
+<form action="<%= user_goals_url %>" method="post" class="ui form">
+  <%= auth_token %>
+
+  <label for="goal_content">Title</label>
+  <input type="text" id="goal_content" name="goal[goal_content]">
+  <br>
+  <br>
+
+  <label for="goal_goaltype">Type &nbsp;&nbsp;&nbsp;</label>
+  <label for="goal_goaltype-public">
+    <input type="radio" value="public" name="goal[goal_type]" checked>
+    Public
+  </label>
+  <label for="goal_goaltype-private">
+    <input type="radio" value="private" name="goal[goal_type]">
+    Private
+  </label>
+  <br>
+  <br>
+
+  <label for="goal_status">Status &nbsp;&nbsp;&nbsp;</label>
+  <label for="goal_status-">
+    <input type="radio" value="false" checked>
+    In Progress
+  </label>
+  <label for="goal_status-">
+    <input type="radio" value="true">
+    Completed
+  </label>
+
+  <br><br>
+
+  <input type="submit" value="Add goal" class="ui button" id="new_session_btn">
+</form>
+
+<div class="ui divider"></div>
+
+<div>
+  <%= link_to 'Back to profile', user_url(params[:user_id]), class: 'ui button' %>
+</div>
+

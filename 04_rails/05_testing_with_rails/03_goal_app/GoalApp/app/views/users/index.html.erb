@@ -7,7 +7,7 @@
     <div class="item">
       <div class="content">
         <div class="header">
-          <%= user.username %>
+          <%= link_to user.username, user_url(user.id) %>
         </div>
       </div>
     </div>

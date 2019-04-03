@@ -1,0 +1,29 @@
+<h2><%= @user.username %>'s profile</h2>
+
+<%# List of goals %>
+
+<table class="ui celled table">
+  <thead>
+    <tr><th>Goal</th>
+    <th>Type</th>
+    <th>Status</th>
+  </tr></thead>
+  <tbody>
+  <% @user.goals.each do |goal| %>
+    <tr>
+      <td data-label="Name"><%= goal.goal_content %></td>
+      <td data-label="Type"><%= goal.goal_type %></td>
+      <td data-label="Status"><%= goal.completed ? 'In progress' : 'Completed' %></td>
+    </tr>
+  <% end %>
+    
+  </tbody>
+</table>
+
+<div class="ui divider"></div>
+
+
+<%# New goal %>
+<div>
+  <%= link_to 'Add goal', new_user_goal_url(params[:id]), class: 'ui button' %>
+</div>
