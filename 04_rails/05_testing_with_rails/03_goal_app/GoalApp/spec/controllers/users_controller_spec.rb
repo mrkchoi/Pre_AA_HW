@@ -18,20 +18,6 @@ RSpec.describe UsersController, type: :controller do
   describe 'POST #create' do
     it 'should redirect the user to the main goal app page' do
       post :create, params: {user: {username: 'test@test.com', password: 'testing'}}
-      expect(response).to render_template('index')
-    end
-  end
-
-  describe 'GET #show' do
-    it 'should render the page for a specific user' do
-      get :show, params: {id: 1}
-      expect(response).to redirect_to user_url(1)
-    end
-  end
-
-  describe 'DELETE #destroy' do
-    it 'should redirect the user to the main goal app page' do
-      delete :destroy, params: {id: 1}
       expect(response).to redirect_to users_url
     end
   end
