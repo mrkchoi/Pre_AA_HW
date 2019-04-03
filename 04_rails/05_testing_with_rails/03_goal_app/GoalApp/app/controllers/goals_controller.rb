@@ -18,9 +18,16 @@ class GoalsController < ApplicationController
   end
 
   def edit
+    @goal = Goal.find_by(id: params[:id])
+    # fail
+    render :edit
   end
 
   def update
+    @goal = Goal.find_by(id: params[:id])
+    @user = User.find_by(id: @goal.user_id)
+    @goal.update_attributes(goal_params)
+    redirect_to user_goal_url(@user.id, @goal.id)
   end
 
   def show
@@ -29,6 +36,11 @@ class GoalsController < ApplicationController
   end
 
   def destroy
+    @goal = Goal.find_by(id: params[:id])
+    @user = User.find_by(id: @goal.user_id)
+
+    @goal.destroy
+    redirect_to user_url(@user)
   end
 
   private

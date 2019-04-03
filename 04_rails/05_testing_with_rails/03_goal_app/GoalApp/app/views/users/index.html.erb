@@ -3,7 +3,7 @@
 
 <div class="ui items">
 
-  <% @users.each do |user| %>
+  <% @users.order('users.username ASC').each do |user| %>
     <div class="item">
       <div class="content">
         <div class="header">

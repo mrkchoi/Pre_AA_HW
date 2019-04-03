@@ -1,4 +1,4 @@
-<h2>New goal</h2>
+<h2>Edit goal</h2>
 
 <%# DISPLAY ERRORS IF NECESSARY %>
 <% if flash.now[:errors] %>
@@ -10,21 +10,22 @@
 <% end %>
 
 <%# MAIN SIGN UP FORM %>
-<form action="<%= user_goals_url %>" method="post" class="ui form">
+<form action="<%= user_goal_url(@goal) %>" method="post" class="ui form">
   <%= auth_token %>
+  <%= patch_request %>
 
   <label for="goal_content">Title</label>
-  <input type="text" id="goal_content" name="goal[goal_content]">
+  <input type="text" id="goal_content" name="goal[goal_content]" value="<%= @goal.goal_content %>">
   <br>
   <br>
 
   <label for="goal_goaltype">Type &nbsp;&nbsp;&nbsp;</label>
   <label for="goal_goaltype-public">
-    <input type="radio" value="public" name="goal[goal_type]" checked>
+    <input type="radio" value="public" name="goal[goal_type]" <%= @goal.goal_type == 'public' ? 'CHECKED' : '' %>>
     Public
   </label>
   <label for="goal_goaltype-private">
-    <input type="radio" value="private" name="goal[goal_type]">
+    <input type="radio" value="private" name="goal[goal_type]" <%= @goal.goal_type == 'public' ? '' : 'CHECKED' %>>
     Private
   </label>
   <br>
@@ -32,11 +33,11 @@
 
   <label for="goal_status">Status &nbsp;&nbsp;&nbsp;</label>
   <label for="goal_status-false">
-    <input type="radio" value="false" name="goal[completed]" checked>
+    <input type="radio" value="false" name="goal[completed]" <%= @goal.completed == 'false' ? 'CHECKED' : '' %>>
     In Progress
   </label>
   <label for="goal_status-true">
-    <input type="radio" value="true" name="goal[completed]">
+    <input type="radio" value="true" name="goal[completed]" <%= @goal.completed == 'false' ? '' : 'CHECKED' %>>
     Completed
   </label>
 
@@ -48,6 +49,6 @@
 <div class="ui divider"></div>
 
 <div>
-  <%= link_to '< Back to profile', user_url(params[:user_id]), class: 'ui button' %>
+  <%= link_to '< Back to goal', user_url(params[:user_id]), class: 'ui button' %>
 </div>
 

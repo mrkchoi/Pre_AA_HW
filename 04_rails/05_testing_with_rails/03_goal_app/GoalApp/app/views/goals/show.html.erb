@@ -6,7 +6,7 @@
   </div>
 
   <div class="item">
-    <strong>Status: </strong><%= @goal.completed == 'Completed' ? 'Completed' : 'In Progress' %>
+    <strong>Status: </strong><%= @goal.completed == 'true' ? 'Completed' : 'In Progress' %>
   </div>
 
 </div>
@@ -14,5 +14,7 @@
 <div class="ui divider"></div>
 
 <div>
-  <%= link_to 'Back to user', user_url(params[:user_id]), class: 'ui button' %>
+  <%= link_to '< Back to user', user_url(params[:user_id]), class: 'ui button' %>
+  <%= link_to 'Edit goal', edit_user_goal_url(params[:user_id], params[:id]), method: :get, class: 'ui button' %>
+  <%= link_to 'Delete Goal', user_goal_url(params[:user_id], params[:id]), method: :delete, class: 'ui button negative' %>
 </div>
