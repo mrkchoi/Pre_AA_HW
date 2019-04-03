@@ -24,6 +24,8 @@ class GoalsController < ApplicationController
   end
 
   def show
+    @goal = Goal.find_by(id: params[:id])
+    render :show
   end
 
   def destroy

@@ -11,7 +11,7 @@
   <tbody>
   <% @user.goals.each do |goal| %>
     <tr>
-      <td data-label="Name"><%= goal.goal_content %></td>
+      <td data-label="Name"><%= link_to goal.goal_content, user_goal_url(params[:id], goal.id) %></td>
       <td data-label="Type"><%= goal.goal_type %></td>
       <td data-label="Status"><%= goal.completed ? 'In progress' : 'Completed' %></td>
     </tr>

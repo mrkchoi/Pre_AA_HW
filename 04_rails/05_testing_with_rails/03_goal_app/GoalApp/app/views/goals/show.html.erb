@@ -1,0 +1,18 @@
+<h2><%= @goal.goal_content %></h2>
+
+<div class="ui list">
+  <div class="item">
+    <strong>Type: </strong><%= @goal.goal_type == 'public' ? 'Public' : 'Private' %>
+  </div>
+
+  <div class="item">
+    <strong>Status: </strong><%= @goal.completed == 'Completed' ? 'Completed' : 'In Progress' %>
+  </div>
+
+</div>
+
+<div class="ui divider"></div>
+
+<div>
+  <%= link_to 'Back to user', user_url(params[:user_id]), class: 'ui button' %>
+</div>
