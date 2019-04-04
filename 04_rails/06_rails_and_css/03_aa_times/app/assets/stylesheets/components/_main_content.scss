@@ -1,0 +1,131 @@
+.main_content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.6rem;
+  // background-color: pink;
+}
+
+.main_content__headline {}
+
+.main_headline {
+  font-size: 2rem;
+  font-style: italic;
+  text-decoration: underline;
+  font-weight: 800;
+}
+
+.author_by_tag {
+  color: $gray;
+  margin: 0.4rem 0;
+  font-size: .9rem;
+}
+.list_bulleted {
+  padding-left: 1rem;
+  list-style: outside;
+}
+.list_bulleted li {
+  font-size: .9rem;
+  line-height: 1.4rem;
+  margin-bottom: 0.8rem;
+}
+.link--blue-underline {
+  color: $dark-blue;
+  font-size: .9rem;
+}
+
+.main_content__video {}
+.main_content__video-highlight iframe {
+  max-width: 100%;
+  margin-bottom: 1rem;
+}
+.main_content__video-highlight {
+  margin-bottom: 1rem;
+}
+.text--normal {
+  font-size: .9rem;
+  line-height: 1.3rem;  
+}
+.hr-bottom {}
+.main_content__video-article {
+  margin-bottom: 1rem;
+}
+.header--normal-underline {
+  font-size: 1rem;
+  font-weight: 900;
+  text-decoration: underline;
+}
+.main_content__video-article {}
+.header--normal {
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.main_content__opinion {
+  display: flex;
+  flex-direction: column;
+}
+.main_content__opinion-title {
+  text-align: center;
+  margin: .6rem 0;
+}
+.main_content__opinion-main {
+  display: flex;
+}
+.pre-header--normal {
+  margin-bottom: 0.6rem;
+}
+.list-bulleted--small {
+  padding-left: 1rem;
+  list-style: outside;
+  margin: 1rem 0;
+  font-size: .9rem;
+}
+
+.list-bulleted--small li {
+  margin-bottom: .4rem;
+  font-weight: 600;
+  font-size: .8rem;
+}
+  
+.image_container {
+  background-color: orangered;
+  height: 125px;
+}
+
+.image_container img {
+  height: 100%;
+  object-fit: cover;
+}
+.main_content__opinion-newsletter {
+  text-align: center;
+}
+.text-input--normal {
+  border: 1px solid grey;
+  padding: 5px;
+  font-size: 0.9rem;
+  flex: 1;
+  border-radius: 2px;
+  text-align: left;
+}
+.form--normal {
+  display: flex;
+}
+
+.form-btn--normal {
+  padding: 5px 10px;
+  font-weight: 900;
+  color: $lightest-gray;
+  background-color: $light-blue;
+  font-family: $sans-serif;
+  border-radius: 2px;
+  padding-left: 10px;
+}
+.form-btn--normal:hover {
+  background-color: $blue;
+}
+.content--small-light {
+  margin: .4rem 0;
+  color: $gray;
+}

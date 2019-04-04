@@ -1,34 +1,52 @@
 .main-nav {
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid $light-gray;
 }
 
 .left-nav > ul,
 .right-nav > ul {
-
+  display: flex;
+  align-items: center;
 }
 
 .left-nav > ul > li {
-
+  font-family: $sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 5px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .right-nav > ul > li {
-
+  margin-right: 5px;
 }
 
 .right-nav > ul > li:last-of-type {
-
+  margin-left: 5px;
 }
 
 .left-nav > ul > li:hover,
 .right-nav > ul > li:last-of-type:hover {
-
+  background-color: $light-gray;
 }
 
 .left-nav span {
 
 }
 
+.right-nav a {
+  padding: 5px;
+  display: inline-block;
+}
 
 .right-nav i {
+  font-size: 1rem;
+}
 
+.right-nav a:hover {
+  text-decoration: none;
 }

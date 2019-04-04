@@ -1,0 +1,30 @@
+
+.section-nav {
+  border-bottom: 1px solid $light-gray;
+}
+
+.section-nav__container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.section-nav__container li {
+  display: inline-block;
+}
+
+.section-nav__link {
+  font-family: $sans-serif;
+  padding: 10px;
+  display: inline-block;
+}
+
+.section-nav__link:hover {
+  text-decoration: none;
+  background-color: $light-gray;
+}
+
+.section-nav__link--underline:hover {
+  text-decoration: underline;
+}
