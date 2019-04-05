@@ -48,6 +48,18 @@ with a class attribute containing 'col-' */
 
 @media all and (max-width: 1000px) {
   [class*='col-'] {
-    // width:
+    width: 100%;
+  }
+
+  .main_content {
+    flex-direction: column;
+  }
+
+  .main_content__video {
+    margin: 1rem 0;
+  }
+
+  .main-nav .right-nav button {
+    display: none;
   }
 }
