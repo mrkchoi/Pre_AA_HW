@@ -21,3 +21,21 @@
  .ui.form {
    max-width: 20rem;
  }
+
+
+ /* HEADER NAV STYLING */
+ .header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ }
+
+ .header__nav-inner {
+   display: flex;
+   align-items: center;
+ }
+
+ .header__nav-status {
+  margin-bottom: 0;
+  margin-right: 1rem;
+ }

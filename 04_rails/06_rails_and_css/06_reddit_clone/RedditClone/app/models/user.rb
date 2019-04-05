@@ -16,7 +16,13 @@ class User < ApplicationRecord
   validates :username, uniqueness: true
   validates :username, :password_digest, :session_token, presence: true
   after_initialize :validate_session_token
-  validates :password, length: {minimum: 6, message: 'must be at least 6 characters'}
+  validates :password, length: {minimum: 6, allow_nil: true}
+  
+  def self.find_by_credentials(username, password)
+    user = User.find_by(username: username)
+    return nil if user.nil?
+    user.is_password?(password) ? user : nil
+  end
 
   def password=(password)
     @password = password
@@ -29,6 +35,7 @@ class User < ApplicationRecord
 
   def reset_session_token!
     self.session_token = self.generate_session_token
+    # fail
     self.save
     self.session_token
   end
