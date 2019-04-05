@@ -11,9 +11,12 @@
 #
 
 class User < ApplicationRecord
+  attr_reader :password
+
   validates :username, uniqueness: true
   validates :username, :password_digest, :session_token, presence: true
   after_initialize :validate_session_token
+  validates :password, length: {minimum: 6, message: 'must be at least 6 characters'}
 
   def password=(password)
     @password = password

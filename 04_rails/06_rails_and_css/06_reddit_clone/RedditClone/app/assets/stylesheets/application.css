@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+.main_container {
+  margin-top: 2rem;
+}
+
+ .ui.form {
+   max-width: 20rem;
+ }

@@ -1,5 +1,29 @@
-<h1>Sign up</h1>
+<h2>Sign up</h2>
 
-<form action="<%= users_url %>" method="post">
-  
+<!--
+DISPLAY ERRORS
+-->
+<% if flash.now[:errors] %>
+  <% flash.now[:errors].each do |error| %>
+    <div class="ui message warning">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
+
+<!--
+USER SIGN UP FORM
+-->
+<form action="<%= users_url %>" method="post" class="ui form">
+  <%= auth_token %>
+
+  <label for="user_username">Username</label>
+  <input type="text" name="user[username]" id="user_username">
+
+  <label for="user_password">Password</label>
+  <input type="password" name="user[password]" id="user_password">
+
+  <input type="submit" value="Sign up" class="ui button">
 </form>
+
+

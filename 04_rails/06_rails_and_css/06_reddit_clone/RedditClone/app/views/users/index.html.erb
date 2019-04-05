@@ -1,0 +1,5 @@
+<h2>All Users</h2>
+
+<% @users.order('users.created_at').each do |user|  %>
+  <p><%= user.username %></p>
+<% end %>
