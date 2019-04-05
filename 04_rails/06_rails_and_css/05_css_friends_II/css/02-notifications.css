@@ -1,0 +1,36 @@
+/* PHASE 2: Notifications */
+.badge {
+  background-color: black;
+  border-radius: 50%;
+  padding: 3px 8px;
+  display: inline-block;
+}
+
+.dropdown__parent {
+  position: relative;
+}
+
+.dropdown__parent:hover + .dropdown,
+.dropdown:hover {
+  display: block;
+}
+
+.dropdown__master:hover .badge {
+  background-color: red;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  background-color: whitesmoke;
+  color: black;
+}
+
+.dropdown__link {
+  border: 1px solid lightgrey;
+  cursor: pointer;
+}
+
+.dropdown__link:hover {
+  background-color: lightgray;
+}
