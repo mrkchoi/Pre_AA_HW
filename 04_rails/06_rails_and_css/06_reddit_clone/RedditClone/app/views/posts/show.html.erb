@@ -25,30 +25,22 @@ POST CONTENT
 <!--
 COMMENTS
 -->
+
 <div>
   <h3>Comments</h3>
-  <div class="ui comments">
-    <% @post.comments.order("comments.created_at ASC").each do |comment|  %>
-      <div class="comment">
-        <a href="#" class="author"><%= comment.author.username %></a>
-        <div class="metadata">
-          <%= comment.created_at %>
-        </div>
-        <div class="text">
-          <%= comment.content %>
-        </div>
-      </div>
+    <% @post.comments.where(parent_comment_id: nil).order("comments.created_at ASC").each do |top_level_comment| %>
+      <%= render 'comments/comment', comment: top_level_comment %>
     <% end %>
-  </div>
-
-  <!--
-  ADD NEW COMMENT
-  -->
-  <% if logged_in? && current_user %>
-    <%= link_to '+ New comment', new_post_comment_url(params[:id]), class: 'ui button positive mini'%>
-  <% end %>
 </div>
 
+
+<!--
+ADD NEW COMMENT
+-->
+  <br>
+<% if logged_in? && current_user %>
+  <%= link_to '+ New comment', new_post_comment_url(params[:id]), class: 'ui button positive mini'%>
+<% end %>
 
 
 <div class="ui divider section"></div>

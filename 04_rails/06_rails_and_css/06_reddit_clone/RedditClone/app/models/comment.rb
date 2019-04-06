@@ -2,10 +2,13 @@
 #
 # Table name: comments
 #
-#  id        :bigint(8)        not null, primary key
-#  content   :text             not null
-#  author_id :integer          not null
-#  post_id   :integer          not null
+#  id                :bigint(8)        not null, primary key
+#  content           :text             not null
+#  author_id         :integer          not null
+#  post_id           :integer          not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  parent_comment_id :integer
 #
 
 class Comment < ApplicationRecord
@@ -24,5 +27,20 @@ class Comment < ApplicationRecord
     foreign_key: :post_id,
     primary_key: :id
   )
+
+  has_many(
+    :child_comments,
+    class_name: 'Comment',
+    foreign_key: :parent_comment_id,
+    primary_key: :id
+  )
+
+  # belongs_to(
+  #   :parent_comment,
+  #   class_name: 'Comment',
+  #   foreign_key: :parent_comment_id,
+  #   primary_key: :id,
+  #   optional: true
+  # )
   
 end

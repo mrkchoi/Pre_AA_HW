@@ -1,7 +1,7 @@
 <h2>New comment</h2>
 
 <br>
-<form action="<%= comments_url %>" method="post" class="ui form">
+<form action="<%= @post_id ? comments_url : comment_comments_url(params[:comment_id]) %>" method="post" class="ui form">
   <%= auth_token %>
 
   <input type="hidden" name="comment[post_id]" value="<%= @post_id %>">

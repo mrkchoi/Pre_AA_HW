@@ -1,0 +1,21 @@
+<div class="ui comments">
+  <div class="comment">
+    <a href="#" class="author">
+      <%= comment.author.username %>
+    </a>
+    <div class="metadata">
+      <%= comment.created_at %>
+    </div>
+    <div class="text">
+      <%= comment.content %>
+    </div>
+    <div class="actions">
+      <%= link_to 'Reply', comment_url(comment.id) %>
+    </div>
+    <% if comment.child_comments %>
+      <% comment.child_comments.each do |child_comment| %>
+        <%= render 'comments/comment', comment: child_comment %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<!--
+POST TITLE/CONTENT
+-->
+<h2><%= link_to @comment.content, comment_url(@comment) %> by <%= User.find_by(id: @comment.author_id).username %></h2>
+
+<div class="ui divider section"></div>
+
+<!--
+CHILD COMMENTS
+-->
+
+<div>
+  <h3>Comments</h3>
+    <% @comment.child_comments.order("comments.created_at ASC").each do |comment|  %>
+       <%= render 'comments/comment', comment: comment %>
+    <% end %>
+  </div>
+</div>
+
+
+<!--
+ADD COMMENT
+-->
+
+  <br>
+<% if logged_in? && current_user %>
+  <%= link_to '+ New comment', new_comment_comment_url(@comment.id),
+    class: 'ui button positive mini' %>
+<% end %>
