@@ -14,13 +14,55 @@ POST CONTENT
   <p>
     <%= @post.content %>
   </p>
+  <p>
+    <a href="<%= @post.url %>"><%= @post.url %></a>
+  </p>
 </div>
 
-<!--
-RELATED SUBS
--->
 
+<div class="ui divider section"></div>
 
 <!--
 COMMENTS
 -->
+<div>
+  <h3>Comments</h3>
+  <div class="ui comments">
+    <% @post.comments.order("comments.created_at ASC").each do |comment|  %>
+      <div class="comment">
+        <a href="#" class="author"><%= comment.author.username %></a>
+        <div class="metadata">
+          <%= comment.created_at %>
+        </div>
+        <div class="text">
+          <%= comment.content %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!--
+  ADD NEW COMMENT
+  -->
+  <% if logged_in? && current_user %>
+    <%= link_to '+ New comment', new_post_comment_url(params[:id]), class: 'ui button positive mini'%>
+  <% end %>
+</div>
+
+
+
+<div class="ui divider section"></div>
+
+<!--
+RELATED SUBS
+-->
+<h3>Related subs</h3>
+<div class="ui items divided">
+  <% @post.sub_ids.each do |sub_id| %>
+  <div class="item">
+    <%= link_to Sub.find(sub_id).title, sub_url(sub_id) %>
+  </div>
+  <% end %>
+</div>
+
+
