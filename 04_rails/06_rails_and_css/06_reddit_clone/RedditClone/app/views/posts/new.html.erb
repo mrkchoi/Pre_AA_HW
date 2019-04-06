@@ -25,16 +25,17 @@
   <br>
   <br>
 
-  <label for="post_sub">Related sub</label>
-  <select name="post[sub_id]" id="post_sub">
-    <% Sub.all.order("subs.title").each do |sub| %>
-      <option value="<%= sub.id %>">
-      
-        <%= sub.title %>
-      </option>
-    <% end %>
-  </select>
-
+  <label for="post_sub">Related subs</label>
+  <br>
+  <br>
+  <input type="hidden" name="post[sub_ids][]" value="">
+  <% Sub.all.order('subs.title ASC').each do |sub| %>
+    <label>
+      <input type="checkbox" name="post[sub_ids][]" value="<%= sub.id %>">
+      <%= sub.title %>
+    </label>
+    <br>
+  <% end %>
 
   <br>
   <br>

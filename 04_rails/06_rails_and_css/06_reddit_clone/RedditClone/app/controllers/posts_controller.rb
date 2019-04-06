@@ -4,9 +4,10 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.author_id = current_user.id
+    # fail
 
     if @post.save
-      redirect_to sub_url(params[:post][:sub_id])
+      redirect_to post_url(@post)
     else
       flash[:errors] = @post.errors.full_messages
       redirect_to new_post_url
@@ -24,16 +25,22 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find_by(id: params[:id])
-    render :edit
+    if logged_in? && current_user.id == @post.author_id
+      render :edit
+    else
+      redirect_to new_session_url
+    end
   end
 
   def update
     @post = Post.find_by(id: params[:id])
     @post.update_attributes(post_params)
+    @post.sub_ids = params[:post][:sub_ids]
 
     if @post.save
       redirect_to post_url(@post)
     else
+      p params.inspect
       flash.now[:errors] = @post.errors.full_messages
       render :edit
     end
@@ -42,7 +49,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :url, :content, :author_id, :sub_id)
+    params.require(:post).permit(:title, :url, :content, :author_id, sub_ids: [])
   end
 
   def validate_user

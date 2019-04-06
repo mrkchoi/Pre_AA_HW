@@ -52,5 +52,14 @@ s15 = Sub.create!(title: 'LPT', description: 'Tips that improve your life in one
 ###################################
 
 50.times do 
-  Post.create!(title: "#{Faker::Book.title}", url: "#{Faker::Internet.url}", content: "#{Faker::Quote.famous_last_words}", author_id: rand(1..3), sub_id: rand(1..15))
+  Post.create!(title: "#{Faker::Book.title}", url: "#{Faker::Internet.url}", content: "#{Faker::Quote.famous_last_words}", author_id: rand(1..3))
+end
+
+
+###################################
+# POST SUBS
+###################################
+
+100.times do
+  PostSub.create!(post_id: rand(1..50), sub_id: rand(1..15))
 end
