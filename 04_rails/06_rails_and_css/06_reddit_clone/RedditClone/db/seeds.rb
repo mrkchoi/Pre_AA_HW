@@ -84,3 +84,9 @@ end
 300.times do
   Comment.create!(content: "#{Faker::Hipster.sentence}", author_id: rand(1..3), post_id: rand(1..50), parent_comment_id: rand(301..600))
 end
+
+# FOURTH LEVEL COMMENTS
+
+300.times do
+  Comment.create!(content: "#{Faker::Hipster.sentence}", author_id: rand(1..3), post_id: rand(1..50), parent_comment_id: rand(601..900))
+end

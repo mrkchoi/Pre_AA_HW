@@ -42,4 +42,14 @@ class Post < ApplicationRecord
     foreign_key: :post_id,
     primary_key: :id
   )
+
+  def comments_by_parent_id
+    comments_by_parent_id = Hash.new {|h,k| h[k] = []}
+
+    comments.includes(:author).each do |comment|
+      comments_by_parent_id[comment.parent_comment_id] << comment
+    end
+
+    comments_by_parent_id
+  end
 end
