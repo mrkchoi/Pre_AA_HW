@@ -1,0 +1,21 @@
+<h2><%= @sub.title %></h2>
+<p><%= @sub.description %></p>
+<% if logged_in? && current_user && current_user.id == @sub.moderator_id %>
+  <%= link_to 'Edit sub', edit_sub_url(@sub) %>
+<% end %>
+
+<br>
+<div class="sub_index__header">
+  <h3>Posts</h3>
+  <%= link_to '+ Add new post', new_post_url, class: 'ui button mini basic positive sub_index__header-btn' %>
+</div>
+
+<div class="ui items divided">
+  <% @sub.posts.order("posts.created_at ASC").each do |post| %>
+    <div class="item">
+      <div class="text">
+        <%= link_to post.title, post_url(post.id) %>
+      </div>
+    </div>
+  <% end %>
+</div>

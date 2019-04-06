@@ -1,0 +1,26 @@
+<!--
+POST TITLE
+-->
+<h2><%= link_to @post.title, post_url(@post) %> by <%= User.find_by(id: @post.author_id).username %></h2>
+
+<% if logged_in? && current_user && current_user.id == @post.author_id %>
+  <%= link_to 'Edit post', edit_post_url(@post.id) %>
+<% end %>
+
+<!--
+POST CONTENT
+-->
+<div class="ui segment">
+  <p>
+    <%= @post.content %>
+  </p>
+</div>
+
+<!--
+RELATED SUBS
+-->
+
+
+<!--
+COMMENTS
+-->

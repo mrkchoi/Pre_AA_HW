@@ -1,0 +1,27 @@
+<h2>New sub</h2>
+
+<br>
+
+<% if flash.now[:errors] %>
+  <% flash.now[:errors].each do |error| %>
+    <div class="ui message warning">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
+
+<form action="<%= subs_url %>" method="post" class="ui form">
+  <%= auth_token %>
+
+  <label for="sub_title">Title</label>
+  <input type="text" name="sub[title]" id="sub_title">
+
+  <label for="sub_description">Description</label>
+  <input type="text" name="sub[description]" id="sub_description">
+
+  <br>
+  <br>
+
+  <input type="submit" value="Create sub" class="ui button positive">
+
+</form>

@@ -1,10 +1,17 @@
 <h2>Sign In</h2>
 
+<br>
 <!--
 DISPLAY ERRORS
 -->
 <% if flash.now[:errors] %>
   <% flash.now[:errors].each do |error| %>
+    <div class="ui message warning">
+      <%= error %>
+    </div>
+  <% end %>
+<% elsif flash[:errors] %>
+  <% flash[:errors].each do |error| %>
     <div class="ui message warning">
       <%= error %>
     </div>
@@ -25,7 +32,7 @@ USER SIGN IN FORM
 
   <br>
   <br>
-  
+
   <input type="submit" value="Sign in" class="ui button">
 </form>
 

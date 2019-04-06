@@ -1,0 +1,21 @@
+<div class="sub_index__header">
+  <h2>All subs</h2>
+  <%= link_to '+ Add new sub', new_sub_url, class: 'ui button mini basic positive sub_index__header-btn'%>
+</div>
+
+
+<div class="ui divided items">
+  <div class="item">
+    <div class="content">
+      
+    </div>
+  </div>
+  <% @subs.order('subs.title ASC').each do |sub| %>
+    <div class="item">
+      <div class="content">
+        <%= link_to sub.title, sub_url(sub.id) %> 
+      </div>
+    </div>
+  <% end %>
+</div>
+

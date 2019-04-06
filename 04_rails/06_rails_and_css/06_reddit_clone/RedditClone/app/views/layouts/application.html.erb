@@ -13,7 +13,7 @@
   <body>
     <main class="ui container main_container">
       <header class="header">
-        <h1>RedditClone</h1>
+        <h1><%= link_to 'RedditClone', subs_url %></h1>
         <div class="header__nav">
         <% if logged_in? && current_user %>
           <div class="header__nav-inner">
@@ -30,7 +30,7 @@
         </div>
       </header>
       
-      <div class="ui divider"></div>
+      <div class="ui divider section"></div>
 
       <%= yield %>
     </main>
