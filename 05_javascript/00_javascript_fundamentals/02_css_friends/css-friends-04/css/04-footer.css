@@ -1,0 +1,29 @@
+/* PHASE 4: Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: white;
+  color: lightgrey;
+  align-items: center;
+  padding: 1.2rem 1.6rem;
+  box-sizing: border-box;
+}
+
+.footer__copyright {
+
+}
+
+.footer__nav li {
+  display: inline-block;
+
+}
+
+.footer__nav a {
+  padding-left: .6rem;
+}
+
+.footer__nav a:hover{
+  color: darkgray;
+}
