@@ -311,24 +311,24 @@ function merge(left, right) {
 
 
 
-function subsets(arr) {
-  if (arr.length === 0) {
-    return [[]];
-  }
+// function subsets(arr) {
+//   if (arr.length === 0) {
+//     return [[]];
+//   }
 
-  const first = [arr.pop()];
-  const prevSubs = subsets(arr);
-  let res = prevSubs.slice(0);
+//   const first = [arr.pop()];
+//   const prevSubs = subsets(arr);
+//   let res = prevSubs.slice(0);
 
-  for(let i = 0; i < prevSubs.length; i++) {
-    res.push(prevSubs[i].concat(first));
-  }
-  
-  return res;
-}
+//   for(let i = 0; i < prevSubs.length; i++) {
+//     res.push(prevSubs[i].concat(first));
+//   }
+
+//   return res;
+// }
 
 
-console.log(subsets([1,2,3]));
+// console.log(subsets([1,2,3]));
 
 
 
