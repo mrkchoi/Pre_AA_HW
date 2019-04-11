@@ -160,9 +160,175 @@ function deepDup(arr) {
   return [arr[0]].concat(deepDup(arr.slice(1)));
 }
 
-console.log(deepDup([1, 2, 3, [4, [5,6]]]));
+// console.log(deepDup([1, 2, 3, [4, [5,6]]]));
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// bsearch(arr, target) - receives a sorted array, returns the index of the target or - 1 if not found
+
+// arr = [1,2], 2
+// arr = [1,2], 3
+function bsearch(arr, target) {
+  let mid = Math.floor(arr.length / 2);
+
+  if (arr[mid] === target) {
+    return mid;
+  } else if (arr.length === 1 && arr !== target) {
+    return NaN;
+  }
+
+  if (target <= arr[mid]) {
+    return bsearch(arr.slice(0, mid), target);
+  } else {
+    return bsearch(arr.slice(mid), target) + mid;
+  }
+
+}
+
+// console.log(bsearch([1,2,3,4,500], 500));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// mergesort(arr) - receives an array, returns a sorted copy of the array by implementing merge sort sorting algorithm
+
+
+
+function ms(arr) {
+  // Split arr until length == 1
+  if (arr.length < 1) {
+    return [];
+  }
+
+  if (arr.length === 1) {
+    return arr;
+  }
+
+  let mid = Math.floor(arr.length / 2);
+  let left = arr.slice(0, mid);
+  let right = arr.slice(mid);  
+
+  // Merge elements back together in correct order
+  return merge(ms(left), ms(right));
+}
+
+// [2], [1]
+function merge(left, right) {
+//  let a1 = left[0];
+//  let a2 = right[0];
+  let merged = [];
+
+  while (left.length > 0 && right.length > 0) {
+    if (left[0] < right[0]) {
+      merged.push(left.shift(1));
+    } else {
+      merged.push(right.shift(1));
+    }
+  }
+  return merged.concat(left).concat(right);
+}
+  
+
+// [5,4,3,2,1]
+
+
+// console.log(ms([5,4,3,2,1]));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// subsets(arr) - receives an array, returns an array containing all the subsets of the original array
+
+// abc
+// '', a, b, c, ab, ac, bc, abc
+
+
+// arr = [1,2,3]
+// function subsets(arr) {
+//   if (arr.length === 0) {
+//     return [[]];
+//   }
+
+//   const first = [arr.pop()];
+//   const prevSubs = subsets(arr);
+//   let res = prevSubs.slice(0);
+
+//   for (let i = 0; i < prevSubs.length; i++) {
+//     res.push(prevSubs[i].concat(first));
+//   }
+
+//   return res;
+// }
+
+
+
+
+
+
+
+
+
+function subsets(arr) {
+  if (arr.length === 0) {
+    return [[]];
+  }
+
+  const first = [arr.pop()];
+  const prevSubs = subsets(arr);
+  let res = prevSubs.slice(0);
+
+  for(let i = 0; i < prevSubs.length; i++) {
+    res.push(prevSubs[i].concat(first));
+  }
+  
+  return res;
+}
+
+
+console.log(subsets([1,2,3]));
 
 
 
