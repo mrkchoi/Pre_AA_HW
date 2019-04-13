@@ -300,3 +300,13 @@ require 'byebug'
 # p hourglassSum(input) # => 7
 
 
+def twoStrings(s1, s2)
+  s1.each_char do |char|
+    return 'YES' if s2.include?(char)
+  end
+  'NO'
+end
+
+
+p twoStrings('hello', 'world') # => YES
+p twoStrings('hi', 'world') # => NO
