@@ -202,3 +202,101 @@ require 'byebug'
 
 
 
+# def jumpingOnClouds(c)
+#   current = 0
+#   jumps = 0
+
+#   c.each_with_index do |el, i|
+#     next if i < current || el == 1
+
+#     if c[i + 2] == 0
+#       current = i + 2
+#       jumps += 1
+#     elsif c[i + 1] == 0
+#       current = i + 1
+#       jumps += 1
+#     end
+#   end
+
+#   jumps
+# end
+
+# p jumpingOnClouds([0,0,1,0,0,1,0]) # => 4
+# p jumpingOnClouds([0,0,0,0,1,0]) # => 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def repeatedString(s, n)
+#   last_length = n % s.length
+#   last_repeat = s.slice(0, last_length)
+
+#   num_complete_repeats = n / s.length
+
+#   full_hash = Hash.new(0)
+#   partial_hash = Hash.new(0)
+
+#   s.chars {|el| full_hash[el] += 1}
+
+#   last_repeat.chars {|el| partial_hash[el] += 1}
+
+#   single_a_count = full_hash['a']
+#   partial_a_count = partial_hash['a']
+
+#   (single_a_count * num_complete_repeats) + partial_a_count
+# end
+
+# p repeatedString('aba', 10) # => 7
+# p repeatedString('a', 100) # => 100
+
+
+
+
+# def hourglassSum(arr)
+#   sums = []
+
+#   i = 0
+#   while i < 4
+#     j = 0
+#     while j < 4
+#       top = arr[i][j] + arr[i][j + 1] + arr[i][j + 2]
+#       mid = arr[i + 1][j + 1]
+#       bottom = arr[i + 2][j] + arr[i + 2][j + 1] + arr[i + 2][j + 2]
+
+#       total = top + mid + bottom
+
+#       sums << total
+#       j += 1
+#     end
+#     i += 1
+#   end
+#   sums.max
+# end
+
+
+
+# input = [
+#   [1,1,1,1,0,1],
+#   [0,1,0,1,0,1],
+#   [1,1,1,1,0,1],
+#   [0,1,0,2,2,2],
+#   [0,1,0,1,2,1],
+#   [0,1,0,2,2,2]
+# ]
+# p hourglassSum(input) # => 7
+
+
