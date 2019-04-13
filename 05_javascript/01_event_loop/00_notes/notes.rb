@@ -415,30 +415,92 @@ require 'byebug'
 # p makeAnagram('fcrxzwscanmligyxyvym', 'jxwtrhvujlmrpdoqbisbwhmgpmeoke') # => 30
 
 
-def reverse(x)
+# def reverse(x)
 
-  if x >= 0
-    reversed = x.to_s.chars.reverse.join.to_i
-  elsif x < 0
-    x_arr = x.to_s.chars
-    x_arr.shift
-    reversed = x_arr.reverse.join.to_i
-    reversed *= -1
+#   if x >= 0
+#     reversed = x.to_s.chars.reverse.join.to_i
+#   elsif x < 0
+#     x_arr = x.to_s.chars
+#     x_arr.shift
+#     reversed = x_arr.reverse.join.to_i
+#     reversed *= -1
+#   end
+
+#   # debugger
+
+
+#   # CHECK WITHIN RANGE FOR REVERSED INTEGER
+#   return 0 if reversed < (-2**31) || reversed > (2**31 - 1)
+#   reversed
+# end
+
+# # p reverse(123) # => 321
+# p reverse(-123) # => -321
+# p reverse(120) # => 21
+# p reverse((2**31 + 2)) # => 0
+# p reverse(-(2**31)) # => 0
+
+
+
+
+
+
+
+# def is_palindrome(x)
+#   x.to_s.chars == x.to_s.chars.reverse
+# end
+
+
+# p is_palindrome(121) # => true
+# p is_palindrome(-121) # => false
+# p is_palindrome(10) # => false
+
+
+
+
+
+
+
+
+
+
+def roman_to_int(num)
+  output = ''
+  romans = {
+    "M"  => 1000,
+    "CM"  => 900,
+    "D"  => 500,
+    "CD"  => 400,
+    "C"  => 100,
+    "XC"  => 90,
+    "L"  => 50,
+    "XL"  => 40,
+    "X"  => 10,
+    "IX"  => 9,
+    "V"  => 5,
+    "IV"  => 4,
+    "I" => 1
+  }
+
+  until num == 0
+    romans.each do |k,v|
+      if romans[k].to_i <= num.to_i
+        output += k
+        num -= romans[k]
+      end
+    end
   end
 
-  # debugger
-
-
-  # CHECK WITHIN RANGE FOR REVERSED INTEGER
-  return 0 if reversed < (-2**31) || reversed > (2**31 - 1)
-  reversed
+  output
 end
 
-# p reverse(123) # => 321
-p reverse(-123) # => -321
-p reverse(120) # => 21
-p reverse((2**31 + 2)) # => 0
-p reverse(-(2**31)) # => 0
 
+
+
+p roman_to_int(3) # => "III"
+p roman_to_int(4) # => "IV"
+p roman_to_int(9) # => "IX"
+p roman_to_int(58) # => "LVIII"
+p roman_to_int(1994) # => "MCMXCIV"
 
 
