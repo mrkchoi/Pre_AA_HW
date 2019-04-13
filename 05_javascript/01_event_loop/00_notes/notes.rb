@@ -300,13 +300,66 @@ require 'byebug'
 # p hourglassSum(input) # => 7
 
 
-def twoStrings(s1, s2)
-  s1.each_char do |char|
-    return 'YES' if s2.include?(char)
+# def twoStrings(s1, s2)
+#   s1.each_char do |char|
+#     return 'YES' if s2.include?(char)
+#   end
+#   'NO'
+# end
+
+
+# p twoStrings('hello', 'world') # => YES
+# p twoStrings('hi', 'world') # => NO
+
+
+
+
+# def maximumToys(prices, k)
+#   count = 0
+#   sorted_prices = prices.sort
+
+#   sorted_prices.each do |el|
+#     if el <= k
+#       count += 1
+#       k -= el
+#     else
+#       break
+#     end
+#   end
+  
+#   count
+# end
+
+# p maximumToys([1,12,5,111,200,1000,10], 50) # => 4
+
+
+
+
+
+
+def countSwaps(a)
+  num_swaps = 0
+  swapped = true
+
+  while swapped
+    swapped = false
+    i = 0
+
+    while i < a.length - 1
+      if a[i] > a[i + 1]
+        a[i], a[i + 1] = a[i + 1], a[i]
+        num_swaps += 1
+        swapped = true
+      end
+      i += 1
+    end
   end
-  'NO'
+
+  print "Array is sorted in #{num_swaps} swaps.\n"
+  print "First Element: #{a[0]}\n"
+  print "Last Element: #{a[-1]}\n"
 end
 
-
-p twoStrings('hello', 'world') # => YES
-p twoStrings('hi', 'world') # => NO
+p countSwaps([3,2,1]) # => 3, 1, 3
+p countSwaps([1,2,3]) # => 3, 1, 3
+p countSwaps([7,6,5,4,3,2,1]) # => 3, 1, 3
