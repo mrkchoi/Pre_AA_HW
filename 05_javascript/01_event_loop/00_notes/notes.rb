@@ -337,29 +337,108 @@ require 'byebug'
 
 
 
-def countSwaps(a)
-  num_swaps = 0
-  swapped = true
+# def countSwaps(a)
+#   num_swaps = 0
+#   swapped = true
 
-  while swapped
-    swapped = false
-    i = 0
+#   while swapped
+#     swapped = false
+#     i = 0
 
-    while i < a.length - 1
-      if a[i] > a[i + 1]
-        a[i], a[i + 1] = a[i + 1], a[i]
-        num_swaps += 1
-        swapped = true
-      end
-      i += 1
-    end
+#     while i < a.length - 1
+#       if a[i] > a[i + 1]
+#         a[i], a[i + 1] = a[i + 1], a[i]
+#         num_swaps += 1
+#         swapped = true
+#       end
+#       i += 1
+#     end
+#   end
+
+#   print "Array is sorted in #{num_swaps} swaps.\n"
+#   print "First Element: #{a[0]}\n"
+#   print "Last Element: #{a[-1]}\n"
+# end
+
+# p countSwaps([3,2,1]) # => 3, 1, 3
+# p countSwaps([1,2,3]) # => 3, 1, 3
+# p countSwaps([7,6,5,4,3,2,1]) # => 3, 1, 3
+
+
+
+
+
+
+
+
+# def makeAnagram(s1, s2)
+#   deletion_count = 0
+
+#   hash1 = Hash.new(0)
+#   hash2 = Hash.new(0)
+
+#   s1.each_char {|char| hash1[char] += 1}
+#   s2.each_char {|char| hash2[char] += 1}
+
+#   hash1.each do |k,v|
+#     if hash2[k] == 0
+#       deletion_count += v
+#       hash1.delete(k)
+#     elsif hash1[k] > hash2[k]
+#       deletion_count += (hash1[k] - hash2[k])
+#       hash1.delete(k)
+#       hash2.delete(k)
+#     elsif hash1[k] < hash2[k]
+#       deletion_count += (hash2[k] - hash1[k])
+#       hash1.delete(k)
+#       hash2.delete(k)
+#     end
+#   end
+
+#   hash2.each do |k,v|
+#     if hash1[k] == 0
+#       deletion_count += v
+#     elsif hash2[k] > hash1[k]
+#       deletion_count += (hash2[k] - hash1[k])
+#     elsif hash2[k] < hash1[k]
+#       deletion_count += (hash1[k] - hash2[k])
+#     end
+#   end
+
+#   deletion_count
+# end
+
+
+
+# p makeAnagram('abc', 'cde') # => 4
+# p makeAnagram('bacdc', 'dcbad') # => 2
+# p makeAnagram('fcrxzwscanmligyxyvym', 'jxwtrhvujlmrpdoqbisbwhmgpmeoke') # => 30
+
+
+def reverse(x)
+
+  if x >= 0
+    reversed = x.to_s.chars.reverse.join.to_i
+  elsif x < 0
+    x_arr = x.to_s.chars
+    x_arr.shift
+    reversed = x_arr.reverse.join.to_i
+    reversed *= -1
   end
 
-  print "Array is sorted in #{num_swaps} swaps.\n"
-  print "First Element: #{a[0]}\n"
-  print "Last Element: #{a[-1]}\n"
+  # debugger
+
+
+  # CHECK WITHIN RANGE FOR REVERSED INTEGER
+  return 0 if reversed < (-2**31) || reversed > (2**31 - 1)
+  reversed
 end
 
-p countSwaps([3,2,1]) # => 3, 1, 3
-p countSwaps([1,2,3]) # => 3, 1, 3
-p countSwaps([7,6,5,4,3,2,1]) # => 3, 1, 3
+# p reverse(123) # => 321
+p reverse(-123) # => -321
+p reverse(120) # => 21
+p reverse((2**31 + 2)) # => 0
+p reverse(-(2**31)) # => 0
+
+
+
