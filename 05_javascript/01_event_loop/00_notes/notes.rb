@@ -524,30 +524,95 @@ require 'byebug'
 
 
 
-def checkMagazine(mag, note)
-  mag_hash = Hash.new(0)
-  note_hash = Hash.new(0)
+# def checkMagazine(mag, note)
+#   mag_hash = Hash.new(0)
+#   note_hash = Hash.new(0)
 
-  mag.each {|el| mag_hash[el] += 1}
-  note.each {|el| note_hash[el] += 1}
+#   mag.each {|el| mag_hash[el] += 1}
+#   note.each {|el| note_hash[el] += 1}
 
-  note_hash.each do |k,v|
-    if note_hash[k] > mag_hash[k]
-      print 'No'
-      return
+#   note_hash.each do |k,v|
+#     if note_hash[k] > mag_hash[k]
+#       print 'No'
+#       return
+#     end
+#   end
+# # 
+#   print 'Yes'
+# end
+
+
+
+# # Test cases
+# dict1 = %w(give me one grand today night)
+# note1 = %w(give one grand today)
+# checkMagazine(dict1, note1) # => 'Yes'
+
+# dict2 = %w(two times three is not four)
+# note2 = %w(two times two is four)
+# checkMagazine(dict2, note2) # => 'No
+
+
+
+
+
+# def longest_common_prefix(arr)
+#   return "" if arr.any? {|el| el.length == 0} || arr.empty? || arr.length == 1
+  
+#   output = ''
+#   index = 0
+#   valid = true
+#   valid_length = true
+
+#   debugger
+#   while valid && valid_length
+#     valid = false
+#     match = arr[0][index]
+
+#     arr.each do |el|
+#       if el[index] == match
+#         valid = true
+#       else
+#         return output
+#       end
+#     end
+#     output += match
+#     index += 1
+#     valid_length = (index < (arr.min.length))
+#   end 
+#   output
+# end
+
+
+# # longest_common_prefix(["flower","flow","flight"]) # => "fl"
+# # longest_common_prefix(["dog","racecar","car"]) # => ""
+# # longest_common_prefix(["",""]) # => ""
+# longest_common_prefix(["c","c"]) # => ""
+
+
+
+
+
+
+def longest_common_prefix(strs)
+  return '' if strs == []
+  common_prefix = ''
+  short_str = strs.sort!.delete_at(0)
+  short_str.chars do |char|
+    strs.each do |str|
+      if str.start_with?(common_prefix + char)
+        next
+      else
+        return common_prefix
+      end
     end
+    common_prefix += char
   end
-# 
-  print 'Yes'
 end
 
 
 
-# Test cases
-dict1 = %w(give me one grand today night)
-note1 = %w(give one grand today)
-checkMagazine(dict1, note1) # => 'Yes'
-
-dict2 = %w(two times three is not four)
-note2 = %w(two times two is four)
-checkMagazine(dict2, note2) # => 'No
+p longest_common_prefix(["flower","flow","flight"]) # => "fl"
+p longest_common_prefix(["dog","racecar","car"]) # => ""
+p longest_common_prefix(["",""]) # => ""
+p longest_common_prefix(["c","c"]) # => "c"
