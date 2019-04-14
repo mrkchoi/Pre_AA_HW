@@ -8,6 +8,7 @@ let reader = readline.createInterface({
 class Game {
   constructor(numTowers) {
     // CREATE NEW GAME BOARD
+    this.numTowers = numTowers;
     this.towers = this.createTowers(numTowers);
   }
 
@@ -31,8 +32,6 @@ class Game {
     for (let i = 1; i <= numTowers; i++) {
       towers[0].unshift(i);
     }
-
-    towers[1].push(4)
     return towers;
   }
 
@@ -92,20 +91,40 @@ class Game {
     let startStack = this.towers[start - 1];
     let endStack = this.towers[end - 1];
 
-    let startDisk = startStack.slice(-1)[0];
-    let currentEndDisk = endStack.slice(-1)[0];
+    endStack.push(startStack.pop());
+    this.printStacks();
+    this.isWon();
   }
 
 
   ///////////////////////////////////
-  // RUN GAME
+  // PRINT STACKS
   ///////////////////////////////////
   printStacks() {
     console.log(this.towers);
+  }
+
+  ///////////////////////////////////
+  // CHECK WIN
+  ///////////////////////////////////
+  isWon() {
+    let final = [];
+    let towerCount = this.numTowers;
+    let i = 1;
+
+    while (i <= towerCount) {
+      final.push(i);
+      i += 1;
+    }
+
+    if (this.towers[1] === final || this.towers[2] === final) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }
 
 let g = new Game(3);
 console.log(g.promptMove() + "\n");
-// console.log(g.createTowers(3));
