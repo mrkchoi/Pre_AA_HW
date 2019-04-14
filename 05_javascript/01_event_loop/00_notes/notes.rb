@@ -594,25 +594,83 @@ require 'byebug'
 
 
 
-def longest_common_prefix(strs)
-  return '' if strs == []
-  common_prefix = ''
-  short_str = strs.sort!.delete_at(0)
-  short_str.chars do |char|
-    strs.each do |str|
-      if str.start_with?(common_prefix + char)
-        next
-      else
-        return common_prefix
-      end
-    end
-    common_prefix += char
-  end
+# def longest_common_prefix(strs)
+#   return '' if strs == []
+#   common_prefix = ''
+#   short_str = strs.sort!.delete_at(0)
+#   short_str.chars do |char|
+#     strs.each do |str|
+#       if str.start_with?(common_prefix + char)
+#         next
+#       else
+#         return common_prefix
+#       end
+#     end
+#     common_prefix += char
+#   end
+# end
+
+
+
+# p longest_common_prefix(["flower","flow","flight"]) # => "fl"
+# p longest_common_prefix(["dog","racecar","car"]) # => ""
+# p longest_common_prefix(["",""]) # => ""
+# p longest_common_prefix(["c","c"]) # => "c"
+
+
+
+# class ListNode
+#   attr_accessor :val, :next
+
+#   def initialize(val)
+#     @val = val
+#     @next = nil
+#   end
+# end
+
+
+# def merge_two_lists(l1, l2)
+#   return l1 if l2.nil?
+#   return l2 if l1.nil?
+
+#   l1, l2 = l2, l1 if l1.val > l2.val
+
+#   l1.next = merge_two_lists(l1.next, l2)
+#   l1
+# end
+
+
+
+
+# merge_two_lists(l1, l2)
+
+
+
+
+
+
+
+
+# def remove_element(nums, val)
+#   nums.sort!
+
+#   until !nums.include?(val)
+#     nums.delete(val)
+#   end
+#   nums.length
+# end
+
+# p remove_element([3,2,2,3], 3)
+# p remove_element([0,1,2,2,3,0,4,2], 2)
+
+
+
+
+def str_str(haystack, needle)
+    return '' if needle == '' && haystack == ''
+    haystack.include?(needle) ? haystack.index(needle) : -1
 end
 
-
-
-p longest_common_prefix(["flower","flow","flight"]) # => "fl"
-p longest_common_prefix(["dog","racecar","car"]) # => ""
-p longest_common_prefix(["",""]) # => ""
-p longest_common_prefix(["c","c"]) # => "c"
+p str_str('hello', 'll')
+p str_str('aaaaa', 'baa')
+p str_str('aaaaa', '')
