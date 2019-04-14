@@ -464,43 +464,90 @@ require 'byebug'
 
 
 
-def roman_to_int(num)
-  output = ''
-  romans = {
-    "M"  => 1000,
-    "CM"  => 900,
-    "D"  => 500,
-    "CD"  => 400,
-    "C"  => 100,
-    "XC"  => 90,
-    "L"  => 50,
-    "XL"  => 40,
-    "X"  => 10,
-    "IX"  => 9,
-    "V"  => 5,
-    "IV"  => 4,
-    "I" => 1
-  }
+# def roman_to_int(num)
+#   output = ''
+#   romans = {
+#     "M"  => 1000,
+#     "CM"  => 900,
+#     "D"  => 500,
+#     "CD"  => 400,
+#     "C"  => 100,
+#     "XC"  => 90,
+#     "L"  => 50,
+#     "XL"  => 40,
+#     "X"  => 10,
+#     "IX"  => 9,
+#     "V"  => 5,
+#     "IV"  => 4,
+#     "I" => 1
+#   }
 
-  until num == 0
-    romans.each do |k,v|
-      if romans[k].to_i <= num.to_i
-        output += k
-        num -= romans[k]
-      end
+#   until num == 0
+#     romans.each do |k,v|
+#       if romans[k].to_i <= num.to_i
+#         output += k
+#         num -= romans[k]
+#       end
+#     end
+#   end
+
+#   output
+# end
+
+
+
+
+# p roman_to_int(3) # => "III"
+# p roman_to_int(4) # => "IV"
+# p roman_to_int(9) # => "IX"
+# p roman_to_int(58) # => "LVIII"
+# p roman_to_int(1994) # => "MCMXCIV"
+
+
+
+
+
+
+
+
+
+
+# def rotLeft(a, d)
+#   d.times {a.push(a.shift)}
+#   a.each {|el| print el.to_s + ' '}
+# end
+
+
+# rotLeft([1,2,3,4,5], 4) # => PRINT => 5 1 2 3 4
+
+
+
+
+
+def checkMagazine(mag, note)
+  mag_hash = Hash.new(0)
+  note_hash = Hash.new(0)
+
+  mag.each {|el| mag_hash[el] += 1}
+  note.each {|el| note_hash[el] += 1}
+
+  note_hash.each do |k,v|
+    if note_hash[k] > mag_hash[k]
+      print 'No'
+      return
     end
   end
-
-  output
+# 
+  print 'Yes'
 end
 
 
 
+# Test cases
+dict1 = %w(give me one grand today night)
+note1 = %w(give one grand today)
+checkMagazine(dict1, note1) # => 'Yes'
 
-p roman_to_int(3) # => "III"
-p roman_to_int(4) # => "IV"
-p roman_to_int(9) # => "IX"
-p roman_to_int(58) # => "LVIII"
-p roman_to_int(1994) # => "MCMXCIV"
-
-
+dict2 = %w(two times three is not four)
+note2 = %w(two times two is four)
+checkMagazine(dict2, note2) # => 'No
