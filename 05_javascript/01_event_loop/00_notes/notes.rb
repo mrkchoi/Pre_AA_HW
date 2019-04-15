@@ -666,11 +666,40 @@ require 'byebug'
 
 
 
-def str_str(haystack, needle)
-    return '' if needle == '' && haystack == ''
-    haystack.include?(needle) ? haystack.index(needle) : -1
+# def str_str(haystack, needle)
+#     return '' if needle == '' && haystack == ''
+#     haystack.include?(needle) ? haystack.index(needle) : -1
+# end
+
+# p str_str('hello', 'll')
+# p str_str('aaaaa', 'baa')
+# p str_str('aaaaa', '')
+
+
+
+
+
+def alternatingCharacters(s)
+  # return (s.length - 1) if !s.include?('B') || !s.include?('A') 
+  count = 0
+
+  i = 0
+  while i < s.length - 1
+    count += 1  if s[i] + s[i + 1] == 'AA' || s[i] + s[i + 1] == 'BB'
+    i += 1
+  end
+
+  count
 end
 
-p str_str('hello', 'll')
-p str_str('aaaaa', 'baa')
-p str_str('aaaaa', '')
+p alternatingCharacters('AAAA') # => 3
+p alternatingCharacters('BBBBB') # => 4
+p alternatingCharacters('ABABAB') # => 0
+p alternatingCharacters('BABABABA') # => 0
+p alternatingCharacters('AAABBB') # => 4
+
+
+
+
+
+
