@@ -4,10 +4,8 @@ let reader = readline.createInterface({
   output: process.stdout
 });
 
-
 class Game {
   constructor(numTowers) {
-    // CREATE NEW GAME BOARD
     this.numTowers = numTowers;
     this.towers = this.createTowers(numTowers);
   }
@@ -15,19 +13,47 @@ class Game {
   ///////////////////////////////////
   // RUN GAME
   ///////////////////////////////////
-  run() {
-    // until all pieces are moved in correct order to finishing tower
-      // render game board
-      // prompt player for move
-      // check to see if move is valid?
-      // make move on board
+  run(reader, gameCompletionCallback) {
+    this.promptMove(reader, (start, end) => {
+      if (!this.move(start, end)) {
+        console.log("Invalid move!");
+      }
+
+      if (!this.isWon()) {
+        this.run(reader, gameCompletionCallback);
+      } else {
+        this.printStacks();
+        console.log('You win!!!');
+        gameCompletionCallback();
+      }
+    });
+  }
+
+  ///////////////////////////////////
+  // PRINT STACKS
+  ///////////////////////////////////
+  printStacks() {
+    console.log("\n");
+    console.log(this.towers);
+  }
+
+  ///////////////////////////////////
+  // PROMPT PLAYER
+  ///////////////////////////////////
+  promptMove(reader, callback) {
+    this.printStacks();
+    reader.question("Enter starting pos: ", (res1) => {
+      reader.question("Enter ending pos: ", (res2) => {
+        callback(parseInt(res1), parseInt(res2));
+      });
+    });
   }
 
   ///////////////////////////////////
   // CREATE TOWERS
   ///////////////////////////////////
   createTowers(numTowers) {
-    let towers = [[], [], []]
+    let towers = [[], [], []];
 
     for (let i = 1; i <= numTowers; i++) {
       towers[0].unshift(i);
@@ -36,50 +62,28 @@ class Game {
   }
 
   ///////////////////////////////////
-  // PROMPT PLAYER
-  ///////////////////////////////////
-  promptMove() {
-    // print stacks
-    this.printStacks();
-    
-    // prompt user for start & end move to a callback
-    reader.question("Enter starting pos:", (res1) => {
-      reader.question("\nEnter ending pos:\n\n", (res2) => {
-        this.isValidMove(res1, res2);
-      });
-    });
-
-    return '';
-  }
-
-
-  ///////////////////////////////////
   // MOVE VALIDATION
   ///////////////////////////////////
   isValidMove(start, end) {
     let startInt = parseInt(start);
     let endInt = parseInt(end);
 
-    // check pos in range
     if (![1, 2, 3].includes(startInt) || ![1, 2, 3].includes(endInt)) {
-      console.log(`\nInvalid positions!\n`);
+      console.log(`Invalid positions!`);
       this.promptMove();
       return;
     }
 
-    // check that start last element can be moved to end last element
     let startStack = this.towers[start - 1];
     let endStack = this.towers[end - 1];
     let startDisk = startStack.slice(-1)[0];
     let currentEndDisk = endStack.slice(-1)[0];
 
     if (currentEndDisk === undefined || startDisk < currentEndDisk) {
-      this.move(start, end);
-      return;
+      return true;
     } else {
-      console.log(`Invalid move! Try again!\n\n`);
-      this.promptMove();
-      return;
+      console.log(`Invalid move! Try again!`);
+      return false;
     }
   }
 
@@ -91,17 +95,12 @@ class Game {
     let startStack = this.towers[start - 1];
     let endStack = this.towers[end - 1];
 
-    endStack.push(startStack.pop());
-    this.printStacks();
-    this.isWon();
-  }
-
-
-  ///////////////////////////////////
-  // PRINT STACKS
-  ///////////////////////////////////
-  printStacks() {
-    console.log(this.towers);
+    if (this.isValidMove(start, end)) {
+      endStack.push(startStack.pop());
+      return true;
+    } else {
+      return false;
+    }
   }
 
   ///////////////////////////////////
@@ -113,18 +112,32 @@ class Game {
     let i = 1;
 
     while (i <= towerCount) {
-      final.push(i);
+      final.unshift(i);
       i += 1;
     }
 
-    if (this.towers[1] === final || this.towers[2] === final) {
+    if (this.towers[1].length === this.numTowers || this.towers[2].length === this.numTowers) {
       return true;
     } else {
       return false;
     }
   }
-
 }
 
+function completionCallback() {
+  reader.question("Play again? (y/n)\n", (res) => {
+    if (res === 'y') {
+      g = new Game(3);
+      g.run(reader, completionCallback);
+    } else if (res === 'n') {
+      console.log('Thanks for playing!');
+      reader.close();
+    } else {
+      completionCallback();
+    }
+  });
+}
+
+
 let g = new Game(3);
-console.log(g.promptMove() + "\n");
+g.run(reader, completionCallback);
