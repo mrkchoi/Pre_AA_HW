@@ -679,27 +679,119 @@ require 'byebug'
 
 
 
-def alternatingCharacters(s)
-  # return (s.length - 1) if !s.include?('B') || !s.include?('A') 
-  count = 0
+# def alternatingCharacters(s)
+#   # return (s.length - 1) if !s.include?('B') || !s.include?('A') 
+#   count = 0
 
-  i = 0
-  while i < s.length - 1
-    count += 1  if s[i] + s[i + 1] == 'AA' || s[i] + s[i + 1] == 'BB'
-    i += 1
-  end
+#   i = 0
+#   while i < s.length - 1
+#     count += 1  if s[i] + s[i + 1] == 'AA' || s[i] + s[i + 1] == 'BB'
+#     i += 1
+#   end
 
-  count
+#   count
+# end
+
+# p alternatingCharacters('AAAA') # => 3
+# p alternatingCharacters('BBBBB') # => 4
+# p alternatingCharacters('ABABAB') # => 0
+# p alternatingCharacters('BABABABA') # => 0
+# p alternatingCharacters('AAABBB') # => 4
+
+
+
+
+
+
+
+
+
+# def minimumAbsoluteDifference(arr)
+#   minimum = Float::INFINITY
+
+#   i = 0
+#   while i < arr.length - 1
+#     j = i + 1
+#     while j < arr.length
+#       abs = (arr[i] - arr[j]).abs
+#       return abs if abs == 0
+#       minimum = abs if abs < minimum
+#       j += 1
+#     end
+#     i += 1
+#   end
+
+#   minimum
+# end
+
+# def minimumAbsoluteDifference(arr)
+#   min = Float::INFINITY
+#   # SORT
+#   # COMPARE ADJ FOR DIFFERENCE
+#   # RETURN LOWEST DIFFERENCE
+#   arr.sort!
+
+#   i = 0
+#   while i < arr.length - 1
+#     cur_diff = arr[i + 1] - arr[i]
+#     min = cur_diff if cur_diff < min
+#     i += 1
+#   end
+#   min
+# end
+
+
+# p minimumAbsoluteDifference([3, -7, 0]) # => 3
+# p minimumAbsoluteDifference([-59, -36, -13, 1, -53, -92, -2, -96, -54, 75]) # => 1
+# p minimumAbsoluteDifference([1, -3, 71, 68, 17]) # => 3
+
+
+
+
+
+
+
+
+# def luckBalance(k, contests)
+#   important = contests.select {|el| el[1] == 1}.sort
+#   prelim = contests.select {|el| el[1] == 0}.sort
+
+#   subs = 0
+#   adds = 0
+
+#   if k < important.length 
+#     diff = important.length - k
+#     diff.times {subs += (important.shift)[0] }
+#   end
+
+#   important.each {|el| adds += el[0]}
+#   prelim.each {|el| adds += el[0]}
+
+#   adds - subs
+# end
+
+
+
+# p luckBalance(2, [[5, 1],[1, 1],[4, 0]]) # => 10
+# p luckBalance(3, [[5, 1],[2, 1],[1, 1],[8, 1],[10, 0],[5, 0]]) # => 29
+
+
+
+
+
+
+def fib(num)
+  seq = [0,1]
+  return seq[0] if num == 0
+  return seq[1] if num == 1
+
+  seq << (fib(num - 1) + fib(num - 2))
+  return seq[-1]
 end
 
-p alternatingCharacters('AAAA') # => 3
-p alternatingCharacters('BBBBB') # => 4
-p alternatingCharacters('ABABAB') # => 0
-p alternatingCharacters('BABABABA') # => 0
-p alternatingCharacters('AAABBB') # => 4
 
 
-
-
-
-
+p fib(3) # => [0,1,1,2] => 2
+p fib(0) # => [0] => 0
+p fib(1) # => [0,1] => 1
+p fib(5) # => [0,1,1,2,3,5] => 5
