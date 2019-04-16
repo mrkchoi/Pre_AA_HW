@@ -22,26 +22,32 @@ class Board {
       [[0,0],[0,1],[0,2]],
       [[1,0],[1,1],[1,2]],
       [[2,0],[2,1],[2,2]],
-
       [[0,0],[1,0],[2,0]],
       [[0,1],[1,1],[2,1]],
       [[0,2],[1,2],[2,2]],
-
       [[0,0],[1,1],[2,2]],
       [[0,2],[1,1],[2,0]]
     ];
 
-    winningCombos.some(combo => {
+    // winningCombos.some(combo => {
+    //   let first = this.board[combo[0][0]][combo[0][1]];
+    //   let second = this.board[combo[1][0]][combo[1][1]];
+    //   let third = this.board[combo[2][0]][combo[2][1]];
+
+    //   (first === second && second === third) && (first != '_');
+    // });
+
+    for (let combo of winningCombos) {
       let first = this.board[combo[0][0]][combo[0][1]];
       let second = this.board[combo[1][0]][combo[1][1]];
       let third = this.board[combo[2][0]][combo[2][1]];
 
-      if (first === second && second === third && first != '_') {
-        this.winner(first);
+      if ((first === second && second === third) && (first != '_')) {
         return true;
       }
-    });
-    return false;
+    }
+
+    return '';
   }
 
   winner(player) {
@@ -80,33 +86,38 @@ class Board {
       let row = parseInt(pos[1]) - 1;
 
       this.board[col][row] = mark;
-      return false;
+      return true;
     } else {
-      console.log('Invalid move!');
+      // console.log('Invalid move!');
       return false;
     }
   }
 
-}
+};
+
+module.exports = Board;
 
 let b = new Board();
-console.log(b.printBoard());
-console.log(b.placeMark('11', 'X'));
-console.log(b.printBoard());
-console.log(b.placeMark('22', 'X'));
-console.log(b.printBoard());
-console.log(b.placeMark('33', 'X'));
-console.log(b.printBoard());
-console.log(b.placeMark('13', 'O'));
-console.log(b.printBoard());
-console.log(b.placeMark('23', 'O'));
-console.log(b.printBoard());
-console.log(b.placeMark('12', 'X'));
-console.log(b.printBoard());
-// console.log(b.placeMark('21', 'X'));
+console.log(b.won());
+
 // console.log(b.printBoard());
-// console.log(b.placeMark('31', 'X'));
-console.log(b.printBoard());
-console.log(b.placeMark('32', 'O'));
-console.log(b.printBoard());
-b.won();
+// console.log(b.placeMark('11', 'X'));
+// console.log(b.printBoard());
+// console.log(b.placeMark('22', 'X'));
+// console.log(b.printBoard());
+// console.log(b.placeMark('33', 'X'));
+// console.log(b.printBoard());
+// console.log(b.placeMark('13', 'O'));
+// console.log(b.printBoard());
+// console.log(b.placeMark('23', 'O'));
+// console.log(b.printBoard());
+// console.log(b.placeMark('12', 'X'));
+// console.log(b.printBoard());
+// // console.log(b.placeMark('21', 'X'));
+// // console.log(b.printBoard());
+// // console.log(b.placeMark('31', 'X'));
+// console.log(b.printBoard());
+// console.log(b.placeMark('32', 'O'));
+// console.log(b.printBoard());
+// b.won();
+
