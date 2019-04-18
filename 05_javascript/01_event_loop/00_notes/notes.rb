@@ -780,18 +780,270 @@ require 'byebug'
 
 
 
-def fib(num)
-  seq = [0,1]
-  return seq[0] if num == 0
-  return seq[1] if num == 1
+# def fib(num)
+#   seq = [0,1]
+#   return seq[0] if num == 0
+#   return seq[1] if num == 1
 
-  seq << (fib(num - 1) + fib(num - 2))
-  return seq[-1]
+#   seq << (fib(num - 1) + fib(num - 2))
+#   return seq[-1]
+# end
+
+
+
+# p fib(3) # => [0,1,1,2] => 2
+# p fib(0) # => [0] => 0
+# p fib(1) # => [0,1] => 1
+# p fib(5) # => [0,1,1,2,3,5] => 5
+
+
+
+
+
+
+
+# def search_insert(nums, target)
+#   return 0 if nums[0] > target
+  
+#   nums.each_with_index do |el, i|
+#     if el == target
+#       return i
+#     elsif el > target
+#       return i
+#     elsif i == (nums.length - 1) && el < target
+#       return nums.length
+#     end
+#   end
+# end
+
+
+# p search_insert([1,3,5,6], 5) # => 2
+# p search_insert([1,3,5,6], 2) # => 1
+# p search_insert([1,3,5,6], 7) # => 4
+# p search_insert([1,3,5,6], 0) # => 0
+
+
+
+
+
+
+
+
+
+
+
+# def max_sub_array(nums)
+#   return nums.first if nums.length == 1
+#   max = -(Float::INFINITY)
+#   len = 1
+
+#   while len <= nums.length
+#     i = 0
+#     while i <= nums.length - len
+#       cur_sum = nums.slice(i, len).sum
+#       if cur_sum > max
+#         max = cur_sum
+#       end
+#       i += 1
+#     end
+#     len += 1
+#   end
+
+#   max
+# end
+
+# p max_sub_array([-2,1,-3,4,-1,2,1,-5,4]) # => 6
+# p max_sub_array([-2,1]) # => 1
+# p max_sub_array([1,2]) # => 3
+
+
+
+
+
+# def max_sub_array(nums)
+#   for i in (1...nums.length)
+#     if nums[i - 1] > 0
+#       nums[i] += nums[i - 1]
+#     end
+#   end
+#   return nums.max
+# end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def max_sub_array(nums)
+#   for i in (1...nums.length)
+#     nums[i] += nums[i - 1] if nums[i - 1] > 0
+#   end
+#   nums.max
+# end
+
+
+
+
+# p max_sub_array([-2,1,-3,4,-1,2,1,-5,4]) # => 6
+# p max_sub_array([-2,1]) # => 1
+# p max_sub_array([1,2]) # => 3
+
+
+
+
+
+
+
+
+
+
+
+
+# def length_of_last_word(str)
+#   if !str.match(/[a-zA-Z]/)
+#     return 0
+#   else
+#     str.split(' ')[-1].length
+#   end
+# end
+
+# p length_of_last_word('hello world') # => 5
+# p length_of_last_word('') # => 0
+# p length_of_last_word(' ') # => 0
+# p length_of_last_word('  ') # => 0
+# p length_of_last_word('   ') # => 0
+# p length_of_last_word('    ') # => 0
+# p length_of_last_word('     ') # => 0
+# p length_of_last_word('      ') # => 0
+
+
+
+
+
+
+
+
+# def plus_one(arr)
+#   output_int = arr.map(&:to_s).join.to_i
+#   output_int += 1
+#   output_int.to_s.chars.map(&:to_i)
+# end
+
+
+
+# p plus_one([1,2,3]) # => [1,2,4]
+# p plus_one([4,3,2,1]) # => [4,3,2,2]
+# p plus_one([9,9,9]) # => [1,0,0,0]
+
+
+
+
+
+
+
+# def merge(nums1, m, nums2, n)
+#   i = 0
+#   while i < nums1.length && nums2.any?
+#     if nums2[0] < nums1[i]
+#       nums1.insert(i, nums2.shift)
+#     else
+#       i += 1
+#     end
+#   end
+#   nums1 + nums2
+# end
+
+
+# p merge([1,2,3,0,0,0], 3, [2,5,6], 3)
+
+
+
+
+
+
+
+
+
+
+# def is_palindrome(str)
+#   str.gsub!(/[^a-zA-Z0-9]/, '')
+#   str.downcase!
+#   str == str.reverse
+# end
+
+# p is_palindrome("A man, a plan, a canal: Panama") # => true
+# p is_palindrome("race a car") # => false
+# p is_palindrome(" ") # => true
+# p is_palindrome("0P") # => false
+
+
+
+
+
+
+
+# def max_profit(prices)
+#   prices.length.times do |i|
+#     profit = prices[i + 1] - prices[i]
+#     if profit < 0
+#       prices[i] = 0
+#     else
+#       prices [i + 1] = profit
+#     end
+#   end
+#   prices.max
+# end
+
+# p max_profit([7,1,5,3,6,4]) # => 5
+# p max_profit([7,6,4,3,1]) # => 0
+
+
+
+
+
+# def count_down(num)
+#   if num == 0
+#     p 'Houston, we have liftoff!'
+#     return
+#   end
+
+#   p num
+#   count_down(num - 1)
+# end
+
+# count_down(5)
+# # 
+
+
+
+# def factorial(n)
+#   return 1 if n <= 1
+#   n * factorial(n - 1)
+# end
+
+# p factorial(10)
+
+
+
+
+def fib(n)
+  return 1 if n <= 1 || n == 2
+  fib(n - 1) + fib(n - 2)
 end
 
-
-
-p fib(3) # => [0,1,1,2] => 2
-p fib(0) # => [0] => 0
-p fib(1) # => [0,1] => 1
-p fib(5) # => [0,1,1,2,3,5] => 5
+p fib(15)
+p fib(10)
+p fib(5)
+p fib(3)
+p fib(1)
+p fib(0)
