@@ -68,7 +68,32 @@ Function.prototype.myBind2 = function (...args) {
 };
 
 // markov.says.myBind(pavlov, 'meow', 'Kush')(); // => 'Pavlov says meow to Kush'
-markov.says.myBind1(pavlov)("meow", "a tree");
-markov.says.myBind2(pavlov)("meow", "a tree");
+// markov.says.myBind1(pavlov)("meow", "a tree");
+// markov.says.myBind2(pavlov)("meow", "a tree");
+
+
+
+
+
+
+function curriedSum(numArgs) {
+  let numbers = [];
+
+  function _curriedSum(num) {
+    numbers.push(num);
+
+    if (numbers.length === numArgs) {
+      return numbers.reduce((acc, cur) => acc + cur);
+    } else {
+      return _curriedSum;
+    }
+  }
+
+  return _curriedSum;
+}
+
+// console.log(curriedSum(4)(5)(30)(20)(1)) ;
+// // console.log(sum(5)(30)(20)(1)); // => 56
+
 
 
