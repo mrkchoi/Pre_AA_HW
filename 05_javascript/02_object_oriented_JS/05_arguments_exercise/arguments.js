@@ -47,7 +47,7 @@ const pavlov = new Cat('Pavlov');
 // markov.says('meow', 'Ned');
 
 
-Function.prototype.myBind = function(context) {
+Function.prototype.myBind1 = function(context) {
   let bindArgs = Array.prototype.slice.call(arguments, 1);
   
   let that = this;
@@ -57,7 +57,18 @@ Function.prototype.myBind = function(context) {
   };
 };
 
+Function.prototype.myBind2 = function (...args) {
+  let context = args[0];
+  let bindArgs = args.slice(1);
+
+  let that = this;
+  return function (...callArgs) {
+    that.apply(context, bindArgs.concat(callArgs));
+  };
+};
+
 // markov.says.myBind(pavlov, 'meow', 'Kush')(); // => 'Pavlov says meow to Kush'
-markov.says.myBind(pavlov)("meow", "a tree");
+markov.says.myBind1(pavlov)("meow", "a tree");
+markov.says.myBind2(pavlov)("meow", "a tree");
 
 
