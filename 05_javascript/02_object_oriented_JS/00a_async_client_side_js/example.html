@@ -7,6 +7,18 @@
   <title>Async Client Side JS</title>
 </head>
 <body>
-  
+  <input type="text" id="user_input" value="">
+  <button id="submit_btn">Submit</button>
+
+  <script>
+    let userInput = document.getElementById('user_input');
+    let submitBtn = document.getElementById('submit_btn');
+
+    let showValue = () => {
+      alert(userInput.value);
+    }
+    
+    submitBtn.addEventListener('click', showValue);
+  </script>
 </body>
 </html>
