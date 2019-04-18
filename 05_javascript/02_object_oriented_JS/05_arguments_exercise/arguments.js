@@ -25,4 +25,39 @@
 
 
 
+class Cat {
+  constructor(name) {
+    this.name = name;
+  }
+
+  says(sound, person) {
+    console.log(`${this.name} says ${sound} to ${person}!`);
+    return true;
+  }
+}
+
+class Dog {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+const markov = new Cat('Markov');
+const pavlov = new Cat('Pavlov');
+// markov.says('meow', 'Ned');
+
+
+Function.prototype.myBind = function(context) {
+  let bindArgs = Array.prototype.slice.call(arguments, 1);
+  
+  let that = this;
+  return function() {
+    let callArgs = Array.prototype.slice.call(arguments);
+    that.apply(context, bindArgs.concat(callArgs));
+  };
+};
+
+// markov.says.myBind(pavlov, 'meow', 'Kush')(); // => 'Pavlov says meow to Kush'
+markov.says.myBind(pavlov)("meow", "a tree");
+
 
