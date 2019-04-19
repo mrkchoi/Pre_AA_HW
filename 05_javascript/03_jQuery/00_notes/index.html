@@ -128,6 +128,30 @@
     $traversals.siblings().attr('style', 'background-color: pink');
   </script>
 
+
+  <!-- Adding/Removing elements from DOM via jQuery -->
+
+  <ul id="add_remove_list">
+  </ul>
+
+  <script>
+    const $ul = $('#add_remove_list');
+    const items = ['Racecars', 'Aeroplanes', 'Lasers'];
+
+    let i = 0;
+    window.setInterval(() => {
+      if ($ul.children().length == 10) {
+        $ul.children().remove();
+      }
+
+      let li = document.createElement('li');
+      li.textContent = items[i];
+
+      $ul.append(li);
+
+      i = (i + 1) % 3;
+    }, 500);
+  </script>
   
 </body>
 </html>
