@@ -20,5 +20,40 @@
       textOutput.textContent = reversed;
     });
   </script>
+
+  <style>
+    .green {
+      color: green;
+    }  
+
+    .red {
+      color: red;
+    }  
+  </style>
+
+  <ul>
+    <li class="green">First text</li>
+    <li class="green">First text</li>
+    <li class="green">First text</li>
+    <li class="green">First text</li>
+    <li class="green">First text</li>
+    <li class="green">First text</li>
+  </ul>
+
+  <button id="color_btn">Click me!</button>
+
+  <script>
+    let greens = document.getElementsByClassName('green');
+    let reds = document.getElementsByClassName('red');
+    const colorBtn = document.querySelector('#color_btn');
+
+    colorBtn.addEventListener('click', () => {
+      for(let i = 0; i < greens.length; i++) {
+        greens[i].className = 'red';
+        console.log(`${i}`);
+      }
+    });
+
+  </script>
 </body>
 </html>
