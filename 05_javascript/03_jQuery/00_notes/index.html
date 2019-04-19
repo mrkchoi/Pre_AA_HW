@@ -139,7 +139,7 @@
     const items = ['Racecars', 'Aeroplanes', 'Lasers'];
 
     let i = 0;
-    window.setInterval(() => {
+    // window.setInterval(() => {
       if ($ul.children().length == 10) {
         $ul.children().remove();
       }
@@ -150,7 +150,7 @@
       $ul.append(li);
 
       i = (i + 1) % 3;
-    }, 500);
+    // }, 500);
   </script>
 
 
@@ -185,6 +185,131 @@
       
     }, 1000);
   </script>
+
+<br><br><br>
+<hr>
+<br><br><br>
+
+
+  <div>
+    <label>
+      <input type="radio" name="duck[favorite_toy]" value="racecars" class="duck_inputs">
+      Racecar
+    </label>
+    <label>
+      <input type="radio" name="duck[favorite_toy]" value="aeroplanes" class="duck_inputs">
+      Aeroplanes
+    </label>
+    <label>
+      <input type="radio" name="duck[favorite_toy]" value="lasers" class="duck_inputs">
+      Lasers
+    </label>
+  </div>
+
+  <script>
+    window.setInterval(() => {
+      let $inputs = $(".duck_inputs");
+
+      $inputs.attr('checked', false);
+
+      let i = Math.floor(3 * Math.random());
+
+      let item = $inputs[i];
+      let $item = $(item);
+
+      $item.attr('checked', true);
+
+    }, 200);
+  </script>
+
+
+
+  <!-- jQuery Events -->
+  <ul id="cool_things"></ul>
+
+  <h4>New Cool Thing</h4>
+  <form id="cool_things_form">
+    <label>
+      <input type="text" id="cool_things_input">
+    </label>
+
+    <input type="submit" value="Add cool thing!">
+  </form>
+
+  <script>
+    let $cool_form = $('#cool_things_form');
+
+    $cool_form.on('submit', event => {
+      event.preventDefault();
+
+      let $cool_input = $('#cool_things_input');
+      let cool_value = $cool_input.val();
+      $cool_input.val('');
+
+      let $cool_item = $("<li></li>");
+      $cool_item.text(cool_value);
+      
+      let $cool_list = $('#cool_things');
+      $cool_list.append($cool_item);
+
+    });
+  </script>
   
+<br><br><br>
+<hr>
+<br><br><br>
+
+  <div>
+    <ul id="event_list">
+      <li>Racecars</li>
+      <li>Lasers</li>
+      <li>Aeroplanes</li>
+    </ul>
+  </div>
+
+  <script>
+    // let $eventItems = $('#event_list li');
+
+    // $eventItems.on('mouseover', event => {
+    //   let currentTarget = event.currentTarget;
+    //   let $currentTarget = $(currentTarget);
+
+    //   alert($currentTarget.text());
+    // })
+    
+  </script>
+  
+  <br><br><br>
+  <hr>
+  <br><br><br>
+
+  
+  <!-- Using jQuery to delay script execution for DOM load -->
+
+  <script>
+    $(() => {
+      let $domListItems = $('#dom_list li');
+      // console.log($domListItems);
+
+      for(let i = 0; i < $domListItems.length; i++) {
+        let item = $domListItems[i]
+        let $item = $(item);
+        console.log($item.text());
+      }
+
+    });
+  </script>
+
+  <ul id="dom_list">
+    <li>1Print me with jQuery!</li>
+    <li>2Print me with jQuery!</li>
+    <li>3Print me with jQuery!</li>
+    <li>4Print me with jQuery!</li>
+  </ul>
+  
+  
+  <br><br><br>
+  <hr>
+  <br><br><br>
 </body>
 </html>
