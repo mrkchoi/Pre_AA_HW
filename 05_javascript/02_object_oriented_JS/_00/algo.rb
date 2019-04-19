@@ -49,11 +49,7 @@
 
 def sortedInsert(head, data)
   new_node = DoublyLinkedListNode.new(data)
-  if head.nil?
-    return new_node 
-  end
-
-
+  return new_node if head.nil?
 
   current_node = head
   
@@ -63,25 +59,14 @@ def sortedInsert(head, data)
     return new_node
   end
 
-  while true
-    if current_node.next.nil?
-      new_node.next = current_node.next
-      new_node.prev = current_node
-      current_node.next = new_node
-      return head
-    end
-
-    if current_node.next.data > new_node.data
-      new_node.next = current_node.next
-      new_node.prev = current_node
-      current_node.next = new_node
-      if !new_node.next.nil?
-        new_node.next.prev = new_node
-      end
-      
-      return head
-    else
-      current_node = current_node.next
-    end
+  while current_node.next && current_node.next.data < data
+    head = head.next
   end
+
+  new_node.next = current_node.next
+  new_node.prev = current_node
+  current_node.next = new_node
+  new_node.next.prev = new_node if new_node.next
+
+  head
 end

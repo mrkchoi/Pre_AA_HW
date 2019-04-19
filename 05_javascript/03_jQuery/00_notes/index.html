@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JS Reversal</title>
+</head>
+<body>
+  <input type="text" id="text_input">
+  <p id="text_reversed"></p>
+
+  <script>
+    const textInput = document.querySelector('#text_input');
+    const textOutput = document.querySelector('#text_reversed');
+
+    textInput.addEventListener('input', () => {
+      let text = textInput.value;
+      let reversed = text.split("").reverse().join('');
+      textOutput.textContent = reversed;
+    });
+  </script>
+</body>
+</html>
