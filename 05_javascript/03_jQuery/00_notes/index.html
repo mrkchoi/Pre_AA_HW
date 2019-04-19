@@ -152,6 +152,39 @@
       i = (i + 1) % 3;
     }, 500);
   </script>
+
+
+  <!-- Using jQuery to create elements -->
+
+  <ul id='short_create'></ul>
+  
+  <script>
+    let $short_ul = $('#short_create');
+    let $li = $("<li></li>");
+    
+    $li.text('dynamically created by jQuery!');
+    $li.attr('style', 'background-color: orangered');
+    $short_ul.append($li);
+
+  </script>
+
+  <!-- Getters/Setters w/ jQuery -->
+
+  <input type="text" id="get_set_input">
+
+  <script>
+    let $get_set_input = $('#get_set_input');
+
+    window.setInterval(() => {
+      if ($get_set_input.val() == 'Racecar') {
+        $get_set_input.val('');
+      } else {
+        $get_set_input.val('Racecar');
+      }
+
+      
+    }, 1000);
+  </script>
   
 </body>
 </html>
