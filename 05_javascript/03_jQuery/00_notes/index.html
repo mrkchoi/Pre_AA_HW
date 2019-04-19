@@ -108,6 +108,25 @@
   </script>
   
 
+  <!-- Traversals in jQuery -->
+
+  <div>
+    <ul id="traversal_list">
+      <li>Racecars</li>
+      <li>Lasers</li>
+      <li>Aeroplanes</li>
+    </ul>
+
+    <p id="traversal_p">Something else</p>
+  </div>
+
+  <script>
+    const $traversals = $('#traversal_list');
+
+    $traversals.children().attr('style', 'background-color: red');
+    $traversals.attr('style', 'background-color: green');
+    $traversals.siblings().attr('style', 'background-color: pink');
+  </script>
 
   
 </body>
