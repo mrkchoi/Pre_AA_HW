@@ -311,5 +311,49 @@
   <br><br><br>
   <hr>
   <br><br><br>
+
+  <!-- Data attributes w/ jQuery -->
+
+  <ul id="dogs"></ul>
+
+  <script>
+    DOGS = {
+      101: {
+        id: 101,
+        name: 'Sable',
+        genus: 'Husky Huskius'
+      },
+      234: {
+        id: 234,
+        name: 'Blixa',
+        genus: 'Corgi Corgiorum'
+      }
+    }
+    
+    let $dogsList = $('#dogs');
+
+    Object.keys(DOGS).forEach(id => {
+      let dog = DOGS[id];
+
+      let $dogLi = $("<li class='dog'></li>");
+      $dogLi.data('id', id);
+      $dogLi.text(`${dog.name} -- ${dog.genus}`);
+      $dogsList.append($dogLi);
+    });
+
+    let $dogs = $('.dog');
+    $dogs.on('click', event => {
+      let $dog = $(event.currentTarget);
+      let $id = $dog.data('id');
+      let $dogInfo = DOGS[$id];
+
+      alert(`${$dogInfo.name} loves you!`);
+    });
+    
+  </script>
+
+  <br><br><br>
+  <hr>
+  <br><br><br>
 </body>
 </html>
