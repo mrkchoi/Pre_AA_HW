@@ -355,5 +355,25 @@
   <br><br><br>
   <hr>
   <br><br><br>
+
+
+  <!-- Alternate method of storing data attributes in the DOM -->
+
+  <ul id="dogs2">
+    <li class="dog" data-dog='{ "id": 101, "name": "Sable", "genus": "Husky Huskius" }'>Sable -- Husky Huskius</li>
+    <li class="dog" data-dog='{ "id": 234, "name": "Blixa", "genus": "Corgi Corgiorum" }'>Blixa -- Corgi Corgiorum</li>
+  </ul>
+
+  <script>
+    let $dogs2 = $('#dogs2 li');
+
+    $dogs2.on('click', event => {
+      let $dog = $(event.currentTarget);
+      let $dogData = $dog.data('dog');
+      console.log($dogData);
+
+      alert(`${$dogData.name} loves you!`);
+    });
+  </script>
 </body>
 </html>
