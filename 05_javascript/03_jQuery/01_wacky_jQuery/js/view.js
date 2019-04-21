@@ -106,6 +106,16 @@ View.prototype.exercise7 = function(){
   //rainbow.
 
   //your code here!
+
+  let easel = $('#easel');
+
+  easel.on('mouseover', '.square', function(e) {
+    e.preventDefault();
+
+    let el = $(e.currentTarget);
+
+    console.log(el.css('background-color'));
+  });
 };
 
 
