@@ -14,6 +14,7 @@ class Game {
   playMove(pos) {
     this.board.placeMark(pos, this.currentPlayer);
     this.swapTurn();
+    console.log('game playmove triggered!');
   }
 
   promptMove(reader, callback) {
