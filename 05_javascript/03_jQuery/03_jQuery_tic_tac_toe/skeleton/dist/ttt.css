@@ -45,3 +45,41 @@ ul {
 .square:hover {
   background-color: yellow;
 }
+
+.x_mark {
+  background-color: white;
+}
+
+.o_mark {
+  background-color: white;
+}
+
+.win_msg {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.game_won .board .square {
+  background-color: white;
+}
+
+.game_winner_X .board .square.x_mark {
+  background-color: green;
+  color: white;
+}
+.game_winner_X .square.o_mark {
+  color: red;
+}
+
+.game_winner_O .board .square.x_mark {
+  color: red;
+}
+.game_winner_O .square.o_mark {
+  background-color: green;
+  color: white;
+}
+
+.draw_game .board .square {
+  color: red;
+  background-color: white;
+}
