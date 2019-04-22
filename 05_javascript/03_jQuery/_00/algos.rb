@@ -236,3 +236,32 @@ def min_depth(root)
     end
   end
 end
+
+
+
+
+
+
+
+class MinStack
+  def initialize()
+    @mins, @stack = [], []
+  end
+
+  def push(el)
+    @stack.push(el)
+    @mins.push(el) if @mins.empty? || @mins.last >= el
+  end
+
+  def pop
+    @mins.pop if @stack.pop == @mins.last
+  end
+
+  def top
+    @stack.last
+  end
+
+  def get_min()
+    @mins.last
+  end
+end
