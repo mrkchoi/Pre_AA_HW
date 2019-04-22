@@ -133,3 +133,106 @@ def sorted_array_to_bst(nums)
   
   node
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # class TreeNode
+# #   attr_accessor :val, :left, :right
+# #   def initialize(val)
+# #     @val = val
+# #     @left, @right = nil, nil
+# #   end
+# # end
+
+# def height(root)
+#   return 0 if root.nil?
+
+#   [height(root.left), height(root.right)].max + 1
+# end
+
+
+# def is_balanced(root)
+#   return true if root.nil?
+
+#   left_height = height(root.left)
+#   right_height = height(root.right)
+
+#   if abs(left_height - right_height) <= 1 && is_balanced(root.left) && is_balanced(root.right)
+#     return true
+#   end
+
+#   false
+# end
+
+
+
+
+
+
+
+
+
+
+def height(root)
+  return 0 if root.nil?
+  [height(root.left), height(root.right)].max + 1
+end
+
+def is_balanced(root)
+  return true if root.nil?
+
+  left_height = height(root.left)
+  right_height = height(root.right)
+
+  return true if (left_height - right_height).abs <= 1 && is_balanced(root.left) && is_balanced(root.right)
+
+  false
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def min_depth(root)
+  return 0 if root.nil?
+
+  cur_node = [root, 1]
+  queue = [cur_node]
+
+  until queue.empty?
+    node, height = queue.shift
+
+    if node.left.nil? && node.right.nil?
+      return height
+    else
+      queue << [node.left, height + 1] if node.left
+      queue << [node.right, height + 1] if node.right
+    end
+  end
+end
