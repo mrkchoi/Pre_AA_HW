@@ -1,0 +1,53 @@
+/* PHASE 10: Posts */
+
+
+
+.post_item {
+  border-top: 1px solid lightgray;
+  padding-top: 1.4rem;
+  margin-top: 1rem;
+  display: flex;
+}
+
+.post_item .thumb {
+  min-width: 58px;
+}
+
+.post_main {
+  margin-left: 1.4rem;
+}
+
+.post_header {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.post_meta {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post_main_content {
+  margin-bottom: 1rem;
+}
+.post_meta__content {
+  display: flex;
+}
+
+.post_meta_detail {
+  margin-right: 1rem;
+  color: gray;
+  position: relative;
+}
+
+.post_meta_detail:not(:last-child)::after {
+  content: "\2022";
+  position: absolute;
+  right: -.6rem;
+}
+
+.post_meta__actions a {
+  font-weight: 500;
+  margin-right: .4rem;
+}
