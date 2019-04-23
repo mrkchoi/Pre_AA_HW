@@ -265,3 +265,196 @@ class MinStack
     @mins.last
   end
 end
+
+
+
+
+
+
+
+
+
+def has_path_sum(root, sum)
+  return nil if root.nil?
+
+  queue = [[root, 0]]
+
+  until queue.empty?
+    cur_node, node_sum = queue.pop()
+
+    queue << [cur_node.left, node_sum + cur_node.val] if cur_node.left
+    queue << [cur_node.right, node_sum + cur_node.val] if cur_node.right
+
+    return true if cur_node.left.nil? && cur_node.right.nil? && node_sum + cur_node.val == sum
+  end
+  
+  false
+end
+
+
+
+
+
+
+
+
+
+
+
+# def level_order_traversal(root)
+#   values = []
+#   return values if root.nil?
+  
+#   queue = [root]
+
+#   until queue.empty?
+#     level_vals = []
+    
+#     queue.length.times do
+#       node = queue.shift()
+#       level_vals << node.val
+
+#       if node.left?
+#         queue << node.left
+#       end
+#       if node.right?
+#         queue << node.right
+#       end
+#     end
+
+#     values << level_vals
+#   end
+
+#   values.reverse!
+# end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def level_order_bottom(root)
+  res = []
+  return res if root.nil?
+
+  queue = [root]
+  until queue.empty?
+    cur = []
+
+    queue.length.times do 
+      node = queue.shift()
+      cur << node.val
+      queue << node.left if node.left
+      queue << node.right if node.right
+    end
+    res << cur
+  end
+  res.reverse!
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def level_order_bottom(root)
+  res = []
+  return [] if root.nil?
+
+  queue = [root]
+
+  until queue.empty?
+    level = []
+    queue.length.times do
+      node = queue.shift()
+      level << node.val
+
+      queue << node.left if node.left
+      queue << node.right if node.right
+    end
+    res << level
+  end
+  res.reverse!
+end
