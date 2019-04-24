@@ -84,177 +84,230 @@ end
 
 
 
-# p fib(5, Array.new(5))
-# p fib(100, Array.new(100))
+# # p fib(5, Array.new(5))
+# # p fib(100, Array.new(100))
+# p fib_bottom_up(1)
+# p fib_bottom_up(2)
+# p fib_bottom_up(3)
+# p fib_bottom_up(4)
+# p fib_bottom_up(5)
+# p fib_bottom_up(10)
+# p fib_bottom_up(100)
+# p fib_bottom_up(10000)
+# # p fib(5, Array.new(5))
+# # p fib(6)
+# # p fib(7)
+# # p fib(8)
+# # p fib(9)
+# # p fib(100)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Naive, Recursive
+def fib1(n)
+  return 1 if n == 1 || n == 2
+  fib1(n - 1) + fib1(n - 2)
+end
+
+# Recursive, Memoized
+def fib_memo(n, memo = [])
+  return memo[n] if memo[n]
+
+  if n == 1 || n == 2
+    result = 1
+  else
+    result = fib_memo(n - 1) + fib_memo(n - 2)
+  end
+
+  memo[n] = result
+  result
+end
+
+# Bottom Up
+def fib_bottom_up(n)
+  return 1 if n == 1 || n == 2
+  bottom_up = []
+
+  bottom_up[1] = 1
+  bottom_up[2] = 1
+
+  (3..n).each do |i|
+    bottom_up[i] = bottom_up[i - 1] + bottom_up[i - 2]
+  end
+
+  bottom_up[n]
+end
+
+
+
+
+
+
+
+
+
+
+p fib1(1)
+p fib1(2)
+p fib1(3)
+p fib1(4)
+p fib1(5)
+
+p "----------------"
+
+p fib_memo(1)
+p fib_memo(2)
+p fib_memo(3)
+p fib_memo(4)
+p fib_memo(5)
+
+p "----------------"
+
 p fib_bottom_up(1)
 p fib_bottom_up(2)
 p fib_bottom_up(3)
 p fib_bottom_up(4)
 p fib_bottom_up(5)
-p fib_bottom_up(10)
-p fib_bottom_up(100)
-p fib_bottom_up(10000)
-# p fib(5, Array.new(5))
-# p fib(6)
-# p fib(7)
-# p fib(8)
-# p fib(9)
-# p fib(100)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+p "----------------"
 
 
 
