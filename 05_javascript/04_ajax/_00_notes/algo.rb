@@ -396,9 +396,244 @@ def roman_to_int(num)
   int
 end
 
-p roman_to_int('III')
-p roman_to_int('III')
-p roman_to_int('MCMXCIV')
+# p roman_to_int('III')
+# p roman_to_int('III')
+# p roman_to_int('MCMXCIV')
+
+
+
+
+
+
+
+def count_and_say(n)
+  hash = {
+    '111' => '31',
+    '11' => '21',
+    '1' => '11',
+    '222' => '32',
+    '22' => '22',
+    '2' => '12',
+    '333' => '33',
+    '33' => '23',
+    '3' => '13',
+  }
+  seq = ['', '1', '11', '21', '1211', '111221']
+  return seq[n] if n <= 5
+
+  until seq.length == (n + 1)
+    cur = ''
+    prev = seq.last # => '111221
+
+    until prev.length == 0
+      hash.each do |k,v|
+        if prev.start_with?(k)    
+          cur += v
+          prev.sub!(k, '')
+          break
+        end
+      end
+    end    
+    seq << cur
+  end
+
+  seq[n]
+end
+
+
+p count_and_say(6)
+p count_and_say(10)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
