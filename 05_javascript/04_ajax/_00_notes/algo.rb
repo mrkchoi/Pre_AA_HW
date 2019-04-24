@@ -69,12 +69,13 @@ end
 #   return result
 # end
 
+# Bottom up approach (dynamic programming)
 def fib_bottom_up(n)
   return 1 if n == 1 || n == 2
-  bottom_up = Array.new(6)
+  bottom_up = []
   bottom_up[1] = 1
-  bottom_up[2] = 2
-  (3..n+1).each do |i|
+  bottom_up[2] = 1
+  (3..n).each do |i|
     bottom_up[i] = bottom_up[i - 1] + bottom_up[i - 2]
   end
   bottom_up[n]
