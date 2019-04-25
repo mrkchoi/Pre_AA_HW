@@ -214,6 +214,8 @@ end
 
 
 
+# Singly Linked List
+
 class Node
   attr_accessor :value, :next
   def initialize(value)
@@ -340,7 +342,160 @@ end
 
 
 
-l = LinkedList.new(Node.new(1))
+# l = LinkedList.new(Node.new(1))
+# l.append(2)
+# l.append(3)
+# l.append(4)
+# l.append(5)
+
+
+
+
+
+
+
+
+# Doubly Linked List
+
+
+
+class DoublyLinkedListNode
+  attr_accessor :value, :prev, :next
+  def initialize(value)
+    @value = value
+    @prev = nil
+    @next = nil
+  end
+end
+
+class DoublyLinkedList
+  attr_accessor :head
+  def initialize(head)
+    @head = head
+  end
+
+  def append(value)
+    new_node = DoublyLinkedListNode.new(value)
+    node = @head
+
+    if node.next.nil?
+      node.next = new_node
+      new_node.prev = node  
+      return new_node
+    end
+
+    until node.next.nil?
+      node = node.next
+    end
+
+    node.next = new_node
+    new_node.prev = node
+    new_node  
+  end
+
+  def prepend(value)
+    new_node = DoublyLinkedListNode.new(value)
+    
+    new_node.next = @head
+    @head.prev = new_node
+    @head = new_node
+  end
+
+  def size
+    return 0 if @head.nil?
+    size = 1
+    node = @head
+
+    until node.next.nil?
+      node = node.next
+      size += 1
+    end
+    size
+  end
+
+  def head
+    @head
+  end
+
+  def tail
+    return @head if @head.next.nil?
+    node = @head
+
+    until node.next.nil?
+      node = node.next
+    end
+    node
+  end
+
+  def at(index)
+    return @head if index == 0
+    cur_idx = 0
+
+    node = @head
+    until cur_idx == index
+      node = node.next
+      cur_idx += 1
+    end
+    node
+  end
+
+  def pop
+    prev_node = nil
+    cur_node = @head
+
+    until cur_node.next.nil?
+      prev_node = cur_node
+      cur_node = cur_node.next
+    end
+
+    prev_node.next = nil
+    prev_node
+  end
+
+  def contains?(value)
+    node = @head
+
+    until node.next.nil?
+      if node.value == value
+        return true
+      end
+      node = node.next
+    end
+
+    false
+  end
+
+  def find(data)
+    idx = 0
+    node = @head
+
+    until node.next.nil?
+      if node.value == data
+        return idx
+      end
+      node = node.next
+      idx += 1
+    end
+
+    false
+  end
+
+  def to_s
+    node = @head
+    output_str = "( #{node.value} )"
+
+    until node.next.nil?
+      node = node.next
+      output_str += " <-> ( #{node.value} )"
+    end
+    output_str += ' -> nil'
+    p output_str
+  end
+end
+
+
+l = DoublyLinkedList.new(DoublyLinkedListNode.new(0))
+l.append(1)
 l.append(2)
 l.append(3)
 l.append(4)
