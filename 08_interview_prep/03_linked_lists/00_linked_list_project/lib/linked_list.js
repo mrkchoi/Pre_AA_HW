@@ -80,32 +80,113 @@ class LinkedList {
 
     // TODO: Implement the addToHead method here
     addToHead(val) {
+        let newNode = new Node(val);
+        newNode.next = this.head;
+        this.head = newNode;
 
+        if (this.length === 0) {
+            this.tail = newNode;
+        }
+
+        this.length += 1;
+        return this;
     }
 
     // TODO: Implement the removeHead method here
     removeHead() {
+        if (this.length === 0) {
+            return undefined;
+        } else if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+            this.length = 0;
+            return;
+        }
 
+        let oldHead = this.head;
+        let newHead = this.head.next;
+
+        this.head = newHead;
+        this.length -= 1;
+
+        return oldHead;
     }
 
     // TODO: Implement the contains method here
     contains(target) {
+        if (this.length === 0) {
+            return undefined;
+        } else if (this.length === 1) {
+            return this.head.value === target;
+        }
 
+        let curNode = this.head;
+
+        while (curNode != null) {
+            if (curNode.value === target) {
+                return true;
+            }
+            curNode = curNode.next;
+        }
+        return false;    
     }
 
     // TODO: Implement the get method here
     get(index) {
+        let curIdx = 0;
+        let curNode = this.head;
 
+        if (this.length === 0 || index >= this.length) {
+            return null;
+        }
+
+        while (curIdx < index) {
+            curNode = curNode.next;
+            curIdx += 1;
+        }
+        return curNode;
     }
 
     // TODO: Implement the set method here
     set(index, val) {
+        if (this.length === 0 || index >= this.length) {
+            return false;
+        }
 
+        let curIdx = 0;
+        let curNode = this.head;
+
+        while (curIdx < index) {
+            curNode = curNode.next;
+            curIdx += 1;
+        }
+
+        curNode.value = val;
+        return true;
     }
 
     // TODO: Implement the insert method here
     insert(index, val) {
+        let newNode = new Node(val);
 
+        if (index > this.length) {
+            return false;
+        }
+
+        let curIdx = 0;
+        let curNode = this.head;
+        let prevNode = null;
+
+        while (curIdx < index) {
+            prevNode = curNode;
+            curNode = curNode.next;
+            curIdx += 1;
+        }
+
+        prevNode.next = newNode;
+        newNode.next = curNode;
+        this.length += 1;
+        return true;
     }
 
     // TODO: Implement the remove method here
