@@ -149,6 +149,112 @@ end
 # Space: O(n)
 
 
-p is_rotation('waterbottle', 'erbottlewat') # => true
-p is_rotation('hello', 'lohel') # => true
-p is_rotation('true', 'false') # => false
+# p is_rotation('waterbottle', 'erbottlewat') # => true
+# p is_rotation('hello', 'lohel') # => true
+# p is_rotation('true', 'false') # => false
+
+
+
+
+# CTCI 2.1
+# Remove Dups: Write code to remove duplicates from an unsorted linked list.
+# Followup: How would you solve this problem if a temporary buffer is not allowed?
+
+
+def remove_dups(head)
+end
+
+
+# class SinglyNode
+#   attr_accessor :value, :next
+
+#   def initialize(value)
+#     @value = value
+#     @next = nil
+#   end
+# end
+
+
+# h1 = SinglyNode.new(1)
+# h2 = SinglyNode.new(2)
+# h3 = SinglyNode.new(3)
+# h4 = SinglyNode.new(4)
+
+# h1.next = h2
+# h2.next = h3
+# h3.next = h4
+# h4.next = nil
+
+
+# class DoublyNode
+#   attr_accessor :value, :prev, :next
+#   def initialize(value)
+#     @value = value
+#     @prev = nil
+#     @next = nil
+#   end
+# end
+
+# d1 = DoublyNode.new(1)
+# d2 = DoublyNode.new(2)
+# d3 = DoublyNode.new(3)
+# d4 = DoublyNode.new(4)
+# d5 = DoublyNode.new(5)
+
+# d2.prev = d1
+# d3.prev = d2
+# d4.prev = d3
+# d5.prev = d4
+
+# d1.next = d2
+# d2.next = d3
+# d3.next = d4
+# d4.next = d5
+
+
+
+
+
+
+
+
+class LinkedList
+  class Node
+    attr_accessor :value
+    def initialize(value)
+      @value = value
+      @next_node = nil
+    end
+  end
+
+  def append(value)
+
+  end
+
+  def prepend(value)
+  end
+
+  def size
+  end
+
+  def head
+  end
+
+  def tail
+  end
+
+  def at(index)
+  end
+
+  def pop
+  end
+
+  def contains?(value)
+  end
+
+  def find(data)
+  end
+
+  def to_s
+  end
+end
