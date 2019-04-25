@@ -406,40 +406,73 @@ end
 
 
 
+# def count_and_say(n)
+#   hash = {
+#     '111' => '31',
+#     '11' => '21',
+#     '1' => '11',
+#     '222' => '32',
+#     '22' => '22',
+#     '2' => '12',
+#     '333' => '33',
+#     '33' => '23',
+#     '3' => '13',
+#   }
+#   seq = ['', '1', '11', '21', '1211', '111221']
+#   return seq[n] if n <= 5
+
+#   until seq.length == (n + 1)
+#     cur = ''
+#     prev = seq.last # => '111221
+
+#     until prev.length == 0
+#       hash.each do |k,v|
+#         if prev.start_with?(k)    
+#           cur += v
+#           prev.sub!(k, '')
+#           break
+#         end
+#       end
+#     end    
+#     seq << cur
+#   end
+
+#   seq[n]
+# end
+
+
+
+
 def count_and_say(n)
-  hash = {
-    '111' => '31',
-    '11' => '21',
-    '1' => '11',
-    '222' => '32',
-    '22' => '22',
-    '2' => '12',
-    '333' => '33',
-    '33' => '23',
-    '3' => '13',
-  }
-  seq = ['', '1', '11', '21', '1211', '111221']
-  return seq[n] if n <= 5
+  dp = []
+  dp[0] = '1'
+  dp[1] = '11'
+  dp[2] = '21'
+  dp[3] = '1211'
+  dp[4] = '111221'
 
-  until seq.length == (n + 1)
-    cur = ''
-    prev = seq.last # => '111221
+  return dp[n - 1] if n <= 5
 
-    until prev.length == 0
-      hash.each do |k,v|
-        if prev.start_with?(k)    
-          cur += v
-          prev.sub!(k, '')
-          break
-        end
+  (5..n - 1).each do |i|
+    prev = dp[i - 1]
+    current_number = prev[0]
+    current_count = 1
+    dp[i] = ''
+
+    for j in (1...prev.length)
+      if prev[j] == current_number
+        current_count += 1
+      else
+        dp[i] += "#{current_count}#{current_number}"
+        current_count = 1
+        current_number = prev[j]
       end
-    end    
-    seq << cur
+    end
+    dp[i] += "#{current_count}#{current_number}"
   end
 
-  seq[n]
+  dp[n - 1]
 end
-
 
 p count_and_say(6)
 p count_and_say(10)
