@@ -214,47 +214,134 @@ end
 
 
 
-
+class Node
+  attr_accessor :value, :next
+  def initialize(value)
+    @value = value
+    @next = nil
+  end
+end
 
 
 
 class LinkedList
-  class Node
-    attr_accessor :value
-    def initialize(value)
-      @value = value
-      @next_node = nil
-    end
+  def initialize(head)
+    @head = head
+    @tail = nil
   end
 
   def append(value)
+    new_node = Node.new(value)
 
+    node = @head
+
+    until node.next.nil?
+      node = node.next
+    end
+
+    node.next = new_node
   end
 
   def prepend(value)
+    new_node = Node.new(value)
+    new_node.next = @head
+    @head = new_node
   end
 
   def size
+    count = 1
+
+    node = @head
+
+    until node.next.nil?
+      count += 1
+      node = node.next
+    end
+
+    count
   end
 
   def head
+    @head
   end
 
   def tail
+    node = @head
+
+    until node.next.nil?
+      node = node.next
+    end
+
+    node
   end
 
   def at(index)
+    cur_idx = 0
+    node = @head
+
+    until node.next.nil?
+      return node if cur_idx == index
+      cur_idx += 1
+    end
+
+    false
   end
 
   def pop
+    prev_node = nil
+    cur_node = @head
+
+    until cur_node.next.nil?
+      prev_node = cur_node
+      cur_node = cur_node.next
+    end
+    prev_node.next = nil
+    prev_node
   end
 
   def contains?(value)
+    node = @head
+
+    until node.next.nil?
+      if node.value == value
+        return true
+      end
+      node = node.next
+    end
+
+    false
   end
 
   def find(data)
+    idx = 0
+    node = @head
+
+    until node.next.nil?
+      return idx if node.value == data
+      node = node.next
+      idx += 1
+    end
+
+    false
   end
 
   def to_s
+    node = @head
+    output_str = "( #{node.value} ) -> "
+
+    until node.next.nil?
+      node = node.next
+      output_str += "( #{node.value} ) -> "
+    end
+    output_str += 'nil'
+    p output_str
   end
 end
+
+
+
+l = LinkedList.new(Node.new(1))
+l.append(2)
+l.append(3)
+l.append(4)
+l.append(5)
