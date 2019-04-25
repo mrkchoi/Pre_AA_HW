@@ -116,10 +116,39 @@ end
 # Space: O(n)
 
 
-m1 = [
-  [1,2,3,4,5],
-  [1,2,0,4,5],
-  [1,2,3,4,5],
-  [1,2,3,4,0]
-]
-zero_matrix(m1)
+# m1 = [
+#   [1,2,3,4,5],
+#   [1,2,0,4,5],
+#   [1,2,3,4,5],
+#   [1,2,3,4,0]
+# ]
+# zero_matrix(m1)
+
+
+
+
+
+# CTCI 1.9 
+# String Rotation: Assume you have a method isSubstring which checks if one word is a substring of another. Given two strings s1 and s2, write code to check if s2 is a rotation of s1 using only one call to isSubstring (e.g. 'waterbottle' is a rotation of 'erbottlewat').
+
+def is_rotation(s1, s2)
+  return false if s1.length != s2.length
+  a1 = s1.chars
+  a2 = s2.chars
+
+  s2.length.times do 
+    if a2.unshift(a2.pop()) == a1
+      return true
+    end
+  end
+
+  false
+end
+
+# Time: O(n)
+# Space: O(n)
+
+
+p is_rotation('waterbottle', 'erbottlewat') # => true
+p is_rotation('hello', 'lohel') # => true
+p is_rotation('true', 'false') # => false
