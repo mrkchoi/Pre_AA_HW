@@ -169,8 +169,13 @@ class LinkedList {
     insert(index, val) {
         let newNode = new Node(val);
 
-        if (index > this.length) {
+        if (index >= this.length || index < 0) {
             return false;
+        } else if (index === 0) {
+            newNode.next = this.head;
+            this.head = newNode;
+            this.length += 1;
+            return true;
         }
 
         let curIdx = 0;
@@ -191,12 +196,32 @@ class LinkedList {
 
     // TODO: Implement the remove method here
     remove(index) {
+        if (index < 0 || index >= this.length) {
+            return undefined;
+        } else if (index === 0) {
+            this.removeHead();
+        } else if (index === this.length - 1) {
+            this.removeTail();
+        } else {
+            let prevNode = null;
+            let curNode = this.head;
+            let curIdx = 0;
+
+            while (curIdx < index) {
+                prevNode = curNode;
+                curNode = curNode.next;
+                curIdx += 1;
+            }
+            prevNode.next = curNode.next;
+            this.length -= 1;
+            return curNode;           
+        }
 
     }
 
     // TODO: Implement the size method here
     size() {
-
+        return this.length;
     }
 }
 
