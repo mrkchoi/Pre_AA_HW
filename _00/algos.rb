@@ -494,9 +494,14 @@ class DoublyLinkedList
 end
 
 
-l = DoublyLinkedList.new(DoublyLinkedListNode.new(0))
-l.append(1)
-l.append(2)
-l.append(3)
-l.append(4)
-l.append(5)
+# l = DoublyLinkedList.new(DoublyLinkedListNode.new(0))
+# l.append(1)
+# l.append(2)
+# l.append(3)
+# l.append(4)
+# l.append(5)
+
+
+
+
+

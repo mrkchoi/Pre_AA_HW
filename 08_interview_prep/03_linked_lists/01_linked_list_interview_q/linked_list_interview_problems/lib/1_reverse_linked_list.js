@@ -71,16 +71,16 @@ function reverseLinkedList(linkedList) {
 
   let prev = null;
   let cur = linkedList.head;
-  let tempNext;
+  let tempNext = null;
 
-  while (cur != null) {
-    tempNext = cur.next;
+  while (tempNext = cur.next) {
     cur.next = prev;
     prev = cur;
     cur = tempNext;
   }
 
-  linkedList.head = prev;
+  linkedList.head = cur;
+  linkedList.head.next = prev;
   linkedList.tail = newTail;
   return linkedList;
 }
