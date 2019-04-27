@@ -124,3 +124,117 @@ var deleteNode = function (node) {
   node.val = next.val;
   node.next = next.next;
 };
+
+
+
+
+// Leetcode 2: Add Two Numbers
+// Passes 1560 / 1563 test cases
+var addTwoNumbers = function (l1, l2) {
+  if (l1 === null || l2 === null) {
+    return null;
+  }
+
+  let list1Values = [];
+  let list2Values = [];
+
+  while (l1 != null) {
+    list1Values.unshift(l1.val);
+    l1 = l1.next;
+  }
+
+  while (l2 != null) {
+    list2Values.unshift(l2.val);
+    l2 = l2.next;
+  }
+
+  list1Values = parseInt(list1Values.join(''));
+  list2Values = parseInt(list2Values.join(''));
+
+  let totalValue = (list1Values + list2Values)
+    .toString()
+    .split('')
+    .reverse()
+    .map(el => {
+      return parseInt(el);
+    });
+
+
+    let newHead = new ListNode(totalValue.shift());
+    let node = newHead;
+
+    while (totalValue.length > 0) {
+      node.next = new ListNode(totalValue.shift());
+      node = node.next;
+    }
+
+    return newHead;
+};
+
+
+var addTwoNumbers = function (l1, l2) {
+  let res = new ListNode(null);
+  let item = res;
+  let remainder = 0;
+  let prev;
+
+  while(l1 || l2) {
+    let left = l1 ? l1.val : 0;
+    let right = l2 ? l2.val : 0;
+    
+    item.val = left + right + remainder;
+
+    if (remainder > 0) {
+      remainder = 0;
+    }
+
+    if (item.val >= 10) {
+      item.val -= 10;
+      remainder = 1;
+    }
+
+    item.next = new Listnode(null);
+    prev = item;
+    item = item.next;
+    l1 = l1 ? l1.next : null;
+    l2 = l2 ? l2.next : null;
+  }
+
+  if (remainder) {
+    prev.next.val = remainder;
+  } else {
+    prev.next = null;
+  }
+  return res;
+}
+
+
+// (831).toString().split('').reverse().map(el => parseInt(el));
+
+
+
+
+// Leetcode 203: Remove Linked List Elements
+var removeElements = function (head, val) {
+  if (head === null) {
+    return null;
+  }
+
+  let prev = head;
+  let cur = head.next;
+
+  while (cur) {
+    if (cur.val === val) {
+      cur = cur.next;
+      prev.next = cur;
+    } else {
+      prev = cur;
+      cur = cur.next;
+    }
+  }
+  if (head.val === val) {
+    return head.next;
+  }
+
+  return head;
+}
