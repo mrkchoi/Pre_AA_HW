@@ -62,23 +62,21 @@
 // -----------
 function reverseLinkedList(linkedList) {
   // TODO: Implement the reverseLinkedList function!
-  if (linkedList.head === null || linkedList.head.next === null) {
-    return linkedList;
-  }
-
-  linkedList.tail = linkedList.head;
-  let prev = null;
   let node = linkedList.head;
-  let save;
+  let first = node;
+  let next = null;
+  let prev = null;
 
-  while (node) {
-    save = node.next;
+  while (next = node.next) {
     node.next = prev;
     prev = node;
-    node = save;
+    node = next;
   }
 
-  linkedList.head = prev;
+  linkedList.head = node;
+  linkedList.head.next = prev;
+  linkedList.tail = first;
+
   return linkedList;
 }
 
@@ -88,7 +86,7 @@ function reverseLinkedList(linkedList) {
 class Node {
   constructor(val) {
     this.value = val;
-    this.next = null;``
+    this.next = null;
   }
 }
 
