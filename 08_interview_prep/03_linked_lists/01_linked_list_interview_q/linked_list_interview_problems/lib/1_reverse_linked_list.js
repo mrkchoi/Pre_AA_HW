@@ -61,26 +61,31 @@
 // Let's code!
 // -----------
 function reverseLinkedList(linkedList) {
-  // TODO: Implement the reverseLinkedList function!
-  if (linkedList.head === null || linkedList.head.next === null) {
+  if (linkedList.head === null) {
+    return null;
+  } else if (linkedList.head.next === null) {
     return linkedList;
   }
 
-  linkedList.tail = linkedList.head;
-  let prev = null;
-  let node = linkedList.head;
-  let save;
+  let newTail = linkedList.head;
 
-  while (node) {
-    save = node.next;
-    node.next = prev;
-    prev = node;
-    node = save;
+  let prev = null;
+  let cur = linkedList.head;
+  let tempNext;
+
+  while (cur != null) {
+    tempNext = cur.next;
+    cur.next = prev;
+    prev = cur;
+    cur = tempNext;
   }
 
   linkedList.head = prev;
+  linkedList.tail = newTail;
   return linkedList;
 }
+
+
 
 // ----------------------------------------
 // Given: Singly Linked List - Do Not Edit!
@@ -117,3 +122,225 @@ class LinkedList {
 exports.Node = Node;
 exports.LinkedList = LinkedList;
 exports.reverseLinkedList = reverseLinkedList;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function reverseLinkedList(linkedList) {
+//   // TODO: Implement the reverseLinkedList function!
+//   if (linkedList.head === null || linkedList.head.next === null) {
+//     return linkedList;
+//   }
+
+//   linkedList.tail = linkedList.head;
+//   let prev = null;
+//   let node = linkedList.head;
+//   let save;
+
+//   while (node) {
+//     save = node.next;
+//     node.next = prev;
+//     prev = node;
+//     node = save;
+//   }
+
+//   linkedList.head = prev;
+//   return linkedList;
+// }
