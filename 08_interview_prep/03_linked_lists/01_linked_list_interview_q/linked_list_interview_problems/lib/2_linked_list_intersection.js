@@ -40,7 +40,40 @@
 // Let's code!
 // -----------
 function linkedListIntersection(list1, list2) {
-  
+  if (!list1 || !list2) {
+    return null;
+  }
+
+  let list1Length = linkedListLength(list1.head);
+  let list2Length = linkedListLength(list2.head);
+  let diff = Math.abs(list2Length - list1Length);
+  let long = list1Length >= list2Length ? list1.head : list2.head;
+  let short = list1Length >= list2Length ? list2.head : list1.head;
+
+  while (long && short) {
+    if (diff > 0) {
+      long = long.next;
+      diff -= 1;
+      continue;
+    }
+
+    if (long === short) {
+      return long;
+    }
+    long = long.next;
+    short = short.next;
+  }
+  return null;
+}
+
+function linkedListLength(node) {
+  if (node === null) {
+    return null;
+  } else if (node.next === null) {
+    return 1;
+  } else {
+    return linkedListLength(node.next) + 1;
+  }
 }
 
 // ----------------------------------------
