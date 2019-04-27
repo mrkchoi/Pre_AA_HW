@@ -61,7 +61,17 @@
 // -----------
 function hasCycle(linkedList) {
   // TODO: Implement the hasCycle function!
-
+  if (linkedList.length === 0) {
+    return false;
+  } else if (linkedList.length === 1 && linkedList.head.next === null) {
+    return false;
+  } else if (linkedList.length === 1) {
+    return true;
+  } else if (linkedList.tail.next != null) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 
