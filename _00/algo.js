@@ -113,3 +113,14 @@ var isPalindrome = function (head) {
 
   return true;
 }
+
+
+
+
+
+// Leetcode 237: Delete Node in a Linked List
+var deleteNode = function (node) {
+  let next = node.next;
+  node.val = next.val;
+  node.next = next.next;
+};
