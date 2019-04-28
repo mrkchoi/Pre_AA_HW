@@ -783,3 +783,70 @@ def delete_node(node)
     node.val = n.val
     node.next = n.next
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# LC 1019: Next Greater Node in Linked List
+def next_larger_nodes(head)
+  return [0] if head.nil? || head.next.nil?
+  output = []
+
+  p1 = head
+  p2 = head.next
+  found = true
+
+  while !p1.nil?
+    found = false
+    while !p2.nil? && !found
+      if p2.val > p1.val
+        output << p2.val
+        found = true
+        break
+      end
+      
+      p2 = p2.next
+    end
+    output << 0 if found == false
+    p1 = p1.next
+    p2 = p1.next if !p1.nil?
+    
+  end
+
+  output
+end
+
+
+def next_larger_nodes(head)
+  res, stack = [], []
+
+    while head
+      while !stack.empty? && stack[-1][1] < head.val
+        res[stack.pop()[0]] = head.val
+      end
+
+      stack.push([res.length, head.val])
+      res.push(0)
+      head = head.next
+    end
+
+    res
+end
