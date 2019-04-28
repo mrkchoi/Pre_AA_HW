@@ -505,3 +505,90 @@ end
 
 
 
+# // CTCI 2.1: Remove Dups
+# // Write code to remove duplicates from an unsorted linked list.
+# // Follow up: How would you solve this problem if a temporary buffer is not allowed?
+
+class Node
+  attr_accessor :val, :next
+  def initialize(val)
+    @val = val
+    @next = nil
+  end
+end
+
+def remove_dups(head)
+  return nil if head.nil?
+  return head if head.next.nil?
+
+  hash = Hash.new
+
+  prev_node = nil
+  cur_node = head
+
+  until (cur_node.nil?)
+    if (!hash[cur_node])
+      hash[cur_node] = true
+      prev_node = cur_node
+      cur_node = cur_node.next
+    else
+      prev_node.next = cur_node.next
+      cur_node = cur_node.next
+    end
+  end
+  head
+end
+
+list = Node.new(1)
+list.next = Node.new(2)
+list.next.next = Node.new(3)
+list.next.next.next = Node.new(3)
+list.next.next.next.next = Node.new(4)
+list.next.next.next.next.next = Node.new(4)
+
+
+list2 = Node.new(1)
+
+remove_dups(list2)
+
+
+
+
+
+
+
+
+
+# // LC 82: Remove Duplicates from Sorted List II
+
+def delete_duplicates(head)
+    return nil if head.nil?
+    return head if head.next.nil?
+    
+    hash = Hash.new(0)
+    cur = head
+    
+    until cur.nil?
+        hash[cur.val] += 1
+        cur = cur.next
+    end
+
+    dup_vals = hash.select {|k,v| v > 1}
+
+    cur = head
+    prev = nil
+    
+    until cur.nil?
+        if dup_vals[cur.val] && (cur == head)
+            cur = cur.next
+            head = cur
+        elsif dup_vals[cur.val]
+            prev.next = prev.next.next
+            cur = prev.next
+        else
+            prev = cur
+            cur = cur.next
+        end
+    end
+    head
+end

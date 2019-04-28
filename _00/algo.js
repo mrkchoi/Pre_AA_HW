@@ -257,12 +257,12 @@ var MyLinkedList = function () {
   this.length = 0;
 }
 
-class Node {
-  constructor(val) {
-    this.val = val;
-    this.next = null;
-  }
-}
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
 
 /**
  * Get the value of the index-th node in the linked list. If the index is invalid, return -1. 
@@ -415,3 +415,79 @@ var middleNode = function (head) {
   return node;
 };
 
+
+
+// CTCI 2.1: Remove Dups
+// Write code to remove duplicates from an unsorted linked list.
+// Follow up: How would you solve this problem if a temporary buffer is not allowed?
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.length = 0;
+  }
+
+  print() {
+    let output = '';
+    let node = this.head;
+
+    while (node.next != null) {
+      output += `${node.val} -> `;
+      node = node.next;
+    }
+
+    return output;
+  }
+}
+
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+
+
+function removeDups(head) {
+  if (head === null) {
+    return null;
+  } else if (head.next === null) {
+    return head;
+  }
+
+  let hash = {};
+  let prev = null;
+  let node = head;
+
+  while (node != null) {
+    if (!hash.node) {
+      hash.node = true;
+      prev = node;
+      node = node.next;
+    } else {
+      prev.next = node.next;
+      node = node.next;
+    }
+  }
+
+  return head;
+}
+
+
+
+// let list = new LinkedList();
+// list.head = new Node(3);
+// list.head.next = new Node(2);
+// list.head.next.next = new Node(3);
+// list.head.next.next.next = new Node(4);
+// list.head.next.next.next.next = new Node(2);
+// list.head.next.next.next.next.next = new Node(5);
+
+
+
+
+
+// Leetcode 82: Remove Duplicates from Sorted List II
+var deleteDuplicates = function (head) {
+
+};
