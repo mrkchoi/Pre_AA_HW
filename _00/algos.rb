@@ -627,3 +627,148 @@ def remove_nth_from_end(head, n)
 
   head
 end
+
+
+
+# LC 148: Sort Linked List
+# def sort_list(head)
+#   return head if head.nil? || head.next.nil?
+
+#   prev = nil
+#   slow = head
+#   fast = head
+
+#   while !fast.nil? && !fast.next.nil?
+#     prev = slow
+#     slow = slow.next
+#     fast = fast.next.next
+#   end
+
+#   prev.next = nil
+
+#   l1 = sort_list(head)
+#   l2 = sort_list(slow)
+
+#   return merge(l1, l2)
+# end
+
+# def merge(l1, l2)
+#   l = ListNode.new(0)
+#   p = l
+
+#   while !l1.nil? && !l2.nil?
+#     if l1.val < l2.val
+#       p.next = l1
+#       l1 = l1.next
+#     else
+#       p.next = l2
+#       l2 = l2.next
+#     end
+#     p = p.next
+#   end
+
+#   if !l1.nil?
+#     p.next = l1
+#   end
+
+#   if !l2.nil?
+#     p.next = l2
+#   end
+
+#   return l.next
+# end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def sort_list(head)
+  return head if head.nil? || head.next.nil?
+
+  prev = nil
+  slow = head
+  fast = head
+
+  while !fast.nil? && !fast.next.nil?
+    prev = slow
+    slow = slow.next
+    fast = fast.next.next
+  end
+
+  prev.next = nil
+  l1 = sort_list(head)
+  l2 = sort_list(slow)
+
+  return merge(l1, l2)
+end
+
+
+def merge(l1, l2)
+  l = ListNode.new(0)
+  p = l
+
+  while !l1.nil? && !l2.nil?
+    if l1.val < l2.val
+      p.next = l1
+      l1 = l1.next
+    else
+      p.next = l2
+      l2 = l2.next
+    end
+    p = p.next
+  end
+
+  if l1.nil?
+    p.next = l2
+  elsif l2.nil?
+    p.next = l1
+  end
+
+  return l.next
+end
