@@ -592,3 +592,38 @@ def delete_duplicates(head)
     end
     head
 end
+
+
+
+
+# LC 19: Remove Nth Node From End of List
+def remove_nth_from_end(head, n)
+  return nil if head.next.nil? && n == 1 || head.nil?
+
+  length = 1
+  node = head
+
+  while node.next != nil
+    node = node.next
+    length += 1
+  end
+
+  remove_pos = length - (n-1)
+  cur_pos = 1
+  node = head
+  prev = nil
+
+  until cur_pos == remove_pos
+    prev = node
+    node = node.next
+    cur_pos += 1
+  end
+
+  if prev === nil
+    return head.next
+  else 
+    prev.next = node.next
+  end
+
+  head
+end
