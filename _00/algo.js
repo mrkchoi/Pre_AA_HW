@@ -238,3 +238,180 @@ var removeElements = function (head, val) {
 
   return head;
 }
+
+
+
+
+
+
+
+
+
+
+/**
+ * Initialize your data structure here.
+ */
+
+var MyLinkedList = function () {
+  this.head = null;
+  this.length = 0;
+}
+
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+
+/**
+ * Get the value of the index-th node in the linked list. If the index is invalid, return -1. 
+ * @param {number} index
+ * @return {number}
+ */
+MyLinkedList.prototype.get = function (index) {
+  if (index >= this.length) {
+    return -1;
+  } else {
+    let node = this.head;
+    let curIdx = 0;
+    while (curIdx < index) {
+      node = node.next;
+      curIdx += 1;
+    }
+    return node.val;
+  }
+};
+
+/**
+ * Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. 
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtHead = function (val) {
+  let newNode = new Node(val);
+  newNode.next = this.head;
+  this.head = newNode;
+  this.length += 1;
+};
+
+/**
+ * Append a node of value val to the last element of the linked list. 
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtTail = function (val) {
+  let newNode = new Node(val);
+
+  if (this.head === null) {
+    this.addAtHead(val);
+    return;
+  } else {
+    let curNode = this.head;
+
+    while (curNode.next != null) {
+      curNode = curNode.next;
+    }
+    newNode.next = null;
+    curNode.next = newNode;
+    this.length += 1;
+  }
+};
+
+/**
+ * Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. 
+ * @param {number} index 
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtIndex = function (index, val) {
+  let newNode = new Node(val);
+
+  if (index < 0 || index > this.length) {
+    return;
+  } else if (index === 0) {
+    this.addAtHead(val);
+    return;
+  } else if (index === this.length) {
+    this.addAtTail(val);
+  } else {
+    let curIdx = 0;
+    let curNode = this.head;
+
+    while (curIdx < index-1) {
+      curnode = curNode.next;   
+      curIdx += 1;
+    }
+    let prev = curNode;
+    next = curNode ? curNode.next : null;
+    newNode.next = next;
+    prev.next = newNode;
+    this.length += 1;
+  }
+};
+
+/**
+ * Delete the index-th node in the linked list, if the index is valid. 
+ * @param {number} index
+ * @return {void}
+ */
+MyLinkedList.prototype.deleteAtIndex = function (index) {
+  if (index < 0 || index > this.length - 1) {
+    return;
+  } else {
+    let curIdx = 0;
+    let curNode = this.head;
+    
+    while (curIdx < index-1) {
+      curNode = curNode.next;
+      curIdx += 1;
+    }
+
+    let prev = curNode;
+    next = curNode.next.next;
+    prev.next = next;
+    this.length -= 1;
+  }
+};
+
+/**
+ * Your MyLinkedList object will be instantiated and called as such:
+ * var obj = new MyLinkedList()
+ * var param_1 = obj.get(index)
+ * obj.addAtHead(val)
+ * obj.addAtTail(val)
+ * obj.addAtIndex(index,val)
+ * obj.deleteAtIndex(index)
+ */
+
+
+
+
+
+
+// Leetcode 876: Middle of the Linked List
+var middleNode = function (head) {
+  if (head === null) return null;
+
+  let length = 1;
+  let node = head;
+
+  while (node.next != null) {
+    node = node.next;
+    length += 1;
+  }
+
+  let midIdx = Math.floor(length / 2);
+  let finalIdx = 0;
+  node = head;
+
+  if (midIdx === 0) return head;
+
+  while (finalIdx < midIdx) {
+    node = node.next;
+    finalIdx += 1;
+  }
+
+  return node;
+};
+
