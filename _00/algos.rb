@@ -727,6 +727,7 @@ end
 
 
 
+# LC 237: Delete Node from Linked List
 
 def sort_list(head)
   return head if head.nil? || head.next.nil?
@@ -771,4 +772,14 @@ def merge(l1, l2)
   end
 
   return l.next
+end
+
+
+
+
+
+def delete_node(node)
+    n = node.next
+    node.val = n.val
+    node.next = n.next
 end
