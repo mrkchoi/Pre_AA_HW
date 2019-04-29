@@ -23,6 +23,31 @@
 // -----------
 // Let's code!
 // -----------
+// ============================================================================
+// Interview Problem: StackQueue
+// ============================================================================
+//
+// -------
+// Prompt:
+// -------
+//
+// Implement your preferred Stack implementation, including the methods:
+//
+//   - Push 
+//   - Pop 
+//   - Size
+//
+// Then, implement a Queue by instantiating two Stack instances for storage.
+//
+// The StackQueue implementation should include the following methods:
+//
+//   - Enqueue
+//   - Dequeue
+//   - Size
+//
+// -----------
+// Let's code!
+// -----------
 
 class Node {
     // TODO: Implement the Node class!
@@ -40,20 +65,19 @@ class Stack {
         this.length = 0;
     }
 
-    push(newNode) {
-        if (newNode.next) {
-            newNode.next = null;
+    push(newStackNode) {
+        if (newStackNode.next) {
+            newStackNode.next = null;
         }
 
         if (!this.top) {
-            this.top = newNode;
-            this.bottom = newNode;
+            this.top = newStackNode;
+            this.bottom = newStackNode;
         } else {
-            let temp = this.top;
-            this.top = newNode;
+            const temp = this.top;
+            this.top = newStackNode;
             this.top.next = temp;
         }
-        
         return ++this.length;
     }
 
@@ -69,7 +93,7 @@ class Stack {
         } else {
             this.top = this.top.next;
         }
-        this.length -= 1;
+        this.length--;
         return temp;
     }
 
@@ -81,24 +105,23 @@ class Stack {
 class StackQueue {
     // TODO: Implement the StackQueue class!
     constructor() {
-        this.front = null;
-        this.back = null;
         this.inStack = new Stack();
         this.outStack = new Stack();
+        this.front = null;
+        this.back = null;
     }
 
     enqueue(val) {
-        const newNode = new Node(val);
-
+        const newQueueNode = new Node(val);
         if (!this.front) {
-            this.front = newNode;
-            this.back = newNode;
+            this.front = newQueueNode;
+            this.back = newQueueNode;
         } else {
-            this.back.next = newNode;
-            this.back = newNode;
+            this.back.next = newQueueNode;
+            this.back = newQueueNode;
         }
 
-        this.inStack.push(new Node(newNode.value));
+        this.inStack.push(new Node(newQueueNode.value));
         return this.size();
     }
 
@@ -117,7 +140,6 @@ class StackQueue {
                 this.outStack.push(this.inStack.pop());
             }
         }
-
         let x = this.outStack.pop();
         return x;
     }
@@ -130,4 +152,3 @@ class StackQueue {
 exports.Node = Node;
 exports.Stack = Stack;
 exports.StackQueue = StackQueue;
-
