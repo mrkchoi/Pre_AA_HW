@@ -63,9 +63,32 @@ p reach_zero(num) #12
 # #       (row-column) of the square. 
 
 
+def vowel_square(input)
+  vowels = %w(a e i o u)
 
-# input = [["a","q","r","s","t"], ["u","k","a","e","i"], ["f","f","o","o","o"]]
-# #       a q r s t
-# #       u k a e i
-# #       f f o o o
-# vowel_square(input) #[1,2]
+  i = 0
+  while i < input.length - 1
+    j = 0
+    while j < input[0].length - 1
+      left_top = input[i][j]
+      right_top = input[i][j+1]
+      left_bottom = input[i+1][j]
+      right_bottom = input[i+1][j+1]
+
+      if vowels.include?(left_top) && vowels.include?(right_top) && vowels.include?(left_bottom) && vowels.include?(right_bottom)
+        return [i,j]
+      end
+      j += 1
+    end
+    i += 1
+  end
+  nil
+end
+
+
+
+input = [["a","q","r","s","t"], ["u","k","a","e","i"], ["f","f","o","o","o"]]
+#       a q r s t
+#       u k a e i
+#       f f o o o
+p vowel_square(input) #[1,2]
