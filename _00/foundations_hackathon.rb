@@ -23,13 +23,41 @@ characters = %w(e n g a r o)
 p valid_word?(characters, word) #true
 p valid_word?(%w(h e l o), 'hello') #false
 
+
+
+
+
+
+
 # # 2) Given a number represented as a binary string, find out how many operations it will take to reduce it to zero using the following rules:
 # #       - if it is even, divide by 2
 # #       - if it is odd, subract 1
 
+def reach_zero(num)
+  num = num.to_i(2)
+  count = 1
 
-# num = "10100110"
-# reach_zero(num) #12
+  until num === 0
+    if num.even?
+      num /= 2
+    elsif num.odd?
+      num -= 1
+    end
+    count += 1
+  end
+  count
+end
+
+
+num = "10100110"
+p reach_zero(num) #12
+
+
+
+
+
+
+
 
 # # 3) Given a 2D array filled with letters, determine if there is any 2x2 square composed entirely of vowels and return the top left position
 # #       (row-column) of the square. 
