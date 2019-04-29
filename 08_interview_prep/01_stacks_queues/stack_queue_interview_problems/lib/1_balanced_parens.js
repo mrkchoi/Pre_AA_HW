@@ -76,7 +76,26 @@
 // Let's code!
 // -----------
 function balancedParens(str) {
+  if (str === '') {
+    return true;
+  }
+  
+  str = str.replace(/[^(|)|{|}|[|\]]/g, '');
+  let stack = [];
 
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === '(') {
+      stack.push(')');
+    } else if (str[i] === '[') {
+      stack.push(']');
+    } else if (str[i] === '{') {
+      stack.push('}');
+    } else if (stack.length === 0 || stack.pop() != str[i]) {
+      return false;
+    }
+  }
+
+  return stack.length === 0;
 }
 
 exports.balancedParens = balancedParens;
