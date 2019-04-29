@@ -72,11 +72,13 @@ class Node {
 }
 
 // Refactor the regular Stack below into a MinMaxStack!
-class Stack {
+class MinMaxStack {
     constructor() {
         this.top = null;
         this.bottom = null;
         this.length = 0;
+        this.minNodes = [];
+        this.maxNodes = [];
     }
 
     push(val) {
@@ -84,10 +86,20 @@ class Stack {
         if (!this.top) {
             this.top = newNode;
             this.bottom = newNode;
+            this.minNodes.push(newNode);
+            this.maxNodes.push(newNode);
         } else {
             const temp = this.top;
             this.top = newNode;
             this.top.next = temp;
+            
+            if (this.minNodes[this.minNodes.length - 1].value > this.top.value) {
+                this.minNodes.push(this.top);
+            }
+            
+            if (this.maxNodes[this.maxNodes.length - 1].value < this.top.value) {
+                this.maxNodes.push(this.top);
+            }
         }
         return ++this.length;
     }
@@ -101,15 +113,40 @@ class Stack {
             this.bottom = null;
         }
         this.top = this.top.next;
+
+        if (this.minNodes[this.minNodes.length - 1].value === temp.value) {
+            this.minNodes.pop();
+        }
+
+        if (this.maxNodes[this.maxNodes.length - 1].value === temp.value) {
+            this.maxNodes.pop();
+        }
+        
         this.length--;
-        return temp.value;
+        return temp;
     }
 
     size() {
         return this.length;
     }
+
+    min() {
+        if (this.length === 0 || this.min === []) {
+            return null;
+        } else {
+            return this.minNodes[this.minNodes.length - 1];
+        }
+    }
+
+    max() {
+        if (this.length === 0 || this.maxNodes === []) {
+            return null;
+        } else {
+            return this.maxNodes[this.maxNodes.length - 1];
+        }
+    }
 }
 
 // Forgetting something down here? 
 exports.Node = Node;
-exports.Stack = Stack;
+exports.MinMaxStack = MinMaxStack;
