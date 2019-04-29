@@ -440,12 +440,12 @@ class LinkedList {
   }
 }
 
-class Node {
-  constructor(val) {
-    this.val = val;
-    this.next = null;
-  }
-}
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
 
 
 function removeDups(head) {
@@ -487,7 +487,58 @@ function removeDups(head) {
 
 
 
-// Leetcode 82: Remove Duplicates from Sorted List II
-var deleteDuplicates = function (head) {
 
-};
+
+
+// Stack implementation w/o arrays
+
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+
+class Stack {
+  constructor() {
+    this.top = null;
+    this.bottom = null;
+    this.length = null;
+  }
+
+  push(val) {
+    const newNode = new Node(val);
+
+    if (!this.top) {
+      this.top = newNode;
+      this.bottom = newNode;
+    } else {
+      const temp = this.top;
+      this.top = newNode;
+      this.top.next = temp;
+    }
+    this.length += 1;
+    return this.top;
+  }
+
+  pop() {
+    if (!this.top) {
+      return null;
+    }
+
+    const temp = this.top;
+    if (this.top === this.bottom) {
+      this.bottom = null;
+    }
+
+    this.top = this.top.next;
+    this.length -= 1;
+    return temp.val;
+
+  }
+
+  size() {
+    return this.length;
+  }
+}
+
