@@ -1104,17 +1104,68 @@
 #   (arr1 - arr2).first
 # end
 
-# Solution #2:
-def find_missing_element(arr1, arr2)
-  hash1 = Hash.new
-  hash2 = Hash.new
+# # Solution #2:
+# def find_missing_element(arr1, arr2)
+#   hash1 = Hash.new
+#   hash2 = Hash.new
 
-  arr1.each {|el| hash1[el] = true}
-  arr2.each {|el| hash2[el] = true}
+#   arr1.each {|el| hash1[el] = true}
+#   arr2.each {|el| hash2[el] = true}
 
-  (hash1.keys - hash2.keys).first
+#   (hash1.keys - hash2.keys).first
+# end
+
+# arr1 = [1,2,3,4,5,6,7,8,9]
+# arr2 = [9,7,6,5,4,3,2,1]
+# p find_missing_element(arr1, arr2) # => 8
+
+
+
+
+
+
+
+
+
+# Linked List Remove Nodes:	Given a linkedlist of integers and an integer value, delete every node of the linkedlist containing that value.
+def remove_nodes(head, val)
+  return nil if head.nil? || head.val == val
+
+  prev = nil
+  cur = head
+  while cur != nil
+    if cur == head && cur.val == val
+      head = head.next
+      cur = head
+      next
+    elsif cur.val == val
+      prev.next = cur.next
+    end
+
+    prev = cur
+    cur = cur.next
+  end
+  
+  head
 end
 
-arr1 = [1,2,3,4,5,6,7,8,9]
-arr2 = [9,7,6,5,4,3,2,1]
-p find_missing_element(arr1, arr2) # => 8
+class Node
+  attr_accessor :val, :next
+  def initialize(val)
+    @val = val
+    @next = nil
+  end
+end
+
+head = Node.new(1)
+n1 = Node.new(2)
+n2 = Node.new(3)
+n3 = Node.new(2)
+n4 = Node.new(5)
+
+head.next = n1
+n1.next = n2
+n2.next = n3
+n3.next = n4
+
+p remove_nodes(head, 2) # =>    1 -> 3 -> 5
