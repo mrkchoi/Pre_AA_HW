@@ -1075,23 +1075,46 @@
 
 
 
-# largest Continuous Sum: Given an array of integers (positive and negative) find the largest continuous sum.
-def largest_continuous_sum(arr)
-  sums = [arr[0]]
+# # largest Continuous Sum: Given an array of integers (positive and negative) find the largest continuous sum.
+# def largest_continuous_sum(arr)
+#   sums = [arr[0]]
 
-  arr.each_with_index do |el, i|
-    next if i == 0
+#   arr.each_with_index do |el, i|
+#     next if i == 0
 
-    if sums[-1] + el < 0
-      sums << 0
-    else
-      sums << sums[-1] + el
-    end
-  end
-  sums.max
+#     if sums[-1] + el < 0
+#       sums << 0
+#     else
+#       sums << sums[-1] + el
+#     end
+#   end
+#   sums.max
+# end
+
+
+# arr = [1,-5,4,-2,-7,0,3,3,-4]
+# p largest_continuous_sum(arr) # => 6
+
+
+
+
+# Find Missing Element:	There is an array of non-negative integers. A second array is formed by shuffling the elements of the first array and deleting a random element. Given these two arrays, find which element is missing in the second array.
+# Solution #1
+# def find_missing_element(arr1, arr2)
+#   (arr1 - arr2).first
+# end
+
+# Solution #2:
+def find_missing_element(arr1, arr2)
+  hash1 = Hash.new
+  hash2 = Hash.new
+
+  arr1.each {|el| hash1[el] = true}
+  arr2.each {|el| hash2[el] = true}
+
+  (hash1.keys - hash2.keys).first
 end
 
-
-arr = [1,-5,4,-2,-7,0,3,3,-4]
-p largest_continuous_sum(arr) # => 6
-
+arr1 = [1,2,3,4,5,6,7,8,9]
+arr2 = [9,7,6,5,4,3,2,1]
+p find_missing_element(arr1, arr2) # => 8
