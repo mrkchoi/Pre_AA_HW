@@ -1037,32 +1037,61 @@
 
 
 
-# Matrix Region Sum:	Given a matrix of integers and coordinates of a rectangular region within the matrix, find the sum of numbers falling inside the rectangle. Our program will be called multiple times with different rectangular regions from the same matrix.
-def matrix_region_sum(matrix, coords)
-  sum = 0
-  c1, c2 = coords
+# # Matrix Region Sum:	Given a matrix of integers and coordinates of a rectangular region within the matrix, find the sum of numbers falling inside the rectangle. Our program will be called multiple times with different rectangular regions from the same matrix.
+# def matrix_region_sum(matrix, coords)
+#   sum = 0
+#   c1, c2 = coords
 
-  if c1[0] < 0 || c1[0] >= matrix.length || c2[0] < 0 || c2[0] >= matrix.length || c1[1] < 0 || c1[1] >= matrix[0].length || c2[1] < 0 || c2[1] >= matrix[0].length
-    return nil
-  end
+#   if c1[0] < 0 || c1[0] >= matrix.length || c2[0] < 0 || c2[0] >= matrix.length || c1[1] < 0 || c1[1] >= matrix[0].length || c2[1] < 0 || c2[1] >= matrix[0].length
+#     return nil
+#   end
 
-  matrix.each_with_index do |row, row_i|
-    row.each_with_index do |col, col_i|
-      if row_i >= c1[0] && row_i <= c2[0] && col_i >= c1[1] && col_i <= c2[1]
-        sum += matrix[row_i][col_i]
-      end
+#   matrix.each_with_index do |row, row_i|
+#     row.each_with_index do |col, col_i|
+#       if row_i >= c1[0] && row_i <= c2[0] && col_i >= c1[1] && col_i <= c2[1]
+#         sum += matrix[row_i][col_i]
+#       end
+#     end
+#   end
+
+#   sum
+# end
+
+
+# matrix = [
+#   [4,5,6,2,4,8],
+#   [7,0,2,3,4,8],
+#   [0,1,6,2,8,4]
+# ]
+# p matrix_region_sum(matrix, [[1,2],[2,4]]) # => 25
+
+
+
+
+
+
+
+
+
+
+
+# largest Continuous Sum: Given an array of integers (positive and negative) find the largest continuous sum.
+def largest_continuous_sum(arr)
+  sums = [arr[0]]
+
+  arr.each_with_index do |el, i|
+    next if i == 0
+
+    if sums[-1] + el < 0
+      sums << 0
+    else
+      sums << sums[-1] + el
     end
   end
-
-  sum
+  sums.max
 end
 
 
-matrix = [
-  [4,5,6,2,4,8],
-  [7,0,2,3,4,8],
-  [0,1,6,2,8,4]
-]
-p matrix_region_sum(matrix, [[1,2],[2,4]]) # => 25
-
+arr = [1,-5,4,-2,-7,0,3,3,-4]
+p largest_continuous_sum(arr) # => 6
 
