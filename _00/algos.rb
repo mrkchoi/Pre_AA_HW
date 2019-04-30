@@ -1183,38 +1183,66 @@
 
 # Combine Two Strings:	We are given 3 strings: str1, str2, and str3. Str3 is said to be a shuffle of str1 and str2 if it can be formed by interweaving the characters of str1 and str2 in a way that maintains the left to right ordering of the characters from each string. For example, given str1=”abc” and str2=”def”, str3=”dabecf” is a valid shuffle since it preserves the character ordering of the two strings. So, given these 3 strings write a function that detects whether str3 is a valid shuffle of str1 and str2.
 
-def combine_two_strings(str1, str2, str3)
-  return false if str3.length != (str1.length + str2.length)
+# def combine_two_strings(str1, str2, str3)
+#   return false if str3.length != (str1.length + str2.length)
   
-  s1 = str1.chars
-  s2 = str2.chars
-  s3 = str3.chars
+#   s1 = str1.chars
+#   s2 = str2.chars
+#   s3 = str3.chars
 
-  s3.each do |char|
-    if char == s1[0]
-      s1.shift()
-    elsif char == s2[0]
-      s2.shift()
+#   s3.each do |char|
+#     if char == s1[0]
+#       s1.shift()
+#     elsif char == s2[0]
+#       s2.shift()
+#     else
+#       return false
+#     end
+#   end
+
+#   s1.empty? && s2.empty?
+# end
+
+
+# str1 = 'abc'
+# str2 = 'def'
+# str3 = 'dabecf'
+# p combine_two_strings(str1, str2, str3)
+
+# str1 = 'abc'
+# str2 = 'def'
+# str3 = 'abcdef'
+# p combine_two_strings(str1, str2, str3)
+
+# str1 = 'abc'
+# str2 = 'def'
+# str3 = 'abcfed'
+# p combine_two_strings(str1, str2, str3)
+
+
+
+
+
+
+# LC 704: Binary Search
+def search(nums, target)
+  l = 0
+  h = nums.length - 1
+
+  while l <= h
+    m = (l + h) / 2
+    if nums[m] == target
+      return m
+    elsif nums[m] > target
+      h = m - 1
     else
-      return false
+      l = m + 1
     end
   end
 
-  s1.empty? && s2.empty?
+  return -1
 end
 
-
-str1 = 'abc'
-str2 = 'def'
-str3 = 'dabecf'
-p combine_two_strings(str1, str2, str3)
-
-str1 = 'abc'
-str2 = 'def'
-str3 = 'abcdef'
-p combine_two_strings(str1, str2, str3)
-
-str1 = 'abc'
-str2 = 'def'
-str3 = 'abcfed'
-p combine_two_strings(str1, str2, str3)
+p search([1,3,5,7,9], 1) # => 0
+p search([1,3,5,7,9], 9) # => 4
+p search([1,3,5,7,9], 10) # => -1
