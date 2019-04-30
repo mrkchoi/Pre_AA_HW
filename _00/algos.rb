@@ -1127,45 +1127,94 @@
 
 
 
-# Linked List Remove Nodes:	Given a linkedlist of integers and an integer value, delete every node of the linkedlist containing that value.
-def remove_nodes(head, val)
-  return nil if head.nil? || head.val == val
+# # Linked List Remove Nodes:	Given a linkedlist of integers and an integer value, delete every node of the linkedlist containing that value.
+# def remove_nodes(head, val)
+#   return nil if head.nil? || head.val == val
 
-  prev = nil
-  cur = head
-  while cur != nil
-    if cur == head && cur.val == val
-      head = head.next
-      cur = head
-      next
-    elsif cur.val == val
-      prev.next = cur.next
-    end
+#   prev = nil
+#   cur = head
+#   while cur != nil
+#     if cur == head && cur.val == val
+#       head = head.next
+#       cur = head
+#       next
+#     elsif cur.val == val
+#       prev.next = cur.next
+#     end
 
-    prev = cur
-    cur = cur.next
-  end
+#     prev = cur
+#     cur = cur.next
+#   end
   
-  head
-end
+#   head
+# end
 
-class Node
-  attr_accessor :val, :next
-  def initialize(val)
-    @val = val
-    @next = nil
+# class Node
+#   attr_accessor :val, :next
+#   def initialize(val)
+#     @val = val
+#     @next = nil
+#   end
+# end
+
+# head = Node.new(1)
+# n1 = Node.new(2)
+# n2 = Node.new(3)
+# n3 = Node.new(2)
+# n4 = Node.new(5)
+
+# head.next = n1
+# n1.next = n2
+# n2.next = n3
+# n3.next = n4
+
+# p remove_nodes(head, 2) # =>    1 -> 3 -> 5
+
+
+
+
+
+
+
+
+
+
+
+
+# Combine Two Strings:	We are given 3 strings: str1, str2, and str3. Str3 is said to be a shuffle of str1 and str2 if it can be formed by interweaving the characters of str1 and str2 in a way that maintains the left to right ordering of the characters from each string. For example, given str1=”abc” and str2=”def”, str3=”dabecf” is a valid shuffle since it preserves the character ordering of the two strings. So, given these 3 strings write a function that detects whether str3 is a valid shuffle of str1 and str2.
+
+def combine_two_strings(str1, str2, str3)
+  return false if str3.length != (str1.length + str2.length)
+  
+  s1 = str1.chars
+  s2 = str2.chars
+  s3 = str3.chars
+
+  s3.each do |char|
+    if char == s1[0]
+      s1.shift()
+    elsif char == s2[0]
+      s2.shift()
+    else
+      return false
+    end
   end
+
+  s1.empty? && s2.empty?
 end
 
-head = Node.new(1)
-n1 = Node.new(2)
-n2 = Node.new(3)
-n3 = Node.new(2)
-n4 = Node.new(5)
 
-head.next = n1
-n1.next = n2
-n2.next = n3
-n3.next = n4
+str1 = 'abc'
+str2 = 'def'
+str3 = 'dabecf'
+p combine_two_strings(str1, str2, str3)
 
-p remove_nodes(head, 2) # =>    1 -> 3 -> 5
+str1 = 'abc'
+str2 = 'def'
+str3 = 'abcdef'
+p combine_two_strings(str1, str2, str3)
+
+str1 = 'abc'
+str2 = 'def'
+str3 = 'abcfed'
+p combine_two_strings(str1, str2, str3)
