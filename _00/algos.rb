@@ -972,3 +972,34 @@ def remove_outer_parentheses(s)
     end
     output
 end
+
+
+
+
+# LC 844: Backspace String Compare
+def backspace_compare(s, t)    
+    s_stack = []
+    t_stack = []
+    
+    s.each_char do |char|
+        if char != '#'
+            s_stack.push(char)
+        elsif s_stack.empty?
+            next
+        else
+            s_stack.pop()
+        end
+    end
+    
+    t.each_char do |char|
+        if char != '#'
+            t_stack.push(char)
+        elsif t_stack.empty?
+            next
+        else
+            t_stack.pop()
+        end
+    end    
+    
+    s_stack == t_stack
+end
