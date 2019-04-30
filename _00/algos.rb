@@ -940,3 +940,35 @@ end
 # param_2 = obj.pop()
 # param_3 = obj.peek()
 # param_4 = obj.empty()
+
+
+
+
+
+
+
+
+
+
+# LC 1021: Remove Outermost Parentheses
+# @param {String} s
+# @return {String}
+def remove_outer_parentheses(s)
+    output = ''
+    c = 0
+    
+    s.each_char do |char|
+        if char == '('
+            c += 1
+            output += char if c > 1
+        elsif char == ')'
+            if c > 1
+                output += char
+                c -= 1
+            else
+                c = 0
+            end
+        end
+    end
+    output
+end
