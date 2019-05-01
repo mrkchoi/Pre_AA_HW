@@ -33,8 +33,8 @@ class Clock extends React.Component {
   render() {
     return (
       <div>
-        <h1>React Clock</h1>
-        <div className="clock_main">
+        <h1>Clock</h1>
+        <div className="main main_clock">
           <div className="clock_time">
             <p>Time:</p>
             <p>{(this.state.time).toLocaleTimeString()}</p>
