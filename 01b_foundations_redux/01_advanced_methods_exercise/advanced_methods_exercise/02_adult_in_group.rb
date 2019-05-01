@@ -3,6 +3,10 @@
 # The method should return false otherwise.
 
 
+def adult_in_group?(arr)
+    arr.any? {|person| person[:age] >= 18}
+end
+
 people_1 = [
     {name: "Jack", age: 17},
     {name: "Jill", age: 21},
