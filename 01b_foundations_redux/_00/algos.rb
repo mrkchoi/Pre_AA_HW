@@ -88,6 +88,40 @@ def power_of_two(n)
   (n&(n-1)) == 0
 end
 
-p power_of_two(2)
-p power_of_two(4)
-p power_of_two(5)
+# p power_of_two(2)
+# p power_of_two(4)
+# p power_of_two(5)
+
+
+def add_two(a, b)
+  until b == 0
+    carry = (a&b)
+    a = (a^b)
+    b = carry << 1
+  end
+  a
+end
+
+# p add_two(2,3)
+# p add_two(-1,1)
+
+def power_of_four(n)
+  n > 0 && (n&(n-1)) == 0 && (n&0x5555555555) == n
+end
+
+# p power_of_four(16)
+# p power_of_four(15)
+
+
+
+def single_number(arr)
+  result = 0
+  i = 0
+  while i < arr.length
+    result = result^arr[i]
+    i += 1
+  end
+  result
+end
+
+p single_number([1,1,2,2,3,3,4,4,5,5,6,7,7,8,8,9,9])
