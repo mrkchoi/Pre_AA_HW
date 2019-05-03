@@ -124,4 +124,39 @@ def single_number(arr)
   result
 end
 
-p single_number([1,1,2,2,3,3,4,4,5,5,6,7,7,8,8,9,9])
+# p single_number([1,1,2,2,3,3,4,4,5,5,6,7,7,8,8,9,9])
+
+
+
+def get_bit(num, i)
+  (num & (1<<i)) == 0 ? 0 : 1
+end
+
+p get_bit(3,2) # => '011' => false
+p get_bit(3,1) # => '011' => true
+p get_bit(11,1) # => '1011' => true
+p get_bit(11,2) # => '1011' => false
+
+
+def set_bit(num, i)
+  (num | (1 << i)).to_s(2).to_i
+end
+
+p set_bit(11, 3) # => '1011' => '0011'
+p set_bit(21, 3) # => '10101' => '11101'
+
+
+
+def clear_bit(num, i)
+  (num & ~(1 << i)).to_s(2).to_i
+end
+
+p clear_bit(23, 2) # => '10111'
+p clear_bit(23, 0) # => '10111'
+
+def clear_bits_through_i(num, i)
+  (num & ((1 << i) - 1)).to_s(2)
+  
+end
+
+p clear_bits_through_i(23, 2) # => '10111' => '10100'
