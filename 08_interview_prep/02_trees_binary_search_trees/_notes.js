@@ -350,15 +350,39 @@
 
 
 
-var searchBST = function (root, val) {
-  if (!root) return null;
+// var searchBST = function (root, val) {
+//   if (!root) return null;
 
-  if (val < root.val) {
-    return searchBST(root.left, val);
-  } else if (val > root.val) {
-    return searchBST(root.right, val);
-  } else {
-    return root;
+//   if (val < root.val) {
+//     return searchBST(root.left, val);
+//   } else if (val > root.val) {
+//     return searchBST(root.right, val);
+//   } else {
+//     return root;
+//   }
+// };
+
+
+
+
+
+
+var rangeSumBST = function (root, L, R) {
+  if (!root) return 0;
+
+  let sum = 0;
+  let queue = [root];
+
+  while (queue.length) {
+    let node = queue.shift();
+
+    if (node.val >= L && node.val <= R) {
+      sum += node.val;
+    }
+
+    if (node.left) queue.push(node.left);
+    if (node.right) queue.push(node.right);
   }
-};
 
+  return sum;
+};
