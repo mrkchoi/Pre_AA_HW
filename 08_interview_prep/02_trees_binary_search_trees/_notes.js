@@ -366,7 +366,7 @@
 
 
 
-
+// Implementation #1
 var rangeSumBST = function (root, L, R) {
   if (!root) return 0;
 
@@ -385,4 +385,32 @@ var rangeSumBST = function (root, L, R) {
   }
 
   return sum;
+};
+
+
+// #2
+
+var rangeSumBST = function (root, L, R) {
+  if (!root) return 0;
+
+  if (root.val > R) {
+    return rangeSumBST(root.left, L, R);
+  } else if (root.val < L) {
+    return rangeSumBST(root.right, L, R);
+  } else {
+    return root.val + rangeSumBST(root.left, L, R) + rangeSumBST(root.right, L, R);
+  }
+}
+
+
+// LC 617: Merge Two Binary Trees
+var mergeTrees = function (t1, t2) {
+  if (!t1 && !t2) return null;
+  if (!t1 || !t2) return t1 || t2;
+
+  let newNode = new TreeNode(t1.val + t2.val);
+  newNode.left = mergeTrees(t1.left, t2.left);
+  newNode.right = mergeTrees(t1.right, t2.right);
+  
+  return newNode;
 };
