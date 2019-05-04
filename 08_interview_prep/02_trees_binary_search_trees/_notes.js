@@ -270,76 +270,95 @@
 
 
 
-class TreeNode {
-  constructor(val) {
-    this.val = val;
-    this.left = null;
-    this.right = null;
+// class TreeNode {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// class BST {
+//   constructor() {
+//     this.root = null;
+//   }
+
+//   insert(val, root=this.root) {
+//     if (!root) {
+//       this.root = new TreeNode(val);
+//       return;
+//     }
+
+//     if (val < root.val) {
+//       let newNode = new TreeNode(val);
+//       if (!root.left) {
+//         root.left = newNode;
+//       } else {
+//         this.insert(val, root.left);
+//       }
+//     } else {
+//       let newNode = new TreeNode(val);
+//       if (!root.right) {
+//         root.right = newNode;
+//       } else {
+//         this.insert(val, root.right);
+//       }
+//     }
+//   }
+
+//   printTree(root=this.root) {
+//     if (!root) return;
+
+//     this.printTree(root.left);
+//     console.log(root.val);
+//     this.printTree(root.right);
+//   }
+
+//   binarySearch(val, root=this.root) {
+//     if (!root) return false;
+
+//     if (val < root.val) {
+//       return this.binarySearch(val, root.left);
+//     } else if (val > root.val) {
+//       return this.binarySearch(val, root.right);
+//     } else {
+//       return true;
+//     }
+//   }
+// }
+
+
+// let bst = new BST();
+
+// bst.insert(10);
+// bst.insert(5);
+// bst.insert(20);
+// bst.insert(1);
+// bst.insert(7);
+// bst.insert(13);
+// bst.insert(25);
+
+// console.log(bst);
+
+// bst.printTree();
+
+// console.log(bst.binarySearch(8));
+
+
+
+
+
+
+
+var searchBST = function (root, val) {
+  if (!root) return null;
+
+  if (val < root.val) {
+    return searchBST(root.left, val);
+  } else if (val > root.val) {
+    return searchBST(root.right, val);
+  } else {
+    return root;
   }
-}
+};
 
-class BST {
-  constructor() {
-    this.root = null;
-  }
-
-  insert(val, root=this.root) {
-    if (!root) {
-      this.root = new TreeNode(val);
-      return;
-    }
-
-    if (val < root.val) {
-      let newNode = new TreeNode(val);
-      if (!root.left) {
-        root.left = newNode;
-      } else {
-        this.insert(val, root.left);
-      }
-    } else {
-      let newNode = new TreeNode(val);
-      if (!root.right) {
-        root.right = newNode;
-      } else {
-        this.insert(val, root.right);
-      }
-    }
-  }
-
-  printTree(root=this.root) {
-    if (!root) return;
-
-    this.printTree(root.left);
-    console.log(root.val);
-    this.printTree(root.right);
-  }
-
-  binarySearch(val, root=this.root) {
-    if (!root) return false;
-
-    if (val < root.val) {
-      return this.binarySearch(val, root.left);
-    } else if (val > root.val) {
-      return this.binarySearch(val, root.right);
-    } else {
-      return true;
-    }
-  }
-}
-
-
-let bst = new BST();
-
-bst.insert(10);
-bst.insert(5);
-bst.insert(20);
-bst.insert(1);
-bst.insert(7);
-bst.insert(13);
-bst.insert(25);
-
-console.log(bst);
-
-bst.printTree();
-
-console.log(bst.binarySearch(8));
