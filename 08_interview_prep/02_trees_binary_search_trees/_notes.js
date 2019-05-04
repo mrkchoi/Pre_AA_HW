@@ -190,7 +190,85 @@
 
 
 
-// BST (naive implementation)
+// // BST (naive implementation)
+
+// class TreeNode {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// class BST {
+//   constructor() {
+//     this.root = null;
+//   }
+
+//   insert(val, root=this.root) {
+//     if (!root) {
+//       let newNode = new TreeNode(val);
+//       this.root = newNode;
+//       return;
+//     }
+
+//     if (val < root.val) {
+//       if (!root.left) {
+//         let newNode = new TreeNode(val);
+//         root.left = newNode;
+//       } else {
+//         this.insert(val, root.left);
+//       }
+//     } else if (val >= root.val) {
+//       if (!root.right) {
+//         let newNode = new TreeNode(val);
+//         root.right = newNode;
+//       } else {
+//         this.insert(val, root.right);
+//       }
+//     }
+//   }
+
+//   inOrderPrint(root=this.root) {
+//     if (!root) return;
+
+//     this.inOrderPrint(root.left);
+//     console.log(root.val);
+//     this.inOrderPrint(root.right);
+//   }
+
+//   search(val, root=this.root) {
+//     if (!root) return false;
+
+//     if (val < root.val) {
+//       return this.search(val, root.left);
+//     } else if (val > root.val) {
+//       return this.search(val, root.right);
+//     } else {
+//       return true;
+//     }
+//   }
+// }
+
+// let bst = new BST();
+// bst.insert(10);
+// bst.insert(5);
+// bst.insert(15);
+// bst.insert(2);
+// bst.insert(7);
+// bst.insert(13);
+// bst.insert(20);
+
+// console.log(bst);
+
+// bst.inOrderPrint();
+// console.log(bst.search(20)); // => true
+// console.log(bst.search(22)); // => false
+
+
+
+
+
 
 class TreeNode {
   constructor(val) {
@@ -207,21 +285,20 @@ class BST {
 
   insert(val, root=this.root) {
     if (!root) {
-      let newNode = new TreeNode(val);
-      this.root = newNode;
+      this.root = new TreeNode(val);
       return;
     }
 
     if (val < root.val) {
+      let newNode = new TreeNode(val);
       if (!root.left) {
-        let newNode = new TreeNode(val);
         root.left = newNode;
       } else {
         this.insert(val, root.left);
       }
-    } else if (val >= root.val) {
+    } else {
+      let newNode = new TreeNode(val);
       if (!root.right) {
-        let newNode = new TreeNode(val);
         root.right = newNode;
       } else {
         this.insert(val, root.right);
@@ -229,38 +306,40 @@ class BST {
     }
   }
 
-  inOrderPrint(root=this.root) {
+  printTree(root=this.root) {
     if (!root) return;
 
-    this.inOrderPrint(root.left);
+    this.printTree(root.left);
     console.log(root.val);
-    this.inOrderPrint(root.right);
+    this.printTree(root.right);
   }
 
-  search(val, root=this.root) {
+  binarySearch(val, root=this.root) {
     if (!root) return false;
 
     if (val < root.val) {
-      return this.search(val, root.left);
+      return this.binarySearch(val, root.left);
     } else if (val > root.val) {
-      return this.search(val, root.right);
+      return this.binarySearch(val, root.right);
     } else {
       return true;
     }
   }
 }
 
+
 let bst = new BST();
+
 bst.insert(10);
 bst.insert(5);
-bst.insert(15);
-bst.insert(2);
+bst.insert(20);
+bst.insert(1);
 bst.insert(7);
 bst.insert(13);
-bst.insert(20);
+bst.insert(25);
 
 console.log(bst);
 
-bst.inOrderPrint();
-console.log(bst.search(20)); // => true
-console.log(bst.search(22)); // => false
+bst.printTree();
+
+console.log(bst.binarySearch(8));
