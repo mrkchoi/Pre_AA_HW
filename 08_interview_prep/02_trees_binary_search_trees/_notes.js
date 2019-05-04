@@ -236,6 +236,18 @@ class BST {
     console.log(root.val);
     this.inOrderPrint(root.right);
   }
+
+  search(val, root=this.root) {
+    if (!root) return false;
+
+    if (val < root.val) {
+      return this.search(val, root.left);
+    } else if (val > root.val) {
+      return this.search(val, root.right);
+    } else {
+      return true;
+    }
+  }
 }
 
 let bst = new BST();
@@ -250,3 +262,5 @@ bst.insert(20);
 console.log(bst);
 
 bst.inOrderPrint();
+console.log(bst.search(20)); // => true
+console.log(bst.search(22)); // => false
