@@ -270,73 +270,73 @@
 
 
 
-// class TreeNode {
-//   constructor(val) {
-//     this.val = val;
-//     this.left = null;
-//     this.right = null;
-//   }
-// }
+class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+}
 
-// class BST {
-//   constructor() {
-//     this.root = null;
-//   }
+class BST {
+  constructor() {
+    this.root = null;
+  }
 
-//   insert(val, root=this.root) {
-//     if (!root) {
-//       this.root = new TreeNode(val);
-//       return;
-//     }
+  insert(val, root=this.root) {
+    if (!root) {
+      this.root = new TreeNode(val);
+      return;
+    }
 
-//     if (val < root.val) {
-//       let newNode = new TreeNode(val);
-//       if (!root.left) {
-//         root.left = newNode;
-//       } else {
-//         this.insert(val, root.left);
-//       }
-//     } else {
-//       let newNode = new TreeNode(val);
-//       if (!root.right) {
-//         root.right = newNode;
-//       } else {
-//         this.insert(val, root.right);
-//       }
-//     }
-//   }
+    if (val < root.val) {
+      let newNode = new TreeNode(val);
+      if (!root.left) {
+        root.left = newNode;
+      } else {
+        this.insert(val, root.left);
+      }
+    } else {
+      let newNode = new TreeNode(val);
+      if (!root.right) {
+        root.right = newNode;
+      } else {
+        this.insert(val, root.right);
+      }
+    }
+  }
 
-//   printTree(root=this.root) {
-//     if (!root) return;
+  printTree(root=this.root) {
+    if (!root) return;
 
-//     this.printTree(root.left);
-//     console.log(root.val);
-//     this.printTree(root.right);
-//   }
+    this.printTree(root.left);
+    console.log(root.val);
+    this.printTree(root.right);
+  }
 
-//   binarySearch(val, root=this.root) {
-//     if (!root) return false;
+  binarySearch(val, root=this.root) {
+    if (!root) return false;
 
-//     if (val < root.val) {
-//       return this.binarySearch(val, root.left);
-//     } else if (val > root.val) {
-//       return this.binarySearch(val, root.right);
-//     } else {
-//       return true;
-//     }
-//   }
-// }
+    if (val < root.val) {
+      return this.binarySearch(val, root.left);
+    } else if (val > root.val) {
+      return this.binarySearch(val, root.right);
+    } else {
+      return true;
+    }
+  }
+}
 
 
-// let bst = new BST();
+let bst = new BST();
 
-// bst.insert(10);
-// bst.insert(5);
-// bst.insert(20);
-// bst.insert(1);
-// bst.insert(7);
-// bst.insert(13);
-// bst.insert(25);
+bst.insert(10);
+bst.insert(5);
+bst.insert(20);
+bst.insert(1);
+bst.insert(7);
+bst.insert(13);
+bst.insert(25);
 
 // console.log(bst);
 
@@ -411,6 +411,171 @@ var mergeTrees = function (t1, t2) {
   let newNode = new TreeNode(t1.val + t2.val);
   newNode.left = mergeTrees(t1.left, t2.left);
   newNode.right = mergeTrees(t1.right, t2.right);
-  
+
   return newNode;
+};
+
+// Recursive Solution
+var inorderTraversal = function (root) {
+  let output = [];
+  if (!root) return output;
+
+  function helper(root) {
+    if (!root) return;
+
+    helper(root.left);
+    output.push(root.val);
+    // console.log(root.val);
+    helper(root.right);
+  }
+  helper(root);
+
+  return output;
+};
+
+// console.log(inorderTraversal(bst.root));
+
+
+
+
+// Iterative Solution
+var inorderTraversal = function (root) {
+  let stack = [];
+  let output = [];
+
+  while (root || stack.length) {
+    if (root) {
+      stack.push(root);
+      root = root.left;
+    } else {
+      root = stack.pop();
+      output.push(root.val);
+      root = root.right;
+    }
+  }
+  return output;
+};
+
+console.log(inorderTraversal(bst.root));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var inorderTraversal = function (root) {
+  let output = []; 
+  if (!root) return output;
+  
+  let stack = [];
+
+  while (root || stack.length) {
+    if (root) {
+      stack.push(root);
+      root = root.left;
+    } else {
+      root = stack.pop();
+      output.push(root.val);
+      root = root.right;
+    }
+  }
+
+  return output;
+};
+
+console.log(inorderTraversal(bst.root));
+
+
+
+// CTCI 4.2 Minimal Tree: Given a sorted (increasing order) array with unique integer elements, write an algorithm to create a binary search tree with minimal height.
+
+// ex. [1,3,5,6,8,9]
+
+
+
+
+
+// var isPowerOfThree = function (n) {
+//   if (n <= 0) return false;
+//   if (n === 1) return true;
+
+//   while (n > 1) {
+//     if (n % 3 === 0) {
+//       n = n/3;
+//     } else {
+//       return false;
+//     }
+//   }
+
+//   return true;
+// };
+
+
+var isPowerOfThree = function (n) {
+  if (n <= 0) return false;
+  if (n === 1) return true;
+
+  if (n % 3 === 0) {
+    return isPowerOfThree(n / 3);
+  } else {
+    return false;
+  }
+};
+
+
+console.log(isPowerOfThree(3));
+console.log(isPowerOfThree(9));
+console.log(isPowerOfThree(27));
+console.log(isPowerOfThree(31));
+
+
+
+
+var titleToNumber = function (s) {
+
 };
