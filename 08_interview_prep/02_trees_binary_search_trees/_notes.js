@@ -456,7 +456,27 @@ var inorderTraversal = function (root) {
   return output;
 };
 
-console.log(inorderTraversal(bst.root));
+// console.log(inorderTraversal(bst.root));
+
+
+
+
+function diameterBT(root) {
+  let diameter = 0;
+  
+  function height(root) {
+    if (!root) return 0;
+
+    let leftHeight = height(root.left);
+    let rightHeight = height(root.right);
+    diameter = Math.max(leftHeight, rightHeight);
+    return diameter + 1;
+  }
+
+  height(root);
+  return diameter;
+}
+
 
 
 
@@ -578,4 +598,109 @@ console.log(isPowerOfThree(31));
 
 var titleToNumber = function (s) {
   
+};
+
+
+
+
+
+
+
+
+var binaryTreePaths = function (root) {
+
+};
+
+
+
+
+var sumOfLeftLeaves = function (root) {
+  if (!root) return 0;
+
+  if (root.left && !root.left.left && !root.left.right) {
+    return root.left + sumOfLeftLeaves(root.right);
+  } else {
+    return sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);
+  }
+};
+
+
+var postorder = function (root) {
+  order = [];
+
+  function helper(root) {
+    if (!root) return;
+
+    helper(root.left);
+    helper(root.right);
+    order.push(root.val);
+  }
+
+  helper(root);
+  
+  return order;
+};
+
+
+var preorder = function (root) {
+  order = [];
+
+  function helper(root) {
+    if (!root) return;
+
+    order.push(root.val);
+    root.children.forEach(child => helper(child));
+  }
+  helper(root);
+
+  return order;
+};
+
+
+
+var isUnivalTree = function (root) {
+  let value = root.val;
+
+  let queue = [root];
+
+  while (queue.length) {
+    let node = queue.shift();
+
+    if (node.val != value) {
+      return false;
+    } else {
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+  }
+  return true;
+};
+
+
+
+
+// Given a n - ary tree, find its maximum depth.
+
+// The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+// For example, given a 3 - ary tree:
+
+var maxDepth = function (root) {
+  if (!root) return 0;
+
+  let queue = [root];
+  let count = 0;
+
+  while (queue.length) {
+    count += 1;
+    let size = queue.length;
+
+    for(let i = 0; i < size; i++) {
+      let current = queue.shift();
+      for(let j = 0; j < current.children.length; j++) {
+        queue.push(current.children[j]);
+      }
+    }
+  }
+  return count;
 };
