@@ -577,5 +577,5 @@ console.log(isPowerOfThree(31));
 
 
 var titleToNumber = function (s) {
-
+  
 };
