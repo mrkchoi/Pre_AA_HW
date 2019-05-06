@@ -117,7 +117,23 @@ def flatten(data)
   return [data] if !data.is_a?(Array)
 
   flattened = []
-  data.each do |el| flattened += flatten(el)
+  data.each {|el| flattened += flatten(el)}
 
   flattened
 end
+
+
+def factorial(num)
+  return 1 if num <= 0
+  num * factorial(num - 1)
+end
+
+# p factorial(5)
+
+
+def fib(num)
+  return 1 if num == 1 || num == 2
+  fib(num - 1) + fib(num - 2)
+end
+
+p fib(10)
