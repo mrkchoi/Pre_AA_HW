@@ -782,3 +782,19 @@ var lowestCommonAncestor = function (root, p, q) {
     return root;
   }
 };
+
+
+
+var lowestCommonAncestor = function (root, p, q) {
+  if (!root) return null;
+  if (root.val === p.val || root.val === q.val) return root;
+
+  let leftResult = lowestCommonAncestor(root.left, p, q);
+  let rightResult = lowestCommonAncestor(root.right, p, q);
+
+  if (!leftResult) return rightResult;
+  if (!rightResult) return leftResult;
+
+  return root;
+};
+
