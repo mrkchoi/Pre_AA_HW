@@ -88,4 +88,81 @@ def is_prime?(num)
   true
 end
 
-p count_primes(100)
+# p count_primes(100)
+
+
+
+
+
+
+def int_to_roman(num)
+  roman = {
+    'M' => 1000,
+    'CM' => 900,
+    'D' => 500,
+    'CD' => 400,
+    'C' => 100,
+    'XC' => 90,
+    'L' => 50,
+    'XL' => 40,
+    'X' => 10,
+    'IX' => 9,
+    'V' => 5,
+    'IV' => 4,
+    'I' => 1,
+  }
+  
+  output = ''
+
+  until num == 0
+    roman.each do |k,v|
+      if num >= v
+        num -= v
+        output += k
+        break
+      end
+    end
+  end
+
+  output
+end
+
+# p int_to_roman(1994)
+# p int_to_roman(4)
+# p int_to_roman(9)
+# p int_to_roman(58)
+# p int_to_roman(20)
+
+
+
+
+
+def length_of_longest_substring(s)
+  max = [0]
+
+  i = 0
+  while i < s.length
+    cur_hash = Hash.new(0)
+    cur_max = 0
+    j = i
+    while j < s.length
+      if !cur_hash.has_key?(s[j])
+        cur_hash[s[j]] += 1
+        cur_max += 1
+      else
+        break
+      end
+      j += 1
+    end
+    max << cur_max
+    i += 1
+  end
+
+  max.max
+end
+
+
+p length_of_longest_substring('aaaaa')
+p length_of_longest_substring('abcabc')
+p length_of_longest_substring('abcabcbb')
+p length_of_longest_substring('pwwkew')
