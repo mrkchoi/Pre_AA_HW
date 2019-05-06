@@ -181,7 +181,33 @@ def length_of_longest_substring(s)
   longest.length
 end
 
-p length_of_longest_substring('aaaaa')
-p length_of_longest_substring('abcabc')
-p length_of_longest_substring('abcabcbb')
-p length_of_longest_substring('pwwkew')
+# p length_of_longest_substring('aaaaa')
+# p length_of_longest_substring('abcabc')
+# p length_of_longest_substring('abcabcbb')
+# p length_of_longest_substring('pwwkew')
+
+
+
+
+# 11. All Permutations of String
+# Generate all permutations of a given string.
+
+def perms(str)
+  return [str] if str.length == 1
+
+  char = str.slice!(0)
+  permutations = perms(str)
+  result = []
+
+  permutations.each do |perm|
+    (0..perm.length).each do |j|
+      word = perm.dup
+      result << word.insert(j, char)
+    end
+  end
+
+  result
+end
+
+
+p perms('abc') # => ['abc', 'acb', 'cab', 'bca', 'bac', 'cba']

@@ -588,10 +588,10 @@ var isPowerOfThree = function (n) {
 };
 
 
-console.log(isPowerOfThree(3));
-console.log(isPowerOfThree(9));
-console.log(isPowerOfThree(27));
-console.log(isPowerOfThree(31));
+// console.log(isPowerOfThree(3));
+// console.log(isPowerOfThree(9));
+// console.log(isPowerOfThree(27));
+// console.log(isPowerOfThree(31));
 
 
 
@@ -928,7 +928,7 @@ bst.insert(15);
 bst.insert(12);
 bst.insert(20);
 
-bst.printTree(bst.root);
+// bst.printTree(bst.root);
 
 
 
@@ -948,7 +948,7 @@ function bstCheck(root) {
   return true;
 }
 
-console.log(bstCheck(bst.root));
+// console.log(bstCheck(bst.root));
 
 
 let n1 = new TreeNode(1);
@@ -962,4 +962,68 @@ n1.right = n3;
 n2.left = n4;
 n2.right = n5;
 
-console.log(bstCheck(n1));
+// console.log(bstCheck(n1));
+
+
+
+
+
+
+
+// 10. Kth Largest Element in Array
+// Given an array of integers find the kth element in the sorted order(not the kth distinct element).So, if the array is[3, 1, 2, 1, 4] and k is 3 then the result is 2, because it’s the 3rd element in sorted order(but the 3rd distinct element is 3).
+
+function kthLargestElement(arr, k) {
+  let sortedArr = bubbleSort(arr);
+  return sortedArr[k-1];
+}
+
+function bubbleSort(arr) {
+  let sorted = true;
+
+  while (sorted === true) {
+    sorted = false;
+
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] > arr[i + 1]) {
+        let temp = arr[i];
+        arr[i] = arr[i+1];
+        arr[i+1] = temp;
+        sorted = true;
+      }
+    }
+  }
+  return arr;
+}
+
+
+
+// console.log(bubbleSort([5,4,3,2,1]));
+// console.log(kthLargestElement([3,1,2,1,4], 3)); // => 2
+// console.log(kthLargestElement([6,5,2,7,9,3,4,0], 6)); // => 6
+
+
+
+function permutations(str) {
+  if (str.length === 1) return [str];
+
+  let char = str[0];
+  let perms = permutations(str.slice(1));
+  let result = [];
+
+  perms.forEach(perm => {  
+    for (let i = 0; i <= perm.length; i++) {
+      let word = perm.slice();
+      if (i == 0) {
+        result.push(char + word);
+      } else if (i == perm.length) {
+        result.push(word + char);
+      } else {
+        result.push(word.slice(0,i) + char + word.slice(i));
+      }
+    }
+  });
+  return result;
+}
+
+console.log(permutations('abc'));
