@@ -270,73 +270,73 @@
 
 
 
-class TreeNode {
-  constructor(val) {
-    this.val = val;
-    this.left = null;
-    this.right = null;
-  }
-}
+// class TreeNode {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
 
-class BST {
-  constructor() {
-    this.root = null;
-  }
+// class BST {
+//   constructor() {
+//     this.root = null;
+//   }
 
-  insert(val, root=this.root) {
-    if (!root) {
-      this.root = new TreeNode(val);
-      return;
-    }
+//   insert(val, root=this.root) {
+//     if (!root) {
+//       this.root = new TreeNode(val);
+//       return;
+//     }
 
-    if (val < root.val) {
-      let newNode = new TreeNode(val);
-      if (!root.left) {
-        root.left = newNode;
-      } else {
-        this.insert(val, root.left);
-      }
-    } else {
-      let newNode = new TreeNode(val);
-      if (!root.right) {
-        root.right = newNode;
-      } else {
-        this.insert(val, root.right);
-      }
-    }
-  }
+//     if (val < root.val) {
+//       let newNode = new TreeNode(val);
+//       if (!root.left) {
+//         root.left = newNode;
+//       } else {
+//         this.insert(val, root.left);
+//       }
+//     } else {
+//       let newNode = new TreeNode(val);
+//       if (!root.right) {
+//         root.right = newNode;
+//       } else {
+//         this.insert(val, root.right);
+//       }
+//     }
+//   }
 
-  printTree(root=this.root) {
-    if (!root) return;
+//   printTree(root=this.root) {
+//     if (!root) return;
 
-    this.printTree(root.left);
-    console.log(root.val);
-    this.printTree(root.right);
-  }
+//     this.printTree(root.left);
+//     console.log(root.val);
+//     this.printTree(root.right);
+//   }
 
-  binarySearch(val, root=this.root) {
-    if (!root) return false;
+//   binarySearch(val, root=this.root) {
+//     if (!root) return false;
 
-    if (val < root.val) {
-      return this.binarySearch(val, root.left);
-    } else if (val > root.val) {
-      return this.binarySearch(val, root.right);
-    } else {
-      return true;
-    }
-  }
-}
+//     if (val < root.val) {
+//       return this.binarySearch(val, root.left);
+//     } else if (val > root.val) {
+//       return this.binarySearch(val, root.right);
+//     } else {
+//       return true;
+//     }
+//   }
+// }
 
 
-let bst = new BST();
+// let bst = new BST();
 
-bst.insert(10);
-bst.insert(5);
-bst.insert(20);
-bst.insert(1);
-bst.insert(7);
-bst.insert(13);
-bst.insert(25);
+// bst.insert(10);
+// bst.insert(5);
+// bst.insert(20);
+// bst.insert(1);
+// bst.insert(7);
+// bst.insert(13);
+// bst.insert(25);
 
 // console.log(bst);
 
@@ -548,7 +548,7 @@ var inorderTraversal = function (root) {
   return output;
 };
 
-console.log(inorderTraversal(bst.root));
+// console.log(inorderTraversal(bst.root));
 
 
 
@@ -870,3 +870,96 @@ var lengthOfLongestSubstring = function (s) {
   }
   return longest.length;
 };
+
+
+
+
+class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class BST {
+  constructor() {
+    this.root = null;
+  }
+
+  insert(val, root=this.root) {
+    if (!root) {
+      this.root = new TreeNode(val);
+      return;
+    }
+
+    if (val < root.val) {
+      if (!root.left) {
+        root.left = new TreeNode(val);
+      } else {
+        this.insert(val, root.left);
+      }
+    } else {
+      if (!root.right) {
+        root.right = new TreeNode(val);
+      } else {
+        this.insert(val, root.right);
+      }
+    }
+  }
+
+  printTree(root=this.root) {
+    if (!this.root) return;
+
+    if (root.left) this.printTree(root.left);
+    console.log(root.val);
+    if (root.right) this.printTree(root.right);
+  }
+}
+
+
+let bst = new BST();
+
+bst.insert(10);
+bst.insert(5);
+bst.insert(1);
+bst.insert(7);
+bst.insert(15);
+bst.insert(12);
+bst.insert(20);
+
+bst.printTree(bst.root);
+
+
+
+function bstCheck(root) {
+  if (!root) return true;
+
+  if (root.left) {
+    if (root.left.val > root.val) return false;
+    bstCheck(root.left);
+  }
+
+  if (root.right) {
+    if (root.right.val < root.val) return false;
+    bstCheck(root.right);
+  }
+
+  return true;
+}
+
+console.log(bstCheck(bst.root));
+
+
+let n1 = new TreeNode(1);
+let n2 = new TreeNode(2);
+let n3 = new TreeNode(3);
+let n4 = new TreeNode(4);
+let n5 = new TreeNode(5);
+
+n1.left = n2;
+n1.right = n3;
+n2.left = n4;
+n2.right = n5;
+
+console.log(bstCheck(n1));
