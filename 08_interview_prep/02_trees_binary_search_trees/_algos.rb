@@ -161,6 +161,25 @@ def length_of_longest_substring(s)
   max.max
 end
 
+require 'byebug'
+
+def length_of_longest_substring(s)
+  longest = ''
+  current = ''
+
+  s.each_char do |el|
+    index = current.index(el)
+
+    if index.nil?
+      current += el
+      longest = longest.length < current.length ? current : longest
+    else
+      current = current.slice(index+1..-1) + el
+    end
+  end
+
+  longest.length
+end
 
 p length_of_longest_substring('aaaaa')
 p length_of_longest_substring('abcabc')

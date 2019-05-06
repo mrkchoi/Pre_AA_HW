@@ -804,6 +804,69 @@ var lowestCommonAncestor = function (root, p, q) {
 
 
 
-var intToRoman = function (num) {
-  
+var lengthOfLongestSubstring = function (s) {
+  let resultStr = "";
+  let currentStr = "";
+
+  for (let i = 0; i < s.length; i++) {
+    let current = s[i];
+    let index = currentStr.indexOf(current);
+
+    if (index == -1) {
+      currentStr += current;
+      resultStr = resultStr.length < currentStr.length ? currentStr : resultStr;
+    } else {
+      currentStr = currentStr.slice(index + 1) + current;
+    }
+  }
+
+  return resultStr.length;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var lengthOfLongestSubstring = function (s) {
+  let longest = '';
+  let current = '';
+
+  for(let i = 0; i < s.length; i++) {
+    let el = s[i];
+    let index = current.indexOf(el);
+
+    if (index == -1) {
+      current += el;
+      longest = longest.length < current.length ? current : longest;
+    } else {
+      current = current.slice(index+1) + el;
+    }
+  }
+  return longest.length;
 };
