@@ -746,5 +746,39 @@ var levelOrder = function (root) {
   return levels;
 };
 
-console.log(root);
-console.log(levelOrder(root));
+// console.log(root);
+// console.log(levelOrder(root));
+
+
+
+
+
+
+var lowestCommonAncestor = function (root, p, q) {
+  return search(root, p, q);
+};
+
+function search(root, p, q) {
+  if (!root) return null;
+  if (root.val === p.val || root.val === q.val) return root;
+
+  let leftSearchResult = search(root.left, p, q);
+  let rightSearchResult = search(root.right, p, q);
+
+  if (!leftSearchResult) return rightSearchResult;
+  if (!rightSearchResult) return leftSearchResult;
+
+  return root;
+}
+
+
+
+var lowestCommonAncestor = function (root, p, q) {
+  if (p.val < root.val && q.val < root.val) {
+    return lowestCommonAncestor(root.left, p, q);
+  } else if (p.val > root.val && q.val > root.val) {
+    return lowestCommonAncestor(root.right, p, q);
+  } else {
+    return root;
+  }
+};
