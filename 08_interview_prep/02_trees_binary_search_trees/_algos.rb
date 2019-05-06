@@ -211,3 +211,91 @@ end
 
 
 p perms('abc') # => ['abc', 'acb', 'cab', 'bca', 'bac', 'cba']
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def permute(nums)
+    return [nums] if nums.length == 0
+
+    first = nums.slice!(0)
+    perms = permute(nums)
+    result = []
+
+    perms.each do |perm|
+      (0..perm.length).each do |i|
+        current = perm.dup
+        result << current.insert(i, first)
+      end
+    end
+
+    result
+end
+
+p permute([1,2,3])
