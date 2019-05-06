@@ -298,4 +298,28 @@ def permute(nums)
     result
 end
 
-p permute([1,2,3])
+# p permute([1,2,3])
+
+
+
+# 12. Reverse Words in a String
+# Given an input string, reverse all the words. To clarify, input: “Interviews are awesome!” output: “awesome! are Interviews”. Consider all consecutive non-whitespace characters as individual words. If there are multiple spaces between words reduce them to a single white space. Also remove all leading and trailing whitespaces. So, the output for ”   CS degree”, “CS    degree”, “CS degree   “, or ”   CS   degree   ” are all the same: “degree CS”.
+
+def reverse_string(str)
+  return str if str.length == 0 || str.length == 1
+  
+  str_arr = str.strip.squeeze(' ').split(' ')
+  output = []
+  
+  (str_arr.length).times do
+    output.unshift(str_arr.shift());
+  end
+
+  output.join(' ')
+end
+
+
+p reverse_string('   CS degree')
+p reverse_string('CS    degree')
+p reverse_string('   CS   degree   ')
+p reverse_string('Interviews are awesome!')
