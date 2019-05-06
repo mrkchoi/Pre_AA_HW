@@ -704,3 +704,47 @@ var maxDepth = function (root) {
   }
   return count;
 };
+
+
+
+
+
+class TNode {
+  constructor(val) {
+    this.val = val;
+    this.children = null;
+  }
+}
+
+let root = new TNode(1);
+root.children = [new TNode(2), new TNode(3), new TNode(4)];
+root.children[0].children = [new TNode(5), new TNode(6)];
+
+var levelOrder = function (root) {
+  if (!root) return [];
+  let levels = [];
+  
+  let queue = [root];
+
+  while (queue.length) {
+    let currentLevel = [];
+    let size = queue.size;
+    
+    for (let i = 0; i < size; i++) {
+      let currentNode = queue.shift();
+      currentLevel.push(currentNode.val);
+
+      if (currentNode.children) {
+        for (let j = 0; j < currentNode.children.length; j++) {
+          queue.push(currentNode.children[j]);
+        }
+      }
+    }
+    levels.push(currentLevel);
+  }
+  
+  return levels;
+};
+
+console.log(root);
+console.log(levelOrder(root));
