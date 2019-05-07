@@ -1254,3 +1254,41 @@ function evenOccuringElement(arr) {
 
 console.log(evenOccuringElement([1,1,2,2,3,3,4,4,5,6,6,7,7,8,8,9,9])); // => 5
 console.log(evenOccuringElement([9,8,7,6,5,4,3,2,9,8,6,5,4,3,2])); // => 7
+
+
+
+// Find Next Palindrome Number:
+// 	Given a number, find the next smallest palindrome larger than the number. For example if the number is 125, next smallest palindrome is 131.
+
+function nextPalindromeNumber(num) {
+  let currentNum = num;
+
+  while (true) {
+    if (palindrome(currentNum.toString())) {
+      return currentNum;
+    }
+    currentNum += 1;
+  }
+}
+
+function palindrome(str) {
+  if (str.length == 0) return true;
+  if (str.length == 1) return true;
+
+  let i = 0;
+  while (i < Math.floor((str.length) / 2)) {
+    if (str[i] != str[str.length - 1 - i]) {
+      return false;
+    }
+    i += 1;
+  }
+  return true;
+}
+
+// console.log(palindrome('aba')) // => true
+// console.log(palindrome('abbb')) // => false
+
+console.log(nextPalindromeNumber(125)); // => 131
+console.log(nextPalindromeNumber(25)); // => 11
+console.log(nextPalindromeNumber(200)); // => 202
+
