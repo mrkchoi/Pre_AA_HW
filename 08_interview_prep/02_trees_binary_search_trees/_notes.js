@@ -1221,8 +1221,36 @@ function nonRepeatingChars(str) {
   return null;
 }
 
-console.log(nonRepeatingChars('')); // => null
-console.log(nonRepeatingChars('a')); // => a
-console.log(nonRepeatingChars('abcddeff')); // => a
-console.log(nonRepeatingChars('aabbcddeff')); // => c
-console.log(nonRepeatingChars('abcdabcabc')); // => d
+// console.log(nonRepeatingChars('')); // => null
+// console.log(nonRepeatingChars('a')); // => a
+// console.log(nonRepeatingChars('abcddeff')); // => a
+// console.log(nonRepeatingChars('aabbcddeff')); // => c
+// console.log(nonRepeatingChars('abcdabcabc')); // => d
+
+
+
+
+// Find Even Occurring Element:
+  // Given an integer array, one element occurs even number of times and all others have odd occurrences. Find the element with even occurrences.
+
+
+function evenOccuringElement(arr) {
+  let counts = {};
+
+  arr.forEach(el => {
+    if (!counts[el]) {
+      counts[el] = 1;
+    } else {
+      counts[el] += 1;
+    }
+  });
+
+  for (let el in counts) {
+    if (counts[el] % 2 != 0) return el;
+  }
+  return null;
+}
+
+
+console.log(evenOccuringElement([1,1,2,2,3,3,4,4,5,6,6,7,7,8,8,9,9])); // => 5
+console.log(evenOccuringElement([9,8,7,6,5,4,3,2,9,8,6,5,4,3,2])); // => 7
