@@ -1116,5 +1116,23 @@ function treeReverseLevelOrder(root) {
 
 // Given the root of a binary search tree and 2 numbers min and max, trim the tree such that all the numbers in the new tree are between min and max(inclusive).The resulting tree should still be a valid binary search tree.
 function trimBST(root, min, max) {
+  if (!root) return null;
 
+  root.left = trimBST(root.left, min, max);
+  root.right = trimBST(root.right, min, max);
+
+  if (root.val >= min && root.val <= max) {
+    return root;
+  }
+
+  if (root.val < min) {
+    return root.right;
+  }
+
+  if (root.val > max) {
+    return root.left;
+  }
 }
+
+console.log(trimBST(bst.root, 4, 15));
+
