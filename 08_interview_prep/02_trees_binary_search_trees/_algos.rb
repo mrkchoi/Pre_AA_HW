@@ -210,7 +210,7 @@ def perms(str)
 end
 
 
-p perms('abc') # => ['abc', 'acb', 'cab', 'bca', 'bac', 'cba']
+# p perms('abc') # => ['abc', 'acb', 'cab', 'bca', 'bac', 'cba']
 
 
 
@@ -481,6 +481,8 @@ bst.insert(3)
 bst.insert(7)
 bst.insert(13)
 bst.insert(20)
+bst.insert(25)
+bst.insert(30)
 
 # p bst.printTreeLevel
 # # p bst.dfs(100, bst.root)
@@ -504,6 +506,23 @@ def minimalTreeHelper(arr, start, ending)
   n
 end
 
-p minimalTree([1,2,3,4,5,6,7,8,9])
-p minimalTree([5,10,15])
+# p minimalTree([1,2,3,4,5,6,7,8,9])
+# p minimalTree([5,10,15])
+
+
+
+
+def checkBalanced(root)
+  return true if !root
+  return false if (heightBST(root.left) - heightBST(root.right)).abs > 1
+  true
+end
+
+def heightBST(root)
+  return 0 if !root
+  1 + [heightBST(root.left), heightBST(root.right)].max
+end
+
+p heightBST(bst.root)
+p checkBalanced(bst.root)
 
