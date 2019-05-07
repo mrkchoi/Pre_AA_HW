@@ -482,6 +482,28 @@ bst.insert(7)
 bst.insert(13)
 bst.insert(20)
 
-p bst.printTreeLevel
-# p bst.dfs(100, bst.root)
-p bst.dfs_recursive(13, bst.root)
+# p bst.printTreeLevel
+# # p bst.dfs(100, bst.root)
+# p bst.dfs_recursive(13, bst.root)
+
+
+
+def minimalTree(arr)
+  return minimalTreeHelper(arr, 0, arr.length - 1)
+end
+
+def minimalTreeHelper(arr, start, ending)
+  return nil if start > ending
+
+  mid = (start + ending) / 2
+  n = TreeNode.new(arr[mid])
+
+  n.left = minimalTreeHelper(arr, start, mid - 1)
+  n.right = minimalTreeHelper(arr, mid + 1, ending)
+
+  n
+end
+
+p minimalTree([1,2,3,4,5,6,7,8,9])
+p minimalTree([5,10,15])
+
