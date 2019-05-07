@@ -1136,3 +1136,63 @@ function trimBST(root, min, max) {
 
 console.log(trimBST(bst.root, 4, 15));
 
+
+
+
+function permutations(str) {
+  if (str.length === 1) return [str];
+
+  let first = str[0];
+  let perms = permutations(str.slice(1));
+  let output = [];
+
+  perms.forEach(perm => {
+    for (let i = 0; i <= perms.length; i++) {
+      let word = perm;
+      if (i === 0) {
+        output.push(first + word);
+      } else if (i === perms.length) {
+        output.push(word + first);
+      } else {
+        output.push(word.slice(0,i) + first + word.slice(i));
+      }
+    }
+  });
+
+  return output;
+}
+
+// console.log(permutations('abcd'));
+
+
+// Check Valid Parentheses
+// Given a string of opening and closing parentheses, check whether it’s balanced.We have 3 types of parentheses: round brackets: (), square brackets: [], and curly brackets: { }.Assume that the string doesn’t contain any other character than these, no spaces words or numbers.Just to remind, balanced parentheses require every opening parenthesis to be closed in the reverse order opened.For example ‘([]) ’ is balanced but ‘([)]‘ is not.
+
+function validParens(str) {
+  let parens = {
+    '(': ')',
+    '[': ']',
+    '{': '}',
+  };
+
+  let stack = [];
+
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === '(') {
+      stack.push(')');
+    } else if (str[i] === '[') {
+      stack.push(']');
+    } else if (str[i] === '{') {
+      stack.push('}');
+    } else {
+      let cur = stack.pop();
+      if (str[i] != cur) return false;
+    }
+  }
+  return true;
+}
+
+
+
+console.log(validParens('[]{}()'));  // => true
+console.log(validParens('({)}'));  // => false
