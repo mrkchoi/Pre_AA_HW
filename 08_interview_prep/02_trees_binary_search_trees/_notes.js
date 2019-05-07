@@ -1350,6 +1350,34 @@ function createMinimalTree(arr, start, end) {
 
 
 
-console.log(minimalTree([5,10,15]));
-console.log(minimalTree([3,5,7,10,13,15]));
+// console.log(minimalTree([5,10,15]));
+// console.log(minimalTree([3,5,7,10,13,15]));
 
+
+
+
+
+// CTCI 4.4 Check Balanced: Implement a function to check if a binary tree is balanced. For the purposes of this question, a balanced tree is defined to be a tree such that the heights of the two subtrees of any node never differ by more than one.
+
+function checkbalanced(root) {
+  if (!root) return true;
+
+  if (Math.abs(heightBST(root.left) - heightBST(root.right)) > 1) return false;
+
+  return true;
+}
+
+function heightBST(root) {
+  if (!root) return 0;
+  return (1 + Math.max(heightBST(root.left), heightBST(root.right)));
+}
+
+let bst2 = new BST();
+bst2.insert(10);
+bst2.insert(5);
+bst2.insert(15);
+bst2.insert(20);
+bst2.insert(25);
+
+console.log(heightBST(bst2.root));
+console.log(checkbalanced(bst2.root));
