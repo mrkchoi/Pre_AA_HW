@@ -1027,3 +1027,52 @@ function permutations(str) {
 }
 
 console.log(permutations('abc'));
+
+
+
+
+
+
+
+
+
+
+
+// Given a binary tree of integers, print it in level order.The output will contain space between the numbers in the same level, and new line between different levels.
+function treeLevelOrder(root) {
+  if (!root) return [];
+
+  let output = [];
+  let queue = [root];
+
+  while (queue.length) {
+    let currentLevel = [];
+    let size = queue.length;
+
+    for (let i = 0; i < size; i++) {
+      let node = queue.shift();
+      currentLevel.push(node.val);
+
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+    
+    output.push(currentLevel);
+  }
+  output.forEach(level =>{
+    console.log(level.join(' '));
+  });
+}
+
+treeLevelOrder(bst.root);
+
+
+// This is very similar to the previous post level order print.We again print the tree in level order, but now starting from bottom level to the root.
+function treeReverseLevelOrder(root) {
+
+}
+
+// Given the root of a binary search tree and 2 numbers min and max, trim the tree such that all the numbers in the new tree are between min and max(inclusive).The resulting tree should still be a valid binary search tree.
+function trimBST(root, min, max) {
+
+}
