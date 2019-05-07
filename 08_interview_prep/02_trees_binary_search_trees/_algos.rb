@@ -523,6 +523,55 @@ def heightBST(root)
   1 + [heightBST(root.left), heightBST(root.right)].max
 end
 
-p heightBST(bst.root)
-p checkBalanced(bst.root)
+# p heightBST(bst.root)
+# p checkBalanced(bst.root)
 
+
+
+
+# CTCI 4.5 Validate BST: Implement a function to check if a binary tree is a binary search tree
+
+class Solution
+  attr_accessor :root
+  def initialize(root)
+    @output = []
+    @root = root
+  end
+
+  def validate_bst(root=@root)
+    return true if (!root) 
+
+    helper(root)
+
+    @output == @output.sort
+  end
+
+  def helper(root)
+    return nil if (!root)
+
+    helper(root.left) if (root.left) 
+    @output << root.val
+    helper(root.right) if (root.right)
+  end
+end
+
+t = TreeNode.new(1)
+t2 = TreeNode.new(2)
+t3 = TreeNode.new(3)
+t4 = TreeNode.new(4)
+t5 = TreeNode.new(5)
+t6 = TreeNode.new(6)
+t7 = TreeNode.new(7)
+
+t.left = t2
+t.right = t3
+t2.left = t4
+t2.right = t5
+t3.left = t6
+t3.right = t7
+
+s = Solution.new(bst.root)
+s2 = Solution.new(t)
+
+p s.validate_bst
+p s2.validate_bst
