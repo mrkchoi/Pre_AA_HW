@@ -319,10 +319,10 @@ def reverse_string(str)
 end
 
 
-p reverse_string('   CS degree')
-p reverse_string('CS    degree')
-p reverse_string('   CS   degree   ')
-p reverse_string('Interviews are awesome!')
+# p reverse_string('   CS degree')
+# p reverse_string('CS    degree')
+# p reverse_string('   CS   degree   ')
+# p reverse_string('Interviews are awesome!')
 
 
 
@@ -336,5 +336,152 @@ def anagram_strings(str1, str2)
 end
 
 
-p anagram_strings('Eleven plus two', 'Twelve plus one') # => true
-p anagram_strings('Eleven plus two', 'Twelve plus') # => false
+# p anagram_strings('Eleven plus two', 'Twelve plus one') # => true
+# p anagram_strings('Eleven plus two', 'Twelve plus') # => false
+
+
+
+
+
+
+
+
+class TreeNode
+  attr_accessor :val, :left, :right
+  def initialize(val)
+    @val = val
+    @left = nil
+    @right = nil
+  end
+end
+
+class BST
+  attr_accessor :root
+  def initialize()
+    @root = nil
+  end
+
+  def insert(val, root=@root)
+    if !root
+      @root = TreeNode.new(val)
+      return
+    end
+
+    if val < root.val
+      if root.left
+        self.insert(val, root.left)
+      else
+        root.left = TreeNode.new(val)
+      end
+    else
+      if root.right
+        self.insert(val, root.right)
+      else
+        root.right = TreeNode.new(val)
+      end
+    end
+  end
+
+  def printTreeLevel
+    return [] if (!@root)
+
+    output = []
+    queue = [@root]
+
+    until queue.empty?
+      level = []
+      size = queue.length
+
+      size.times do
+        node = queue.shift()
+        level << node.val
+
+        queue.push(node.left) if node.left
+        queue.push(node.right) if node.right
+      end
+
+      output << level
+    end
+
+    output
+  end
+
+  def printPreOrder(root=@root)
+    return nil if (!root)
+
+    p root.val
+    printPreOrder(root.left)
+    printPreOrder(root.right)
+  end
+
+  def printInOrder(root=@root)
+    return nil if (!root)
+
+    printInOrder(root.left)
+    p root.val
+    printInOrder(root.right)
+  end
+
+  def printPostOrder(root=@root)
+    return nil if !root
+
+    printPostOrder(root.left)
+    printPostOrder(root.right)
+    p root.val
+  end
+
+  def bfs(val, root=@root)
+    return nil if !root
+
+    queue = [root]
+
+    until queue.empty?
+      node = queue.shift()
+
+      return node if node.val == val
+
+      queue.push(node.left) if node.left
+      queue.push(node.right) if node.right
+    end
+
+    nil
+  end
+
+  def dfs(val, root=@root)
+    return nil if !root
+
+    stack = [root]
+
+    until stack.empty?
+      node = stack.pop()
+      p node.val
+
+      return node if node.val == val
+
+      stack.push(node.right) if (node.right)
+      stack.push(node.left) if node.left
+    end
+
+    nil
+  end
+
+  def dfs_recursive(val, root=@root)
+    return if (!root)  
+
+    return root if root.val == val
+    return dfs_recursive(val, root.left) || dfs_recursive(val, root.right)
+  end
+end
+
+bst = BST.new()
+bst.insert(10)
+bst.insert(5)
+bst.insert(15)
+bst.insert(3)
+bst.insert(7)
+bst.insert(13)
+bst.insert(20)
+
+p bst.printTreeLevel
+# p bst.dfs(100, bst.root)
+p bst.dfs_recursive(13, bst.root)
