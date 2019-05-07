@@ -1319,6 +1319,37 @@ function numAnagram(num1, num2) {
 
 // console.log(numAnagram(123, 132));
 
-console.log(nextHigherMatch(1234)); // => 1243
-console.log(nextHigherMatch(279)); // => 297
-console.log(nextHigherMatch(297)); // => 729
+// console.log(nextHigherMatch(1234)); // => 1243
+// console.log(nextHigherMatch(279)); // => 297
+// console.log(nextHigherMatch(297)); // => 729
+
+
+
+
+
+// CTCI 4.2 Minimal Tree: Given a sorted (increasing order) array with unique integer elements, write an algorithm to create a binary search tree with minimal height.
+
+
+
+
+function minimalTree(arr) {
+  return createMinimalTree(arr, 0, (arr.length - 1));
+}
+
+function createMinimalTree(arr, start, end) {
+  if (end < start) return null;
+
+  let mid = Math.floor((start + end) / 2);
+  let n = new TreeNode(arr[mid]);
+
+  n.left = createMinimalTree(arr, start, mid-1);
+  n.right = createMinimalTree(arr, mid+1, end);
+
+  return n;
+}
+
+
+
+console.log(minimalTree([5,10,15]));
+console.log(minimalTree([3,5,7,10,13,15]));
+
