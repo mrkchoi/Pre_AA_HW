@@ -307,7 +307,7 @@ end
 
 def reverse_string(str)
   return str if str.length == 0 || str.length == 1
-  
+
   str_arr = str.strip.squeeze(' ').split(' ')
   output = []
   
@@ -323,3 +323,18 @@ p reverse_string('   CS degree')
 p reverse_string('CS    degree')
 p reverse_string('   CS   degree   ')
 p reverse_string('Interviews are awesome!')
+
+
+
+# Anagram Strings:	Given two strings, check if they’re anagrams or not. Two strings are anagrams if they are written using the same exact letters, ignoring space, punctuation and capitalization. Each letter should have the same count in both strings. For example, ‘Eleven plus two’ and ‘Twelve plus one’ are meaningful anagrams of each other.
+
+def anagram_strings(str1, str2) 
+  clean1 = str1.gsub(/[^a-zA-Z]/, '').squeeze(' ').downcase
+  clean2 = str2.gsub(/[^a-zA-Z]/, '').squeeze(' ').downcase
+
+  clean1.chars.sort == clean2.chars.sort
+end
+
+
+p anagram_strings('Eleven plus two', 'Twelve plus one') # => true
+p anagram_strings('Eleven plus two', 'Twelve plus') # => false
