@@ -1026,7 +1026,7 @@ function permutations(str) {
   return result;
 }
 
-console.log(permutations('abc'));
+// console.log(permutations('abc'));
 
 
 
@@ -1064,13 +1064,55 @@ function treeLevelOrder(root) {
   });
 }
 
-treeLevelOrder(bst.root);
+// treeLevelOrder(bst.root);
 
 
-// This is very similar to the previous post level order print.We again print the tree in level order, but now starting from bottom level to the root.
+
+
+
+
+
+
+
+
+
+
+
+
+// This is very similar to the previous post level order print. We again print the tree in level order, but now starting from bottom level to the root.
 function treeReverseLevelOrder(root) {
+  if (!root) return [];
 
+  let queue = [root];
+  let output = [];
+
+  while (queue.length) {
+    let size = queue.length;
+    let currentLevel = [];
+
+    for (let i = 0; i < size; i++) {
+      let node = queue.shift();
+      currentLevel.push(node.val);
+
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+    output.unshift(currentLevel);
+  }
+
+  output.forEach(level => {
+    console.log(level.join(' '));
+  });
 }
+
+// treeReverseLevelOrder(bst.root);
+
+
+
+
+
+
+
 
 // Given the root of a binary search tree and 2 numbers min and max, trim the tree such that all the numbers in the new tree are between min and max(inclusive).The resulting tree should still be a valid binary search tree.
 function trimBST(root, min, max) {
