@@ -1134,7 +1134,7 @@ function trimBST(root, min, max) {
   }
 }
 
-console.log(trimBST(bst.root, 4, 15));
+// console.log(trimBST(bst.root, 4, 15));
 
 
 
@@ -1194,5 +1194,35 @@ function validParens(str) {
 
 
 
-console.log(validParens('[]{}()'));  // => true
-console.log(validParens('({)}'));  // => false
+// console.log(validParens('[]{}()'));  // => true
+// console.log(validParens('({)}'));  // => false
+
+// First Non Repeated Characters in String:
+// Find the first non - repeated(unique) character in a given string.
+
+function nonRepeatingChars(str) {
+  if (str === '') return null;
+  if (str.length === 1) return str;
+
+  chars = {};
+
+  for (let i = 0; i < str.length; i++) {
+    if (!chars[str[i]]) {
+      chars[str[i]] = 1;
+    } else {
+      chars[str[i]] += 1;
+    }
+  }
+
+  for (let i = 0; i < str.length; i++) {
+    if (chars[str[i]] === 1) return str[i];
+  }
+
+  return null;
+}
+
+console.log(nonRepeatingChars('')); // => null
+console.log(nonRepeatingChars('a')); // => a
+console.log(nonRepeatingChars('abcddeff')); // => a
+console.log(nonRepeatingChars('aabbcddeff')); // => c
+console.log(nonRepeatingChars('abcdabcabc')); // => d
