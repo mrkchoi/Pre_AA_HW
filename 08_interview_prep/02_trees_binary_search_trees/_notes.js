@@ -1379,5 +1379,56 @@ bst2.insert(15);
 bst2.insert(20);
 bst2.insert(25);
 
-console.log(heightBST(bst2.root));
-console.log(checkbalanced(bst2.root));
+// console.log(heightBST(bst2.root));
+// console.log(checkbalanced(bst2.root));
+
+
+
+
+// CTCI 4.5 Validate BST: Implement a function to check if a binary tree is a binary search tree
+
+
+function validateBST(root) {
+  if (!root) return null;
+
+  let nodes = [];
+
+  function helper(root) {
+    if (!root) return null;
+
+    helper(root.left);
+    nodes.push(root.val);
+    helper(root.right);
+  }
+
+  helper(root);
+
+  for (let i = 0; i < nodes.length - 1; i++) {
+    if (nodes[i] > nodes[i+1]) return false;
+  }
+
+  return true;
+}
+
+
+
+let tree = new TreeNode(1);
+let tree2 = new TreeNode(2);
+let tree3 = new TreeNode(3);
+let tree4 = new TreeNode(4);
+let tree5 = new TreeNode(5);
+let tree6 = new TreeNode(6);
+let tree7 = new TreeNode(7);
+
+tree.left = tree2;
+tree.right = tree3;
+tree2.left = tree4;
+tree2.right = tree5;
+tree3.left = tree6;
+tree3.right = tree7;
+
+// console.log(tree);
+
+
+console.log(validateBST(tree)); // => false
+console.log(validateBST(bst.root)); // => true
