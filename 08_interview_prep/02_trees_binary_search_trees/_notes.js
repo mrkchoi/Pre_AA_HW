@@ -1252,8 +1252,8 @@ function evenOccuringElement(arr) {
 }
 
 
-console.log(evenOccuringElement([1,1,2,2,3,3,4,4,5,6,6,7,7,8,8,9,9])); // => 5
-console.log(evenOccuringElement([9,8,7,6,5,4,3,2,9,8,6,5,4,3,2])); // => 7
+// console.log(evenOccuringElement([1,1,2,2,3,3,4,4,5,6,6,7,7,8,8,9,9])); // => 5
+// console.log(evenOccuringElement([9,8,7,6,5,4,3,2,9,8,6,5,4,3,2])); // => 7
 
 
 
@@ -1288,7 +1288,37 @@ function palindrome(str) {
 // console.log(palindrome('aba')) // => true
 // console.log(palindrome('abbb')) // => false
 
-console.log(nextPalindromeNumber(125)); // => 131
-console.log(nextPalindromeNumber(25)); // => 11
-console.log(nextPalindromeNumber(200)); // => 202
+// console.log(nextPalindromeNumber(125)); // => 131
+// console.log(nextPalindromeNumber(25)); // => 11
+// console.log(nextPalindromeNumber(200)); // => 202
 
+
+
+// Find Next Higher Number with Same Digits:
+  // Given a number, find the next higher number using only the digits in the given number. For example if the given number is 1234, next higher number with same digits is 1243.
+  
+function nextHigherMatch(num) {
+  let current = num+1;
+  while (true) {
+    if (numAnagram(num, current)) return current;
+    current += 1;
+  }
+  return null;
+}
+
+function numAnagram(num1, num2) {
+  let clean1 = num1.toString().split('').map(el => parseInt(el));
+  let clean2 = num2.toString().split('').map(el => parseInt(el));
+
+  if (clean1.sort().toString() === clean2.sort().toString()) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// console.log(numAnagram(123, 132));
+
+console.log(nextHigherMatch(1234)); // => 1243
+console.log(nextHigherMatch(279)); // => 297
+console.log(nextHigherMatch(297)); // => 729
