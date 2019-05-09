@@ -610,7 +610,7 @@ e.neighbors = [a];
 f.neighbors = [e];
 
 
-console.log(f);
+// console.log(f);
 
 
 function dfsGraphNodeRecur(node, visited = new Set()) {
@@ -626,4 +626,25 @@ function dfsGraphNodeRecur(node, visited = new Set()) {
   });
 }
 
-console.log(dfsGraphNodeRecur(f)); 
+// console.log(dfsGraphNodeRecur(f)); 
+
+
+function dfsGraphNodeIter(node) {
+  if (!node) return null;
+
+  let visited = new Set();
+  let stack = [node];
+
+  while (stack.length) {
+    let node = stack.pop();
+
+    if (visited.has(node)) continue;
+
+    console.log(node.val);
+    visited.add(node);
+
+    stack.push(...node.neighbors);
+  }
+}
+
+dfsGraphNodeIter(f);
