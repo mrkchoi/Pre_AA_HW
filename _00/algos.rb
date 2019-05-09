@@ -1263,7 +1263,20 @@ class Building
 end
 
 
-h = Building.new
-h.set_thermostat(60)
-h.set_thermostat(100)
-h.set_thermostat(89)
+# h = Building.new
+# h.set_thermostat(60)
+# h.set_thermostat(100)
+# h.set_thermostat(89)
+
+
+def return_number(a)
+  ((a/2)**2) * (65 - (a/2))
+end
+
+def child_retirement_balance(a)
+  child_age = a/2
+  child_bank_balance = child_age**2
+  years_till_retirement = 65 - child_age
+  
+  child_bank_balance * years_till_retirement
+end
