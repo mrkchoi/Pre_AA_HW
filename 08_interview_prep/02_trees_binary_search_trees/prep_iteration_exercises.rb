@@ -4,8 +4,17 @@
 # factors of a given number.
 
 def factors(num)
+  return num if num == 1
+  output = []
+
+  (2...num).each do |el|
+    output << el if num % el == 0
+  end
+
+  output
 end
 
+# p factors(200)
 # ### Bubble Sort
 #
 # http://en.wikipedia.org/wiki/bubble_sort
@@ -47,12 +56,46 @@ end
 
 class Array
   def bubble_sort!(&prc)
+    sorted = false
+
+    until sorted
+      sorted = true
+      i = 0
+      while i < self.length - 1
+        if prc.call(self[i], self[i+1]) == 1
+          self[i],self[i+1] = self[i+1],self[i]
+          sorted =false
+        end
+        i += 1
+      end
+    end
+    self
   end
 
   def bubble_sort(&prc)
+    output = self.dup
+
+    sorted = false
+    until sorted
+      sorted = true
+      i = 0
+      while i < output.length - 1
+        if prc.call(output[i], output[i+1]) == 1
+          output[i], output[i+1] = output[i+1], output[i]
+          sorted = false
+        end
+        i += 1
+      end
+    end
+
+    output
   end
 end
 
+# p [5,4,3,2,1].bubble_sort! {|a,b| a <=> b}
+# a = [5,4,3,2,1]
+# p a.bubble_sort {|a,b| a <=> b}
+# p a
 # ### Substrings and Subwords
 #
 # Write a method, `substrings`, that will take a `String` and return an
@@ -66,17 +109,37 @@ end
 # `subwords` will accept both a string and a dictionary (an array of
 # words).
 
-def substrings(string)
+def substrings(str)
+  output = []
+
+  i = 0
+  while i < str.length
+    j = i
+    while j < str.length
+      output << str[i..j]   
+      j += 1
+    end
+    i += 1
+  end
+  
+  output
 end
 
+# p substrings('catinhat')
+
 def subwords(word, dictionary)
+  all_subs = substrings(word)
+  all_subs.select {|el| dictionary.include?(el)}
 end
+
+# p subwords('catinhat', ['cat', 'hat', 'in'])
 
 # ### Doubler
 # Write a `doubler` method that takes an array of integers and returns an
 # array with the original elements multiplied by two.
 
 def doubler(array)
+  
 end
 
 # ### My Each

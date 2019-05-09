@@ -1243,6 +1243,27 @@ def search(nums, target)
   return -1
 end
 
-p search([1,3,5,7,9], 1) # => 0
-p search([1,3,5,7,9], 9) # => 4
-p search([1,3,5,7,9], 10) # => -1
+# p search([1,3,5,7,9], 1) # => 0
+# p search([1,3,5,7,9], 9) # => 4
+# p search([1,3,5,7,9], 10) # => -1
+
+
+
+require 'byebug'
+
+class Building
+  def initialize
+    @temperature = 70
+  end
+
+  def set_thermostat(temp)
+    debugger if temp > 90
+    @temperature = temp
+  end
+end
+
+
+h = Building.new
+h.set_thermostat(60)
+h.set_thermostat(100)
+h.set_thermostat(89)
