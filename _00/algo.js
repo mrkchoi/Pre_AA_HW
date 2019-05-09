@@ -647,4 +647,48 @@ function dfsGraphNodeIter(node) {
   }
 }
 
-dfsGraphNodeIter(f);
+// dfsGraphNodeIter(f);
+
+
+
+let graph = {
+  'a': ['b', 'c', 'e'],
+  'b': [],
+  'c': ['d','b'],
+  'd': [],
+  'e': ['a'],
+  'f': ['e'],
+};
+
+function dfsGraph(graph) {
+  let visited = new Set();
+
+  for (let node in graph) {
+    dfsGraphAdjListRecur(node, graph, visited);
+  }
+}
+
+function dfsGraphAdjListRecur(node, graph, visited = new Set()) {
+  if (visited.has(node)) return;
+
+  console.log(node);
+  visited.add(node);
+
+  graph[node].forEach(neighbor => {
+    dfsGraphAdjListRecur(neighbor, graph, visited);
+  });  
+}
+
+let graph2 = {
+  'h': ['i', 'j', 'k'],
+  'i': [],
+  'j': ['k'],
+  'k': [],
+  'l': ['m'],
+  'm': []
+};
+
+dfsGraph(graph);
+console.log('--------');
+dfsGraph(graph2);
+
