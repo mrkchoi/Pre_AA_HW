@@ -573,5 +573,154 @@ t3.right = t7
 s = Solution.new(bst.root)
 s2 = Solution.new(t)
 
-p s.validate_bst
-p s2.validate_bst
+# p s.validate_bst
+# p s2.validate_bst
+
+
+
+
+# my_each
+
+class Array
+  def my_each(&prc)
+    i = 0
+    while i < self.length
+      prc.call(self[i])
+      i += 1
+    end
+
+    self
+  end
+
+  def my_select(&prc)
+    output = []
+    self.my_each do |el|
+      output << el if prc.call(el)
+    end
+
+    output
+  end
+
+  def my_reject(&prc)
+    output = []
+
+    self.my_each do |el|
+      output << el if !prc.call(el)
+    end
+
+    output
+  end
+
+  def my_any?(&prc)
+    self.my_each do |el|
+      return true if prc.call(el)
+    end
+
+    false
+  end
+
+  def my_all?(&prc)
+    self.my_each do |el|
+      return false unless prc.call(el)
+    end
+    true
+  end
+
+  def my_flatten
+    res = []
+
+    self.each do |el|
+      if !el.is_a?(Array)
+        res << el
+      else
+        res += el.my_flatten
+      end
+    end
+    res
+  end
+
+  def my_zip(*args)
+    output = Array.new(self.length) {Array.new(args.length+1){nil}}
+
+    self.each_with_index do |el, i|
+      output[i][0] = el
+    end
+
+    args.each_with_index do |arg, i|
+      arg.each_with_index do |el, j|
+        output[j][i+1] = el if j < self.length
+      end
+    end
+
+    
+    output
+  end
+
+  def my_rotate(val=1)
+    if val > 0
+      val.times do
+        self.push((self.shift()))
+      end
+    else
+      (val.abs).times do
+        self.unshift(self.pop())
+      end
+    end
+    
+    self
+  end
+
+  def my_join(separator='')
+    output =''
+    self.each {|el| output += (el + separator)}
+    output
+  end
+
+  def my_reverse
+    return self if self.length == 1
+
+    (self[1..-1]).my_reverse + [self.first]
+  end
+end
+
+
+a = [4,5,6]
+b = [7,8,9]
+c = [10,11,12]
+d = [13,14,15]
+
+# p [1,2,3].my_zip(a,b) # => [1,2,3,4,5]
+# p [1,2].my_zip(a,b) # => [1,2,3,4,5]
+# p a.my_zip([1,2], [8]) # => [1,2,3,4,5]
+# p [1,2].my_zip(a,b,c,d) # => [1,2,3,4,5]
+
+# p %w(a b c d).my_rotate
+# p %w(a b c d).my_rotate(2)
+# p %w(a b c d).my_rotate(-3)
+# p %w(a b c d).my_rotate(15)
+
+# p %w(a b c d).my_join
+# p %w(a b c d).my_join('$')
+
+# p %w(a b c).my_reverse
+# p [1].my_reverse
+# p [1,2,3,4,5,6,7,8,9,10].my_reverse
+
+
+
+def factors(num)
+end
+
+def bubble_sort!(%prc)
+end
+
+def bubble_sort(%prc)
+end
+
+def substrings(str)
+end
+
+def subwords(word, dictionary)
+end
+
+
