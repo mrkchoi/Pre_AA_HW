@@ -1016,10 +1016,10 @@ h.insert(100);
 h.insert(86);
 h.insert(1000);
 
-console.log(h.array);
-console.log('---------');
-console.log(h.deleteMax());
-console.log(h.array);
+// console.log(h.array);
+// console.log('---------');
+// console.log(h.deleteMax());
+// console.log(h.array);
 
 
 
@@ -1031,9 +1031,91 @@ console.log(h.array);
 
 
 class MinHeap {
+  constructor() {
+    this.array = [null];
+  }
 
+  getLeftChildIdx(idx) {
+    return idx * 2;
+  }
+
+  getRightChildIdx(idx) {
+    return idx * 2 + 1;
+  }
+
+  getParent(idx) {
+    return Math.floor(idx / 2);
+  }
+
+  insert(val) {
+    this.array.push(val);
+    this.siftUp(this.array.length - 1);
+  }
+
+  siftUp(idx) {
+    if (idx === 1) return;
+
+    let parentIdx = this.getParent(idx);
+
+    if (this.array[parentIdx] > this.array[idx]) {
+      [this.array[parentIdx], this.array[idx]] = [this.array[idx], this.array[parentIdx]];
+
+      this.siftUp(parentIdx);
+    }
+  }
+
+  deleteMin() {
+    if (this.array.length === 1) return null;
+    if (this.array.length === 2) return this.array.pop();
+
+    let min = this.array[1];
+    this.array[1] = this.array.pop();
+    
+    this.siftDown(1);
+    return min;
+  }
+
+  siftDown(idx) {
+    let arr = this.array;
+    let leftChildIdx = this.getLeftChildIdx(idx);
+    let rightChildIdx = this.getRightChildIdx(idx);
+    let leftVal = arr[leftChildIdx];
+    let rightVal = arr[rightChildIdx];
+
+    if (leftVal === undefined) leftVal = Infinity;
+    if (rightVal === undefined) rightVal = Infinity;
+
+    if (leftVal > arr[idx] && rightVal > arr[idx]) return;
+
+    let swapIdx;
+
+    if (leftVal < rightVal) {
+      swapIdx = leftChildIdx;
+    } else {
+      swapIdx = rightChildIdx;
+    }
+
+    [arr[idx], arr[swapIdx]] = [arr[swapIdx], arr[idx]];
+    this.siftDown(swapIdx);
+  }
 }
 
+let minH = new MinHeap();
+
+minH.insert(10);
+minH.insert(20);
+minH.insert(125);
+minH.insert(13);
+minH.insert(15);
+minH.insert(5);
+minH.insert(55);
+minH.insert(67);
+
+console.log(minH.array);
+console.log('--------');
+
+console.log(minH.deleteMin());
+console.log(minH.array);
 
 
 
