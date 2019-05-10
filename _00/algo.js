@@ -1111,14 +1111,45 @@ minH.insert(5);
 minH.insert(55);
 minH.insert(67);
 
-console.log(minH.array);
-console.log('--------');
+// console.log(minH.array);
+// console.log('--------');
 
-console.log(minH.deleteMin());
-console.log(minH.array);
+// console.log(minH.deleteMin());
+// console.log(minH.array);
 
 
 
+// Merge K Sorted Arrays
+
+function mergeKSortedArrays(arr) {
+  output = [];
+
+  let [arr1, arr2] = arr;
+  let minHeap = new MinHeap();
+
+  while (arr1.length && arr2.length) {
+    minHeap.insert(arr1.shift());
+    minHeap.insert(arr2.shift());
+
+    output.push(minHeap.deleteMin());
+  }
+
+  while (minHeap.array.length > 1) {
+    output.push(minHeap.deleteMin());
+  }
+
+  if (arr1.length) {
+    output.concat(arr1);
+  } else {
+    output.concat(arr2);
+  }
+
+  return output;
+}
+
+
+console.log(mergeKSortedArrays([[0,5,10,25,46],[15,67,99,200,304]]));
+// => [0,5,10,15,25,46,67,99,200,304]
 
 
 
