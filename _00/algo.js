@@ -691,95 +691,93 @@
 // // dfsGraph(graph2);
 
 
-class GraphNode {
-  constructor(val) {
-    this.val = val;
-    this.neighbors = [];
-  }
-}
+// class GraphNode {
+//   constructor(val) {
+//     this.val = val;
+//     this.neighbors = [];
+//   }
+// }
 
-let a = new GraphNode('a');
-let b = new GraphNode('b');
-let c = new GraphNode('c');
-let d = new GraphNode('d');
-let e = new GraphNode('e');
-let f = new GraphNode('f');
+// let a = new GraphNode('a');
+// let b = new GraphNode('b');
+// let c = new GraphNode('c');
+// let d = new GraphNode('d');
+// let e = new GraphNode('e');
+// let f = new GraphNode('f');
 
-a.neighbors = [e, c, b];
-c.neighbors = [b, d];
-e.neighbors = [a];
-f.neighbors = [e];
+// a.neighbors = [e, c, b];
+// c.neighbors = [b, d];
+// e.neighbors = [a];
+// f.neighbors = [e];
 
-// console.log(a);
+// // console.log(a);
 
-function bfsGraphNodeHelper(node, visited = new Set()) {
-  if (!node) return;
+// function bfsGraphNodeHelper(node, visited = new Set()) {
+//   if (!node) return;
 
-  let queue = [node];
+//   let queue = [node];
 
-  while (queue.length) {
-    let node = queue.shift();
+//   while (queue.length) {
+//     let node = queue.shift();
 
-    if (visited.has(node)) {
-      continue;
-    }
+//     if (visited.has(node)) {
+//       continue;
+//     }
 
-    console.log(node.val);
-    visited.add(node);
+//     console.log(node.val);
+//     visited.add(node);
 
-    node.neighbors.forEach(neighbor => {
-      queue.push(neighbor);
-    });
-  }
-}
+//     node.neighbors.forEach(neighbor => {
+//       queue.push(neighbor);
+//     });
+//   }
+// }
 
-// bfsGraphNode(f);
-
-
-
-let graph = {
-  'a': ['e', 'c', 'b'],
-  'b': [],
-  'c': ['d'],
-  'd': [],
-  'e': ['a'],
-  'f': ['e']
-};
-
-function bfsGraphAdjListHelper(node, graph, visited = new Set()) {
-  if (!node) return;
-
-  let queue = [node];
-
-  while (queue.length) {
-    let node = queue.shift();
-
-    if (visited.has(node)) {
-      continue;
-    }
-
-    console.log(node);
-    visited.add(node);
-
-    graph[node].forEach(neighbor => {
-      queue.push(neighbor);
-    });
-  }
-}
-
-function bfsGraphAdjList(graph) {
-  if (!graph) return null;
-
-  let visited = new Set();
-
-  for (let node in graph) {
-    bfsGraphAdjListHelper(node, graph, visited);
-  }
-}
-
-// bfsGraphAdjList(graph);
+// // bfsGraphNode(f);
 
 
+
+// let graph = {
+//   'a': ['e', 'c', 'b'],
+//   'b': [],
+//   'c': ['d'],
+//   'd': [],
+//   'e': ['a'],
+//   'f': ['e']
+// };
+
+// function bfsGraphAdjListHelper(node, graph, visited = new Set()) {
+//   if (!node) return;
+
+//   let queue = [node];
+
+//   while (queue.length) {
+//     let node = queue.shift();
+
+//     if (visited.has(node)) {
+//       continue;
+//     }
+
+//     console.log(node);
+//     visited.add(node);
+
+//     graph[node].forEach(neighbor => {
+//       queue.push(neighbor);
+//     });
+//   }
+// }
+
+// function bfsGraphAdjList(graph) {
+//   if (!graph) return null;
+
+//   let visited = new Set();
+
+//   for (let node in graph) {
+//     bfsGraphAdjListHelper(node, graph, visited);
+//   }
+// }
+
+// // bfsGraphAdjList(graph);
 
 
 
@@ -787,57 +785,150 @@ function bfsGraphAdjList(graph) {
 
 
 
-// LC 207: Course Schedule
-
-var canFinish = function (numCourses, prerequisites) {
-  let prereq = buildGraph(prerequisites);
-  let totalCourses = Object.keys(prereq).length;
-  let completed = new Set();
-
-  let eligibleCourseExists = true;
-
-  while (eligibleCourseExists) {
-    eligibleCourseExists = false;
-
-    for (let course in prereq) {
-      let EveryPreBeenMet = (prereq[course].every(pre => completed.has(pre)));
-
-      if (!completed.has(course) && EveryPreBeenMet) {
-        completed.add(course);
-        eligibleCourseExists = true;
-      }
-    }  
-  }
-
-  return completed.length === totalCourses;
-};
-
-function buildGraph(list) {
-  let graph = {};
-
-  list.forEach(el => {
-    let [course, pre] = el.map(String);
-
-    if (course in graph) {
-      graph[course].push(pre);
-    } else {
-      graph[course] = [pre];
-    }
-
-    if (!(pre in graph)) {
-      graph[pre] = [];
-    }
-  });
-  return graph;
-}
 
 
-// canFinish(2, [[1,0]]); // => true
-// canFinish(2, [[0, 1], [1, 0]]); // => false
+// // LC 207: Course Schedule
 
-// console.log(buildGraph([[0,1]]));
+// var canFinish = function (numCourses, prerequisites) {
+//   let prereq = buildGraph(prerequisites);
+//   let totalCourses = Object.keys(prereq).length;
+//   let completed = new Set();
+
+//   let eligibleCourseExists = true;
+
+//   while (eligibleCourseExists) {
+//     eligibleCourseExists = false;
+
+//     for (let course in prereq) {
+//       let EveryPreBeenMet = (prereq[course].every(pre => completed.has(pre)));
+
+//       if (!completed.has(course) && EveryPreBeenMet) {
+//         completed.add(course);
+//         eligibleCourseExists = true;
+//       }
+//     }  
+//   }
+
+//   return completed.length === totalCourses;
+// };
+
+// function buildGraph(list) {
+//   let graph = {};
+
+//   list.forEach(el => {
+//     let [course, pre] = el.map(String);
+
+//     if (course in graph) {
+//       graph[course].push(pre);
+//     } else {
+//       graph[course] = [pre];
+//     }
+
+//     if (!(pre in graph)) {
+//       graph[pre] = [];
+//     }
+//   });
+//   return graph;
+// }
 
 
+// // canFinish(2, [[1,0]]); // => true
+// // canFinish(2, [[0, 1], [1, 0]]); // => false
+
+// // console.log(buildGraph([[0,1]]));
+
+
+
+
+// class MaxHeap {
+//   constructor() {
+//     this.array = [null];
+//   }
+
+//   getParent(idx) {
+//     return Math.floor(idx / 2);
+//   }
+
+//   getLeftChild(idx) {
+//     return (2 * idx);
+//   }
+
+//   getRightChild(idx) {
+//     return (2 * idx + 1);
+//   }
+
+//   insert(val) {
+//     this.array.push(val);
+//     this.siftUp(this.array.length - 1);
+//   }
+
+//   siftUp(idx) {
+//     if (idx === 1) return;
+
+//     let parentIdx = this.getParent(idx);
+
+//     if (this.array[parentIdx] < this.array[idx]) {
+//       [this.array[parentIdx], this.array[idx]] = [this.array[idx], this.array[parentIdx]];
+
+//       this.siftUp(parentIdx);
+//     }
+//   }
+
+//   deleteMax() {
+//     if (this.array.length === 2) return this.array.pop();
+//     if (this.array.length === 1) return null;
+
+//     let max = this.array[1];
+//     this.array[1] = this.array.pop();
+//     this.siftDown(1);
+//     return max;
+//   }
+
+//   siftDown(idx) {
+//     let arr = this.array;
+//     let leftChild = this.getLeftChild(idx);
+//     let rightChild = this.getRightChild(idx);
+//     let leftVal = arr[leftChild];
+//     let rightVal = arr[rightChild];
+
+//     if (leftVal === undefined) leftVal = -Infinity;
+//     if (rightVal === undefined) rightVal = -Infinity;
+
+//     if (arr[idx] > leftVal && arr[idx] > rightVal) {
+//       return;
+//     } 
+
+//     let swapIdx;
+
+//     if (leftVal < rightVal) {
+//       swapIdx = rightIdx;
+//     } else {
+//       swapIdx = leftIdx;
+//     }
+
+//     [arr[idx], arr[swapIdx]] = [arr[swapIdx], arr[idx]];
+
+//     this.siftDown(swapIdx);
+//   }
+
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// => [null, 100, 50, 40, 25, 20, 15, 35]
 
 
 class MaxHeap {
@@ -845,16 +936,16 @@ class MaxHeap {
     this.array = [null];
   }
 
-  getParent(idx) {
-    return Math.floor(idx / 2);
-  }
-
   getLeftChild(idx) {
-    return (2 * idx);
+    return idx * 2;
   }
 
   getRightChild(idx) {
-    return (2 * idx + 1);
+    return idx * 2 + 1;
+  }  
+
+  getParent(idx) {
+    return Math.floor(idx / 2);
   }
 
   insert(val) {
@@ -868,47 +959,149 @@ class MaxHeap {
     let parentIdx = this.getParent(idx);
 
     if (this.array[parentIdx] < this.array[idx]) {
-      [this.array[parentIdx], this.array[idx]] = [this.array[idx], this.array[parentIdx]];
+
+      [this.array[idx], this.array[parentIdx]] = [this.array[parentIdx], this.array[idx]];
 
       this.siftUp(parentIdx);
     }
   }
 
   deleteMax() {
-    if (this.array.length === 2) return this.array.pop();
     if (this.array.length === 1) return null;
+    if (this.array.length === 2) return this.array.pop();
 
     let max = this.array[1];
     this.array[1] = this.array.pop();
+
     this.siftDown(1);
+    
     return max;
   }
 
   siftDown(idx) {
     let arr = this.array;
-    let leftChild = this.getLeftChild(idx);
-    let rightChild = this.getRightChild(idx);
-    let leftVal = arr[leftChild];
-    let rightVal = arr[rightChild];
+    let leftChildIdx = this.getLeftChild(idx);
+    let rightChildIdx = this.getRightChild(idx);
+    let leftVal = arr[leftChildIdx];
+    let rightVal = arr[rightChildIdx];
 
     if (leftVal === undefined) leftVal = -Infinity;
     if (rightVal === undefined) rightVal = -Infinity;
 
-    if (arr[idx] > leftVal && arr[idx] > rightVal) {
-      return;
-    } 
+    if (leftVal < arr[idx] && rightVal < arr[idx]) return;
 
     let swapIdx;
 
     if (leftVal < rightVal) {
-      swapIdx = rightIdx;
+      swapIdx = rightChildIdx;
     } else {
-      swapIdx = leftIdx;
+      swapIdx = leftChildIdx;
     }
 
     [arr[idx], arr[swapIdx]] = [arr[swapIdx], arr[idx]];
-
     this.siftDown(swapIdx);
   }
+}
+
+
+
+let h = new MaxHeap();
+
+h.insert(1);
+h.insert(20);
+h.insert(25);
+h.insert(36);
+h.insert(15);
+h.insert(100);
+h.insert(86);
+h.insert(1000);
+
+console.log(h.array);
+console.log('---------');
+console.log(h.deleteMax());
+console.log(h.array);
+
+
+
+
+
+
+
+
+
+
+class MinHeap {
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
