@@ -1148,8 +1148,14 @@ function mergeKSortedArrays(arr) {
 }
 
 
-console.log(mergeKSortedArrays([[0,5,10,25,46],[15,67,99,200,304]]));
+// console.log(mergeKSortedArrays([[0,5,10,25,46],[15,67,99,200,304]]));
 // => [0,5,10,15,25,46,67,99,200,304]
+
+
+
+
+
+
 
 
 
