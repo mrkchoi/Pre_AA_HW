@@ -13,9 +13,7 @@ function breadthFirstSearch(startingNode, targetVal) {
         if (node.val === targetVal) return node;
         visited.add(node);
 
-        node.neighbors.forEach(neighbor => {
-            queue.push(neighbor);
-        });
+        queue.push(...node.neighbors);
     }
     return null;
 }
