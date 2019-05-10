@@ -777,4 +777,62 @@ function bfsGraphAdjList(graph) {
   }
 }
 
-bfsGraphAdjList(graph);
+// bfsGraphAdjList(graph);
+
+
+
+
+
+
+
+
+
+// LC 207: Course Schedule
+
+var canFinish = function (numCourses, prerequisites) {
+  let prereq = buildGraph(prerequisites);
+  let totalCourses = Object.keys(prereq).length;
+  let completed = new Set();
+
+  let eligibleCourseExists = true;
+
+  while (eligibleCourseExists) {
+    eligibleCourseExists = false;
+
+    for (let course in prereq) {
+      let EveryPreBeenMet = (prereq[course].every(pre => completed.has(pre)));
+
+      if (!completed.has(course) && EveryPreBeenMet) {
+        completed.add(course);
+        eligibleCourseExists = true;
+      }
+    }  
+  }
+
+  return completed.length === totalCourses;
+};
+
+function buildGraph(list) {
+  let graph = {};
+
+  list.forEach(el => {
+    let [course, pre] = el.map(String);
+
+    if (course in graph) {
+      graph[course].push(pre);
+    } else {
+      graph[course] = [pre];
+    }
+
+    if (!(pre in graph)) {
+      graph[pre] = [];
+    }
+  });
+  return graph;
+}
+
+
+canFinish(2, [[1,0]]); // => true
+canFinish(2, [[0, 1], [1, 0]]); // => false
+
+console.log(buildGraph([[0,1]]));
