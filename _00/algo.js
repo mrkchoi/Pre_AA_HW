@@ -1188,10 +1188,40 @@ function countingValleys(n, s) {
   return count;
 }
 
-console.log(countingValleys(8, "UDDDUDUU"));
+// console.log(countingValleys(8, "UDDDUDUU"));
 
 
 
+
+
+// LC 14. Longest Common Prefix
+var longestCommonPrefix = function (arr) {
+  if (arr.length === 0) return '';
+  if (arr.length === 1) return arr[0];
+
+  let output = '';
+
+  let i = 0;
+  while (i < arr[0].length) {
+    let curMatch = arr[0][i];
+    let match = arr.every(word => {
+      return word[i] === curMatch;
+    });
+
+    if (match) {
+      output += curMatch;
+    } else {
+      break;
+    }
+
+    i += 1;
+  }
+
+  return output;
+};
+
+console.log(longestCommonPrefix(["flower", "flow", "flight"]));
+console.log(longestCommonPrefix(["dog", "racecar", "car"]));
 
 
 
