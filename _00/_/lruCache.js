@@ -110,3 +110,66 @@ class List {
     }
   }
 }
+
+
+class LRUCacheItem {
+  constructor(val=null, key=null) {
+    this.val = val;
+    this.key = key;
+    this.node = null;
+  }
+}
+
+class LRUCache {
+  constructor(limit) {
+    this.items = {};
+    this.ordering = new List();
+    this.length = 0;
+    this.limit = limit;
+  }
+
+  size() {
+    return this.length;
+  }
+  
+  isFull() {
+    return this.length >= this.limit;
+  }
+
+  get(key) {
+    if (!this.items[key]) return null;
+
+    let item = this.items[key];
+    this.promote(item);
+
+    return item.val;
+  }
+
+  set(key, val) {
+    let item;
+
+    if (this.items[key]) {
+      item = this.items[key];
+      item.val = val;
+      this.promote(item);
+    } else {
+      if (this.isFull()) this.prune();
+
+      item = new LRUCacheItem(val, key);
+      item.node = this.ordering.unshift(item);
+      this.items[key] = item;
+      this.length += 1;
+      }
+
+  }
+
+  prune() {
+    let oldest = this.ordering.pop();
+    delete this.items[oldest.key];
+    this.length = Math.max(0, this.length - 1);
+  }
+
+  promote(item) {
+    this.ordering.moveToFront(item.node);
+  }
+}
