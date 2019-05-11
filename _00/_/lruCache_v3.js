@@ -123,26 +123,57 @@ class LRUCache {
   }
 
   get(key) {
-
+    if (!this.items[key]) {
+      return null;
+    } else {
+      let item = this.items[key];
+      this.promote(item);
+      return item.val;
+    }
   }
 
   set(key, val) {
+    let item;
 
+    if (!this.items[key]) {
+      if (this.isFull()) this.prune();
+
+      item = new LRUCacheItem(key, val);
+      item.node = this.ordering.unshift(item);
+      this.items[key] = item;
+      this.length += 1;
+    } else {
+      item = this.items[key];
+      item.val = val;
+      this.promote(item);
+    }
+
+    return item.val;
   }
 
   size() {
-    
+    return this.length;
   }
 
   isFull() {
-    
+    return this.length >= this.limit;
   }
 
   promote(item) {
-
+    this.ordering.moveToFront(item.node);
   }
 
   prune() {
-
+    let oldest = this.ordering.pop();
+    delete this.items[oldest.key];
+    this.length = Math.max(0, this.length -1);
   }
 }
+
+
+let c = new LRUCache(4);
+c.set(1, 'a');
+c.set(2, 'b');
+c.set(3, 'c');
+c.set(4, 'd');
+c.set(5, 'e');
