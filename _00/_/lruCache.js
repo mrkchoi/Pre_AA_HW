@@ -3,8 +3,8 @@
 class ListNode {
   constructor(val, prev=null, next=null) {
     this.val = val;
-    this.prev = null;
-    this.next = null;
+    this.prev = prev;
+    this.next = next;
   }
 
   delete() {
@@ -24,7 +24,7 @@ class List {
       this.head = this.tail = new ListNode(val);
     } else {
       this.tail = new ListNode(val, this.tail, null);
-      this.tail.prev.next = this.tail;
+      if (this.tail.prev) this.tail.prev.next = this.tail;
     }
 
     return this.tail;
@@ -55,6 +55,58 @@ class List {
   }
 
   shift() {
-    
+    if (!this.head) {
+      return null;
+    } else {
+      let head = this.head;
+      this.head = this.head.next;
+      this.head.prev = null;
+      head.delete();
+      return head.val;
+    }
+  }
+
+  moveToFront(node) {
+    if (this.tail === node) {
+      this.pop();
+    } else if (this.head === node) {
+      return;
+    } else {
+      node.delete();
+    }
+
+    node.next = node.prev = null;
+
+    if (!this.head) {
+      this.head = this.tail = node;
+    } else {
+      let head = this.head;
+      this.head = node;
+      this.head.next = head;
+      head.prev = this.head;
+    }
+
+    return this.head;
+  }
+
+  moveToBack(node) {
+    if (this.head === node) {
+      this.shift();
+    } else if (this.tail === node) {
+      return;
+    } else {
+      node.delete();
+    }
+
+    node.next = node.prev = null;
+
+    if (!this.head) {
+      this.head = this.tail = node;
+    } else {
+      let tail = this.tail;
+      this.tail = node;
+      this.tail.prev = tail;
+      tail.next = this.tail;
+    }
   }
 }
