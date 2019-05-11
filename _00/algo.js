@@ -928,100 +928,98 @@
 
 
 
-// => [null, 100, 50, 40, 25, 20, 15, 35]
+// // => [null, 100, 50, 40, 25, 20, 15, 35]
 
 
-class MaxHeap {
-  constructor() {
-    this.array = [null];
-  }
+// class MaxHeap {
+//   constructor() {
+//     this.array = [null];
+//   }
 
-  getLeftChild(idx) {
-    return idx * 2;
-  }
+//   getLeftChild(idx) {
+//     return idx * 2;
+//   }
 
-  getRightChild(idx) {
-    return idx * 2 + 1;
-  }  
+//   getRightChild(idx) {
+//     return idx * 2 + 1;
+//   }  
 
-  getParent(idx) {
-    return Math.floor(idx / 2);
-  }
+//   getParent(idx) {
+//     return Math.floor(idx / 2);
+//   }
 
-  insert(val) {
-    this.array.push(val);
-    this.siftUp(this.array.length - 1);
-  }
+//   insert(val) {
+//     this.array.push(val);
+//     this.siftUp(this.array.length - 1);
+//   }
 
-  siftUp(idx) {
-    if (idx === 1) return;
+//   siftUp(idx) {
+//     if (idx === 1) return;
 
-    let parentIdx = this.getParent(idx);
+//     let parentIdx = this.getParent(idx);
 
-    if (this.array[parentIdx] < this.array[idx]) {
+//     if (this.array[parentIdx] < this.array[idx]) {
 
-      [this.array[idx], this.array[parentIdx]] = [this.array[parentIdx], this.array[idx]];
+//       [this.array[idx], this.array[parentIdx]] = [this.array[parentIdx], this.array[idx]];
 
-      this.siftUp(parentIdx);
-    }
-  }
+//       this.siftUp(parentIdx);
+//     }
+//   }
 
-  deleteMax() {
-    if (this.array.length === 1) return null;
-    if (this.array.length === 2) return this.array.pop();
+//   deleteMax() {
+//     if (this.array.length === 1) return null;
+//     if (this.array.length === 2) return this.array.pop();
 
-    let max = this.array[1];
-    this.array[1] = this.array.pop();
+//     let max = this.array[1];
+//     this.array[1] = this.array.pop();
 
-    this.siftDown(1);
+//     this.siftDown(1);
     
-    return max;
-  }
+//     return max;
+//   }
 
-  siftDown(idx) {
-    let arr = this.array;
-    let leftChildIdx = this.getLeftChild(idx);
-    let rightChildIdx = this.getRightChild(idx);
-    let leftVal = arr[leftChildIdx];
-    let rightVal = arr[rightChildIdx];
+//   siftDown(idx) {
+//     let arr = this.array;
+//     let leftChildIdx = this.getLeftChild(idx);
+//     let rightChildIdx = this.getRightChild(idx);
+//     let leftVal = arr[leftChildIdx];
+//     let rightVal = arr[rightChildIdx];
 
-    if (leftVal === undefined) leftVal = -Infinity;
-    if (rightVal === undefined) rightVal = -Infinity;
+//     if (leftVal === undefined) leftVal = -Infinity;
+//     if (rightVal === undefined) rightVal = -Infinity;
 
-    if (leftVal < arr[idx] && rightVal < arr[idx]) return;
+//     if (leftVal < arr[idx] && rightVal < arr[idx]) return;
 
-    let swapIdx;
+//     let swapIdx;
 
-    if (leftVal < rightVal) {
-      swapIdx = rightChildIdx;
-    } else {
-      swapIdx = leftChildIdx;
-    }
+//     if (leftVal < rightVal) {
+//       swapIdx = rightChildIdx;
+//     } else {
+//       swapIdx = leftChildIdx;
+//     }
 
-    [arr[idx], arr[swapIdx]] = [arr[swapIdx], arr[idx]];
-    this.siftDown(swapIdx);
-  }
-}
-
-
-
-let h = new MaxHeap();
-
-h.insert(1);
-h.insert(20);
-h.insert(25);
-h.insert(36);
-h.insert(15);
-h.insert(100);
-h.insert(86);
-h.insert(1000);
-
-// console.log(h.array);
-// console.log('---------');
-// console.log(h.deleteMax());
-// console.log(h.array);
+//     [arr[idx], arr[swapIdx]] = [arr[swapIdx], arr[idx]];
+//     this.siftDown(swapIdx);
+//   }
+// }
 
 
+
+// let h = new MaxHeap();
+
+// h.insert(1);
+// h.insert(20);
+// h.insert(25);
+// h.insert(36);
+// h.insert(15);
+// h.insert(100);
+// h.insert(86);
+// h.insert(1000);
+
+// // console.log(h.array);
+// // console.log('---------');
+// // console.log(h.deleteMax());
+// // console.log(h.array);
 
 
 
@@ -1030,146 +1028,167 @@ h.insert(1000);
 
 
 
-class MinHeap {
-  constructor() {
-    this.array = [null];
-  }
 
-  getLeftChildIdx(idx) {
-    return idx * 2;
-  }
 
-  getRightChildIdx(idx) {
-    return idx * 2 + 1;
-  }
+// class MinHeap {
+//   constructor() {
+//     this.array = [null];
+//   }
 
-  getParent(idx) {
-    return Math.floor(idx / 2);
-  }
+//   getLeftChildIdx(idx) {
+//     return idx * 2;
+//   }
 
-  insert(val) {
-    this.array.push(val);
-    this.siftUp(this.array.length - 1);
-  }
+//   getRightChildIdx(idx) {
+//     return idx * 2 + 1;
+//   }
 
-  siftUp(idx) {
-    if (idx === 1) return;
+//   getParent(idx) {
+//     return Math.floor(idx / 2);
+//   }
 
-    let parentIdx = this.getParent(idx);
+//   insert(val) {
+//     this.array.push(val);
+//     this.siftUp(this.array.length - 1);
+//   }
 
-    if (this.array[parentIdx] > this.array[idx]) {
-      [this.array[parentIdx], this.array[idx]] = [this.array[idx], this.array[parentIdx]];
+//   siftUp(idx) {
+//     if (idx === 1) return;
 
-      this.siftUp(parentIdx);
-    }
-  }
+//     let parentIdx = this.getParent(idx);
 
-  deleteMin() {
-    if (this.array.length === 1) return null;
-    if (this.array.length === 2) return this.array.pop();
+//     if (this.array[parentIdx] > this.array[idx]) {
+//       [this.array[parentIdx], this.array[idx]] = [this.array[idx], this.array[parentIdx]];
 
-    let min = this.array[1];
-    this.array[1] = this.array.pop();
+//       this.siftUp(parentIdx);
+//     }
+//   }
+
+//   deleteMin() {
+//     if (this.array.length === 1) return null;
+//     if (this.array.length === 2) return this.array.pop();
+
+//     let min = this.array[1];
+//     this.array[1] = this.array.pop();
     
-    this.siftDown(1);
-    return min;
-  }
+//     this.siftDown(1);
+//     return min;
+//   }
 
-  siftDown(idx) {
-    let arr = this.array;
-    let leftChildIdx = this.getLeftChildIdx(idx);
-    let rightChildIdx = this.getRightChildIdx(idx);
-    let leftVal = arr[leftChildIdx];
-    let rightVal = arr[rightChildIdx];
+//   siftDown(idx) {
+//     let arr = this.array;
+//     let leftChildIdx = this.getLeftChildIdx(idx);
+//     let rightChildIdx = this.getRightChildIdx(idx);
+//     let leftVal = arr[leftChildIdx];
+//     let rightVal = arr[rightChildIdx];
 
-    if (leftVal === undefined) leftVal = Infinity;
-    if (rightVal === undefined) rightVal = Infinity;
+//     if (leftVal === undefined) leftVal = Infinity;
+//     if (rightVal === undefined) rightVal = Infinity;
 
-    if (leftVal > arr[idx] && rightVal > arr[idx]) return;
+//     if (leftVal > arr[idx] && rightVal > arr[idx]) return;
 
-    let swapIdx;
+//     let swapIdx;
 
-    if (leftVal < rightVal) {
-      swapIdx = leftChildIdx;
-    } else {
-      swapIdx = rightChildIdx;
+//     if (leftVal < rightVal) {
+//       swapIdx = leftChildIdx;
+//     } else {
+//       swapIdx = rightChildIdx;
+//     }
+
+//     [arr[idx], arr[swapIdx]] = [arr[swapIdx], arr[idx]];
+//     this.siftDown(swapIdx);
+//   }
+// }
+
+// let minH = new MinHeap();
+
+// minH.insert(10);
+// minH.insert(20);
+// minH.insert(125);
+// minH.insert(13);
+// minH.insert(15);
+// minH.insert(5);
+// minH.insert(55);
+// minH.insert(67);
+
+// // console.log(minH.array);
+// // console.log('--------');
+
+// // console.log(minH.deleteMin());
+// // console.log(minH.array);
+
+
+
+// // Merge K Sorted Arrays
+
+// function mergeKSortedArrays(arr) {
+//   output = [];
+
+//   let [arr1, arr2] = arr;
+//   let minHeap = new MinHeap();
+
+//   while (arr1.length && arr2.length) {
+//     minHeap.insert(arr1.shift());
+//     minHeap.insert(arr2.shift());
+
+//     output.push(minHeap.deleteMin());
+//   }
+
+//   while (minHeap.array.length > 1) {
+//     output.push(minHeap.deleteMin());
+//   }
+
+//   if (arr1.length) {
+//     output.concat(arr1);
+//   } else {
+//     output.concat(arr2);
+//   }
+
+//   return output;
+// }
+
+
+// // console.log(mergeKSortedArrays([[0,5,10,25,46],[15,67,99,200,304]]));
+// // => [0,5,10,15,25,46,67,99,200,304]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Complete the countingValleys function below.
+function countingValleys(n, s) {
+  let count = 0;
+  let level = 0;
+
+  // keep track of count
+  for (let i = 0; i < n; i++) {
+    if (s[i] === 'U') {
+      level += 1;
+      if (level === 0) count += 1;
+
+    } else if (s[i] === 'D') {
+      level -= 1;
     }
-
-    [arr[idx], arr[swapIdx]] = [arr[swapIdx], arr[idx]];
-    this.siftDown(swapIdx);
   }
+  
+  return count;
 }
 
-let minH = new MinHeap();
-
-minH.insert(10);
-minH.insert(20);
-minH.insert(125);
-minH.insert(13);
-minH.insert(15);
-minH.insert(5);
-minH.insert(55);
-minH.insert(67);
-
-// console.log(minH.array);
-// console.log('--------');
-
-// console.log(minH.deleteMin());
-// console.log(minH.array);
-
-
-
-// Merge K Sorted Arrays
-
-function mergeKSortedArrays(arr) {
-  output = [];
-
-  let [arr1, arr2] = arr;
-  let minHeap = new MinHeap();
-
-  while (arr1.length && arr2.length) {
-    minHeap.insert(arr1.shift());
-    minHeap.insert(arr2.shift());
-
-    output.push(minHeap.deleteMin());
-  }
-
-  while (minHeap.array.length > 1) {
-    output.push(minHeap.deleteMin());
-  }
-
-  if (arr1.length) {
-    output.concat(arr1);
-  } else {
-    output.concat(arr2);
-  }
-
-  return output;
-}
-
-
-// console.log(mergeKSortedArrays([[0,5,10,25,46],[15,67,99,200,304]]));
-// => [0,5,10,15,25,46,67,99,200,304]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+console.log(countingValleys(8, "UDDDUDUU"));
 
 
 
