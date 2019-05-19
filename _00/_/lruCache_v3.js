@@ -36,6 +36,7 @@ class List {
       this.head = newNode;
       this.head.next.prev = this.head;
     }
+    return this.head;
   }
 
   pop() {

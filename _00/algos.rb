@@ -1249,34 +1249,193 @@ end
 
 
 
-require 'byebug'
+# require 'byebug'
 
-class Building
-  def initialize
-    @temperature = 70
-  end
+# class Building
+#   def initialize
+#     @temperature = 70
+#   end
 
-  def set_thermostat(temp)
-    debugger if temp > 90
-    @temperature = temp
-  end
-end
-
-
-# h = Building.new
-# h.set_thermostat(60)
-# h.set_thermostat(100)
-# h.set_thermostat(89)
+#   def set_thermostat(temp)
+#     debugger if temp > 90
+#     @temperature = temp
+#   end
+# end
 
 
-def return_number(a)
-  ((a/2)**2) * (65 - (a/2))
-end
+# # h = Building.new
+# # h.set_thermostat(60)
+# # h.set_thermostat(100)
+# # h.set_thermostat(89)
 
-def child_retirement_balance(a)
-  child_age = a/2
-  child_bank_balance = child_age**2
-  years_till_retirement = 65 - child_age
+
+# def return_number(a)
+#   ((a/2)**2) * (65 - (a/2))
+# end
+
+# def child_retirement_balance(a)
+#   child_age = a/2
+#   child_bank_balance = child_age**2
+#   years_till_retirement = 65 - child_age
   
-  child_bank_balance * years_till_retirement
+#   child_bank_balance * years_till_retirement
+# end
+
+
+
+
+
+
+
+
+# Write a recursive method that takes in a string to search and a key string.
+# Return true if the string contains all of the characters in the key
+# in the same order that they appear in the key.
+#
+# string_include_key?("cadbpc", "abc") => true
+# string_include_key("cba", "abc") => false
+def string_include_key?(string, key)
+  return true if key.length == 0
+  return false if string.length == 0
+
+  if string[0] == key[0]
+    string_include_key?(string[1..-1], key[1..-1])
+  else
+    string_include_key?(string[1..-1], key)
+  end
 end
+
+# Write a method that finds the sum of the first n
+# fibonacci numbers recursively. Assume n > 0.
+
+def fibs_sum(n)
+  return 0 if n == 0
+  return 1 if n == 1
+
+  fibs_sum(n - 1) + fibs_sum(n - 2) + 1
+end
+
+
+# fibs_sum(0) => [] => 0
+# fibs_sum(1) => [1] => 1
+# fibs_sum(2) => [1,1] => 2
+# fibs_sum(3) => [1,1,2] => 4
+# fibs_sum(4) => [1,1,2,3] => 7
+# fibs_sum(4) => [1,1,2,3,5] => 12
+
+
+
+
+# Write an Array#dups method that will return a hash containing the indices of all
+# duplicate elements. The keys are the duplicate elements; the values are
+# arrays of their indices in ascending order, e.g.
+# [1, 3, 4, 3, 0, 3, 0].dups => { 3 => [1, 3, 5], 0 => [4, 6] }
+
+class Array
+  def dups
+    hash = Hash.new {|h,k| h[k] = []}
+
+    self.each_with_index do |el, i|
+      hash[el] << i
+    end
+
+    hash.select {|k,v| v.length > 1}
+  end
+end
+
+# Write a function anagrams(str1, str2) that takes in two words and returns a boolean
+# indicating whether or not the words are anagrams. Anagrams are words that
+# contain the same characters but not necessarily in the same order. Solve this
+# without using Array#sort
+def anagrams(str1, str2)
+  hash1 = Hash.new(0)  
+  hash2 = Hash.new(0)  
+
+  str1.each_char do |el|
+    hash1[el] += 1
+  end
+
+  str2.each_char do |el|
+    hash2[el] += 1
+  end
+
+  hash1 == hash2
+end
+
+class Hash
+  # Write a version of my each that calls a proc on each key, value pair
+  def my_each(&prc)
+    keys = self.keys
+
+    i = 0
+    while i < keys.length
+      prc.call(keys[i], self[keys[i]])
+      i += 1
+    end
+
+    self
+  end 
+end
+
+class Array
+  def my_each(&prc)
+    i = 0
+    while i < self.length
+      prc.call(self[i])
+      i += 1
+    end
+
+    self
+  end
+
+  def my_each_with_index(&prc)
+    i = 0
+
+    while i < self.length
+      prc.call(self[i], i)
+      i += 1
+    end
+
+    self
+  end
+end
+
+class Array
+  def my_all?(&prc)
+    self.each do |el|
+      return false if !prc.call(el)
+    end   
+
+    true
+  end
+end
+
+class Array
+  # Write an Array method that returns a bubble-sorted copy of an array. 
+  # Do NOT call the built-in Array#sort method in your implementation. 
+  def bubble_sort(&prc)
+    arr = self.dup
+    prc ||= Proc.new {|a,b| a <=> b}
+
+    sorted = false
+    until sorted
+      sorted = true
+
+      i = 0
+      while i < arr.length - 1
+        if prc.call(arr[i], arr[i + 1]) == 1
+          arr[i], arr[i+1] = arr[i+1], arr[i]
+          sorted = false
+        end
+        i += 1
+      end
+    end
+
+    arr
+  end
+
+  # You are not required to implement this; it's here as a suggestion :-)
+  def bubble_sort!(&prc)
+  end
+end
+
